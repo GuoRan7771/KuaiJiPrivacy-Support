@@ -17,20 +17,42 @@
     --bg-color: #f5f5f7;
   }
 
-  /* --- 关键修改 1：调整背景层级 --- */
+  /* --- 1. 核心修复区 --- */
+  
+  html {
+    /* 强制 html 占满高度并涂满灰色，解决底部可能出现的白边 */
+    background-color: var(--bg-color);
+    height: 100%;
+  }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-weight: 400;
+    color: #1d1d1f; 
+    background-color: var(--bg-color); 
+    margin: 0;
+    padding: 0;
+    min-height: 100%; 
+    /* 这是一个保险措施：防止 iOS 顶部下拉回弹时露出白色 */
+    position: relative;
+  }
+
   .liquid-background {
     position: fixed;
-    top: 0;
+    /* --- 关键修改：避开状态栏 --- */
+    /* 让光斑层从刘海屏下方才开始，上方留出纯粹的灰色背景 */
+    top: env(safe-area-inset-top, 0px); 
     left: 0;
     width: 100%;
-    height: 100vh;
-    /* 改为 0，让它显示在 html 背景色之上 */
+    /* 高度相应减少，避免由于 top 下移导致底部溢出 */
+    height: calc(100vh - env(safe-area-inset-top, 0px));
+    
     z-index: 0; 
     overflow: hidden;
-    /* 确保背景层不拦截鼠标点击 */
     pointer-events: none; 
   }
 
+  /* 下面的样式保持不变，但为了完整性我全部列出 */
   .blob {
     position: absolute;
     border-radius: 50%;
@@ -42,7 +64,8 @@
     width: 450px;
     height: 450px;
     background: rgba(0, 122, 255, 0.6); 
-    top: -50px;
+    /* 既然容器已经下移，这里稍微往上提一点点，让它贴近安全区的边缘，通过视觉补偿 */
+    top: -80px; 
     left: -100px;
     animation: moveBlob 20s infinite alternate ease-in-out;
   }
@@ -66,36 +89,19 @@
   }
 
   @keyframes moveBlob {
-    0% {
-      transform: scale(1) translate(0px, 0px);
-    }
-    100% {
-      transform: scale(1.3) translate(150px, -100px);
-    }
+    0% { transform: scale(1) translate(0px, 0px); }
+    100% { transform: scale(1.3) translate(150px, -100px); }
   }
 
-  /* --- 关键修改 2：html/body 设置 --- */
-  html, body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    font-weight: 400;
-    color: #1d1d1f; 
-    /* 保持背景色，解决 Safari 滚动回弹时的缝隙颜色 */
-    background-color: var(--bg-color); 
-    margin: 0;
-    padding: 0;
-    min-height: 100%; 
-  }
-
-  /* --- 关键修改 3：提升内容层级 --- */
   main {
     max-width: var(--w);
     margin: 0 auto;
-    padding: 40px 20px;
-    padding-top: env(safe-area-inset-top, 40px);
+    /* padding-top 不需要很大了，因为 env 已经处理了顶部距离，给一点基础间距即可 */
+    padding: 20px 20px;
+    /* 依然保留 safe-area 也就是为了确保文字不被遮挡 */
+    padding-top: env(safe-area-inset-top, 20px);
     padding-bottom: env(safe-area-inset-bottom, 20px);
     line-height: 1.6;
-    
-    /* 重点：让文字内容浮在光斑之上 */
     position: relative; 
     z-index: 1; 
   }
@@ -104,53 +110,19 @@
     font-size: 32px;
     font-weight: 600;
     text-align: center;
-    margin: 0 0 12px;
+    margin: 12px 0 12px; /* 稍微调整边距 */
     letter-spacing: -0.2px;
   }
 
-  h2 {
-    font-size: 24px;
-    font-weight: 600;
-    margin-top: 24px;
-  }
-
-  h3 {
-    font-size: 19px;
-    font-weight: 600;
-    margin-top: 20px;
-  }
-
-  p, li {
-    font-size: 17px; 
-  }
-  
-  ul {
-    margin: 8px 0 8px 22px;
-    padding-left: 0;
-  }
-
-  .muted {
-    color: #6e6e73; 
-  }
-
-  hr {
-    border: none;
-    border-top: 1px solid #d2d2d7; 
-    margin: 32px 0;
-  }
-  
-  a {
-    color: #007aff; 
-    text-decoration: none;
-  }
-  
-  a:hover {
-    text-decoration: underline;
-  }
-
-  .center {
-    text-align: center;
-  }
+  h2 { font-size: 24px; font-weight: 600; margin-top: 24px; }
+  h3 { font-size: 19px; font-weight: 600; margin-top: 20px; }
+  p, li { font-size: 17px; }
+  ul { margin: 8px 0 8px 22px; padding-left: 0; }
+  .muted { color: #6e6e73; }
+  hr { border: none; border-top: 1px solid #d2d2d7; margin: 32px 0; }
+  a { color: #007aff; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .center { text-align: center; }
   
   footer {
     margin: 40px 0 20px;
@@ -171,29 +143,11 @@
     transition: opacity 0.3s ease-in-out;
   }
   
-  .lang p, .lang li {
-    text-shadow: 0 1px 3px rgba(255, 255, 255, 0.7);
-  }
-  
-  .lang h2, .lang h3, .lang strong {
-    color: #1d1d1f; 
-    font-weight: 600;
-    text-shadow: 0 2px 4px rgba(255, 255, 255, 0.7);
-  }
-  
-  .lang a {
-    color: #007aff; 
-    font-weight: 500;
-    text-shadow: 0 1px 3px rgba(255, 255, 255, 0.7);
-  }
-  
-  .lang.active {
-    display: block; 
-  }
-  
-  .lang.show {
-    opacity: 1; 
-  }
+  .lang p, .lang li { text-shadow: 0 1px 3px rgba(255, 255, 255, 0.7); }
+  .lang h2, .lang h3, .lang strong { color: #1d1d1f; font-weight: 600; text-shadow: 0 2px 4px rgba(255, 255, 255, 0.7); }
+  .lang a { color: #007aff; font-weight: 500; text-shadow: 0 1px 3px rgba(255, 255, 255, 0.7); }
+  .lang.active { display: block; }
+  .lang.show { opacity: 1; }
 
   .lang-switcher {
     text-align: center;
@@ -221,10 +175,7 @@
     transition: all 0.3s ease;
   }
 
-  .lang-btn:hover {
-    color: #000;
-  }
-
+  .lang-btn:hover { color: #000; }
   .lang-btn.active {
     font-weight: 600;
     color: #000; 
@@ -350,31 +301,22 @@ document.addEventListener('DOMContentLoaded', () => {
       const currentActiveBtn = document.querySelector('.lang-btn.active');
       const currentActiveSection = document.querySelector('.lang.active');
       
-      if (currentActiveBtn === button) {
-        return; 
-      }
+      if (currentActiveBtn === button) { return; }
       
-      if (currentActiveBtn) {
-        currentActiveBtn.classList.remove('active');
-      }
+      if (currentActiveBtn) { currentActiveBtn.classList.remove('active'); }
       button.classList.add('active');
       
       if (currentActiveSection) {
         currentActiveSection.classList.remove('show'); 
-        
         setTimeout(() => {
           currentActiveSection.classList.remove('active'); 
-          
           newTargetSection.classList.add('active'); 
-          
           requestAnimationFrame(() => {
             requestAnimationFrame(() => {
                newTargetSection.classList.add('show');
             });
           });
-          
         }, transitionTime);
-        
       } else {
         newTargetSection.classList.add('active');
         newTargetSection.classList.add('show');
