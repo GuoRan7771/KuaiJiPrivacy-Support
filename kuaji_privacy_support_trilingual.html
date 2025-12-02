@@ -2,7 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#f5f5f7">
+
 <title>Privacy & Support | KuaiJi</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,17 +14,21 @@
 <style>
   :root {
     --w: 860px;
+    --bg-color: #f5f5f7;
   }
 
-  /* --- 1. Liquid Glass 动画背景 --- */
+  /* --- 关键修改 1：调整背景层级 --- */
   .liquid-background {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100vh;
-    z-index: -1;
+    /* 改为 0，让它显示在 html 背景色之上 */
+    z-index: 0; 
     overflow: hidden;
+    /* 确保背景层不拦截鼠标点击 */
+    pointer-events: none; 
   }
 
   .blob {
@@ -68,22 +74,30 @@
     }
   }
 
-
-  /* --- 2. Apple 简约设计风格 (Inter 字体) --- */
-  body {
+  /* --- 关键修改 2：html/body 设置 --- */
+  html, body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     font-weight: 400;
     color: #1d1d1f; 
-    background-color: #f5f5f7; 
+    /* 保持背景色，解决 Safari 滚动回弹时的缝隙颜色 */
+    background-color: var(--bg-color); 
     margin: 0;
     padding: 0;
+    min-height: 100%; 
   }
 
+  /* --- 关键修改 3：提升内容层级 --- */
   main {
     max-width: var(--w);
-    margin: 40px auto;
-    padding: 0 20px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    padding-top: env(safe-area-inset-top, 40px);
+    padding-bottom: env(safe-area-inset-bottom, 20px);
     line-height: 1.6;
+    
+    /* 重点：让文字内容浮在光斑之上 */
+    position: relative; 
+    z-index: 1; 
   }
 
   h1 {
@@ -144,37 +158,31 @@
     color: #6e6e73;
   }
 
-  /* --- 3. 悬浮文字区 (背景透明 + 灰黑色文字) --- */
   .lang {
     background: none;
     backdrop-filter: none;
     border: none;
     box-shadow: none;
-    
     padding: 24px 0;
     margin: 32px 0;
-    
-    /* 更新：默认文字为深灰色 */
     color: #333333; 
-    
     display: none; 
     opacity: 0;
     transition: opacity 0.3s ease-in-out;
   }
   
-  /* 更新：使用浅色阴影 (辉光) 保证可读性 */
   .lang p, .lang li {
     text-shadow: 0 1px 3px rgba(255, 255, 255, 0.7);
   }
   
   .lang h2, .lang h3, .lang strong {
-    color: #1d1d1f; /* 近黑色 */
+    color: #1d1d1f; 
     font-weight: 600;
     text-shadow: 0 2px 4px rgba(255, 255, 255, 0.7);
   }
   
   .lang a {
-    color: #007aff; /* 标准蓝色 */
+    color: #007aff; 
     font-weight: 500;
     text-shadow: 0 1px 3px rgba(255, 255, 255, 0.7);
   }
@@ -187,8 +195,6 @@
     opacity: 1; 
   }
 
-
-  /* --- 4. 语言切换器样式 ("Pill" 风格) --- */
   .lang-switcher {
     text-align: center;
     background: rgba(230, 230, 235, 0.7); 
