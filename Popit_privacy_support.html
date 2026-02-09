@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#f5f5f7">
+
+<title>BubblePop | Support & Privacy</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --w:860px;
+  --bg:#f5f5f7;
+}
+
+html{
+  background:var(--bg);
+  height:100%;
+}
+
+body{
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  margin:0;
+  color:#1d1d1f;
+  background:var(--bg);
+  min-height:100%;
+  position:relative;
+}
+
+/* liquid background */
+
+.liquid-background{
+  position:fixed;
+  top:env(safe-area-inset-top,0px);
+  left:0;
+  width:100%;
+  height:calc(100vh - env(safe-area-inset-top,0px));
+  overflow:hidden;
+  pointer-events:none;
+  z-index:0;
+}
+
+.blob{
+  position:absolute;
+  border-radius:50%;
+  filter:blur(110px);
+  opacity:.5;
+}
+
+.blob1{
+  width:460px;height:460px;
+  background:rgba(0,122,255,.6);
+  top:-80px;left:-100px;
+  animation:move 22s infinite alternate ease-in-out;
+}
+
+.blob2{
+  width:360px;height:360px;
+  background:rgba(52,199,89,.5);
+  bottom:-100px;right:40px;
+  animation:move 26s infinite alternate-reverse ease-in-out;
+}
+
+.blob3{
+  width:320px;height:320px;
+  background:rgba(255,149,0,.5);
+  left:120px;bottom:120px;
+  animation:move 18s infinite alternate ease-in-out;
+}
+
+@keyframes move{
+  0%{transform:scale(1) translate(0,0);}
+  100%{transform:scale(1.3) translate(140px,-100px);}
+}
+
+/* layout */
+
+main{
+  max-width:var(--w);
+  margin:0 auto;
+  padding:20px;
+  padding-top:env(safe-area-inset-top,20px);
+  padding-bottom:env(safe-area-inset-bottom,20px);
+  line-height:1.65;
+  position:relative;
+  z-index:1;
+}
+
+h1{
+  font-size:32px;
+  font-weight:600;
+  text-align:center;
+  margin:12px 0;
+}
+
+h2{font-size:24px;font-weight:600;margin-top:26px;}
+h3{font-size:19px;font-weight:600;margin-top:18px;}
+p,li{font-size:17px;}
+
+ul{margin:8px 0 8px 22px;}
+
+a{color:#007aff;text-decoration:none;}
+a:hover{text-decoration:underline;}
+
+hr{
+  border:none;
+  border-top:1px solid #d2d2d7;
+  margin:32px 0;
+}
+
+.center{text-align:center;}
+.muted{color:#6e6e73;}
+
+footer{
+  margin:40px 0 20px;
+  font-size:14px;
+  color:#6e6e73;
+}
+
+/* language switch */
+
+.lang{
+  display:none;
+  opacity:0;
+  transition:opacity .25s ease;
+}
+
+.lang.active{display:block;}
+.lang.show{opacity:1;}
+
+.lang-switcher{
+  text-align:center;
+  background:rgba(230,230,235,.7);
+  backdrop-filter:blur(10px);
+  border-radius:20px;
+  padding:6px;
+  display:inline-block;
+  box-shadow:0 4px 12px rgba(0,0,0,.05);
+}
+
+.lang-btn{
+  font-size:15px;
+  font-weight:500;
+  background:none;
+  border:none;
+  padding:8px 16px;
+  border-radius:16px;
+  cursor:pointer;
+}
+
+.lang-btn.active{
+  font-weight:600;
+  background:#fff;
+  box-shadow:0 3px 10px rgba(0,0,0,.12);
+}
+</style>
+</head>
+
+<body>
+
+<div class="liquid-background">
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+  <div class="blob blob3"></div>
+</div>
+
+<main>
+
+<h1>BubblePop • Support • Privacy</h1>
+<p class="center muted">Realistic bubble wrap simulator with haptics and sound.</p>
+
+<div class="center">
+  <div class="lang-switcher">
+    <button class="lang-btn active" data-lang="zh">中文</button>
+    <button class="lang-btn" data-lang="en">English</button>
+    <button class="lang-btn" data-lang="fr">Français</button>
+  </div>
+</div>
+
+<hr>
+
+<!-- 中文 -->
+<section id="zh" class="lang active show">
+<h2>技术支持</h2>
+<p>遇到问题请联系：</p>
+<p><a href="mailto:rangertars777@gmail.com">rangertars777@gmail.com</a></p>
+<ul>
+<li>附上设备型号、iOS 版本、App 版本、复现步骤</li>
+<li>通常 1 至 3 个工作日回复</li>
+</ul>
+
+<h3>常见问题</h3>
+<ul>
+<li>无声音：检查静音或重启设备</li>
+<li>无触感：开启系统触感，关闭低电量模式</li>
+<li>统计清零：统计面板点击重置</li>
+</ul>
+
+<hr>
+
+<h2>隐私政策</h2>
+<p><strong>生效日期：2026-02-09</strong></p>
+<ul>
+<li>不收集个人数据</li>
+<li>无广告或分析 SDK</li>
+<li>所有数据仅保存在本地设备</li>
+</ul>
+</section>
+
+<!-- English -->
+<section id="en" class="lang">
+<h2>Technical Support</h2>
+<p>Email: <a href="mailto:rangertars777@gmail.com">rangertars777@gmail.com</a></p>
+<ul>
+<li>Include device model, iOS version, steps to reproduce</li>
+<li>Reply within 1 to 3 business days</li>
+</ul>
+
+<hr>
+
+<h2>Privacy Policy</h2>
+<ul>
+<li>No personal data collected</li>
+<li>No ads or analytics</li>
+<li>All data stays on device</li>
+</ul>
+</section>
+
+<!-- Français -->
+<section id="fr" class="lang">
+<h2>Support technique</h2>
+<p>E-mail : <a href="mailto:rangertars777@gmail.com">rangertars777@gmail.com</a></p>
+<ul>
+<li>Indiquez modèle, version iOS et étapes du problème</li>
+<li>Réponse sous 1 à 3 jours ouvrables</li>
+</ul>
+
+<hr>
+
+<h2>Confidentialité</h2>
+<ul>
+<li>Aucune donnée personnelle collectée</li>
+<li>Pas de publicité ni analyse</li>
+<li>Données stockées localement</li>
+</ul>
+</section>
+
+<footer class="center">
+<hr>
+<div class="muted">BubblePop • © 2026 • Offline first • No tracking</div>
+</footer>
+
+</main>
+
+<script>
+document.querySelectorAll('.lang-btn').forEach(btn=>{
+  btn.onclick=()=>{
+    if(btn.classList.contains('active')) return;
+    document.querySelectorAll('.lang-btn').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.lang').forEach(s=>s.classList.remove('active','show'));
+    btn.classList.add('active');
+    const target=document.getElementById(btn.dataset.lang);
+    target.classList.add('active');
+    requestAnimationFrame(()=>target.classList.add('show'));
+  };
+});
+</script>
+
+</body>
+</html>
