@@ -1,188 +1,320 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#f5f5f7">
+<meta name="theme-color" content="#f5f5f7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<meta name="color-scheme" content="light dark">
 
 <title>Privacy & Support | KuaiJi</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
+  /* 页面主题色（蓝 / 绿 / 橙） */
   :root {
-    --w: 860px;
-    --bg-color: #f5f5f7;
+    --blob-1: rgba(0, 122, 255, 0.6);
+    --blob-2: rgba(52, 199, 89, 0.5);
+    --blob-3: rgba(255, 149, 0, 0.5);
   }
 
-  /* --- 1. 核心修复区 --- */
-  
+  :root {
+    --w: 780px;
+    --bg: #f5f5f7;
+    --text: #1d1d1f;
+    --text-2: #3a3a3c;
+    --muted: #6e6e73;
+    --line: rgba(0, 0, 0, 0.08);
+    --accent: #007aff;
+    --accent-soft: rgba(0, 122, 255, 0.1);
+    --card: rgba(255, 255, 255, 0.62);
+    --card-border: rgba(255, 255, 255, 0.75);
+    --card-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 16px 48px rgba(0, 0, 0, 0.07);
+    --seg-bg: rgba(255, 255, 255, 0.55);
+    --seg-border: rgba(0, 0, 0, 0.06);
+    --seg-active: #ffffff;
+    --blob-opacity: 0.5;
+    --safe-top: env(safe-area-inset-top, 0px);
+    color-scheme: light dark;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #000000;
+      --text: #f5f5f7;
+      --text-2: #d1d1d6;
+      --muted: #98989d;
+      --line: rgba(255, 255, 255, 0.1);
+      --accent: #0a84ff;
+      --accent-soft: rgba(10, 132, 255, 0.16);
+      --card: rgba(28, 28, 30, 0.58);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --card-shadow: 0 16px 48px rgba(0, 0, 0, 0.45);
+      --seg-bg: rgba(44, 44, 46, 0.6);
+      --seg-border: rgba(255, 255, 255, 0.08);
+      --seg-active: #636366;
+      --blob-opacity: 0.32;
+    }
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+
   html {
-    /* 强制 html 占满高度并涂满灰色，解决底部可能出现的白边 */
-    background-color: var(--bg-color);
+    /* 让 html 本身涂满背景色，避免 iOS 回弹时露出白边 */
+    background-color: var(--bg);
     height: 100%;
+    -webkit-text-size-adjust: 100%;
   }
 
   body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     font-weight: 400;
-    color: #1d1d1f; 
-    background-color: var(--bg-color); 
+    color: var(--text);
+    background-color: var(--bg);
     margin: 0;
-    padding: 0;
-    min-height: 100%; 
-    /* 这是一个保险措施：防止 iOS 顶部下拉回弹时露出白色 */
+    min-height: 100%;
     position: relative;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
   }
 
+  /* --- 流体背景：从安全区下方开始，状态栏区域保持纯色 --- */
   .liquid-background {
     position: fixed;
-    /* --- 关键修改：避开状态栏 --- */
-    /* 让光斑层从刘海屏下方才开始，上方留出纯粹的灰色背景 */
-    top: env(safe-area-inset-top, 0px); 
+    top: var(--safe-top);
     left: 0;
     width: 100%;
-    /* 高度相应减少，避免由于 top 下移导致底部溢出 */
-    height: calc(100vh - env(safe-area-inset-top, 0px));
-    
-    z-index: 0; 
+    height: calc(100vh - var(--safe-top));
+    z-index: 0;
     overflow: hidden;
-    pointer-events: none; 
+    pointer-events: none;
   }
 
-  /* 下面的样式保持不变，但为了完整性我全部列出 */
   .blob {
     position: absolute;
     border-radius: 50%;
     filter: blur(100px);
-    opacity: 0.5;
+    opacity: var(--blob-opacity);
+    will-change: transform;
   }
 
-  .blob1 {
-    width: 450px;
-    height: 450px;
-    background: rgba(0, 122, 255, 0.6); 
-    /* 既然容器已经下移，这里稍微往上提一点点，让它贴近安全区的边缘，通过视觉补偿 */
-    top: -80px; 
-    left: -100px;
-    animation: moveBlob 20s infinite alternate ease-in-out;
-  }
-
-  .blob2 {
-    width: 350px;
-    height: 350px;
-    background: rgba(52, 199, 89, 0.5); 
-    bottom: -100px;
-    right: 50px;
-    animation: moveBlob 25s infinite alternate-reverse ease-in-out;
-  }
-  
-  .blob3 {
-    width: 300px;
-    height: 300px;
-    background: rgba(255, 149, 0, 0.5); 
-    bottom: 100px;
-    left: 150px;
-    animation: moveBlob 18s infinite alternate ease-in-out;
-  }
+  .blob1 { width: 460px; height: 460px; background: var(--blob-1); top: -80px; left: -100px; animation: moveBlob 20s infinite alternate ease-in-out; }
+  .blob2 { width: 360px; height: 360px; background: var(--blob-2); bottom: -100px; right: 40px; animation: moveBlob 25s infinite alternate-reverse ease-in-out; }
+  .blob3 { width: 320px; height: 320px; background: var(--blob-3); bottom: 110px; left: 140px; animation: moveBlob 18s infinite alternate ease-in-out; }
 
   @keyframes moveBlob {
-    0% { transform: scale(1) translate(0px, 0px); }
+    0% { transform: scale(1) translate(0, 0); }
     100% { transform: scale(1.3) translate(150px, -100px); }
   }
 
+  /* --- 布局 --- */
   main {
     max-width: var(--w);
     margin: 0 auto;
-    /* padding-top 不需要很大了，因为 env 已经处理了顶部距离，给一点基础间距即可 */
-    padding: 20px 20px;
-    /* 依然保留 safe-area 也就是为了确保文字不被遮挡 */
-    padding-top: env(safe-area-inset-top, 20px);
-    padding-bottom: env(safe-area-inset-bottom, 20px);
-    line-height: 1.6;
-    position: relative; 
-    z-index: 1; 
+    padding:
+      max(var(--safe-top), 48px)
+      max(env(safe-area-inset-right, 0px), 20px)
+      max(env(safe-area-inset-bottom, 0px), 28px)
+      max(env(safe-area-inset-left, 0px), 20px);
+    line-height: 1.65;
+    position: relative;
+    z-index: 1;
   }
+
+  .hero { text-align: center; margin-bottom: 24px; }
 
   h1 {
-    font-size: 32px;
-    font-weight: 600;
-    text-align: center;
-    margin: 12px 0 12px; /* 稍微调整边距 */
-    letter-spacing: -0.2px;
+    font-size: clamp(28px, 6vw, 40px);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin: 0 0 10px;
   }
 
-  h2 { font-size: 24px; font-weight: 600; margin-top: 24px; }
-  h3 { font-size: 19px; font-weight: 600; margin-top: 20px; }
-  p, li { font-size: 17px; }
-  ul { margin: 8px 0 8px 22px; padding-left: 0; }
-  .muted { color: #6e6e73; }
-  hr { border: none; border-top: 1px solid #d2d2d7; margin: 32px 0; }
-  a { color: #007aff; text-decoration: none; }
-  a:hover { text-decoration: underline; }
-  .center { text-align: center; }
-  
-  footer {
-    margin: 40px 0 20px;
-    font-size: 14px;
-    color: #6e6e73;
+  .subtitle {
+    font-size: clamp(16px, 2.6vw, 18px);
+    color: var(--muted);
+    margin: 0 auto;
+    max-width: 34em;
   }
 
-  .lang {
-    background: none;
-    backdrop-filter: none;
-    border: none;
-    box-shadow: none;
-    padding: 24px 0;
-    margin: 32px 0;
-    color: #333333; 
-    display: none; 
-    opacity: 0;
-    transition: opacity 0.3s ease-in-out;
+  /* --- 语言切换（吸顶分段控件） --- */
+  .switcher-wrap {
+    position: sticky;
+    top: max(var(--safe-top), 12px);
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    margin: 0 0 24px;
   }
-  
-  .lang p, .lang li { text-shadow: 0 1px 3px rgba(255, 255, 255, 0.7); }
-  .lang h2, .lang h3, .lang strong { color: #1d1d1f; font-weight: 600; text-shadow: 0 2px 4px rgba(255, 255, 255, 0.7); }
-  .lang a { color: #007aff; font-weight: 500; text-shadow: 0 1px 3px rgba(255, 255, 255, 0.7); }
-  .lang.active { display: block; }
-  .lang.show { opacity: 1; }
 
   .lang-switcher {
-    text-align: center;
-    background: rgba(230, 230, 235, 0.7); 
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border-radius: 20px;
-    padding: 6px;
-    display: inline-block;
-    margin-top: 24px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    display: inline-flex;
+    gap: 2px;
+    padding: 4px;
+    border-radius: 999px;
+    background: var(--seg-bg);
+    border: 1px solid var(--seg-border);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
   }
 
   .lang-btn {
-    font-family: 'Inter', -apple-system, sans-serif;
+    font: inherit;
     font-size: 15px;
     font-weight: 500;
-    color: #333; 
-    background: none;
+    color: var(--muted);
+    background: transparent;
     border: none;
-    padding: 8px 16px;
+    padding: 7px 18px;
     margin: 0;
     cursor: pointer;
-    border-radius: 16px; 
-    transition: all 0.3s ease;
+    border-radius: 999px;
+    white-space: nowrap;
+    -webkit-tap-highlight-color: transparent;
+    transition: color 0.2s ease, background-color 0.25s ease, box-shadow 0.25s ease;
   }
 
-  .lang-btn:hover { color: #000; }
+  .lang-btn:hover { color: var(--text); }
+  .lang-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
   .lang-btn.active {
+    color: var(--text);
     font-weight: 600;
-    color: #000; 
-    background-color: #ffffff; 
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
+    background-color: var(--seg-active);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 3px 10px rgba(0, 0, 0, 0.08);
   }
 
+  /* --- 内容卡片（毛玻璃） --- */
+  .lang {
+    display: none;
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: 24px;
+    box-shadow: var(--card-shadow);
+    backdrop-filter: blur(28px) saturate(170%);
+    -webkit-backdrop-filter: blur(28px) saturate(170%);
+    padding: clamp(24px, 5vw, 44px);
+    color: var(--text-2);
+  }
+
+  .lang.active { display: block; }
+  .lang.show { opacity: 1; transform: none; }
+
+  .lang > :first-child { margin-top: 0; }
+  .lang > :last-child { margin-bottom: 0; }
+
+  h2 {
+    font-size: clamp(22px, 4vw, 26px);
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: -0.015em;
+    color: var(--text);
+    margin: 32px 0 12px;
+  }
+
+  h3 {
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.35;
+    color: var(--text);
+    margin: 28px 0 10px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+  }
+
+  p, li { font-size: 16.5px; }
+  p { margin: 0 0 10px; }
+  strong { color: var(--text); font-weight: 600; }
+
+  .meta {
+    display: inline-block;
+    font-size: 13.5px;
+    font-weight: 500;
+    color: var(--muted);
+    background: var(--line);
+    padding: 3px 12px;
+    border-radius: 999px;
+    margin-bottom: 4px;
+  }
+
+  .note { font-size: 14.5px; color: var(--muted); }
+
+  ul { list-style: none; margin: 8px 0 12px; padding: 0; }
+
+  li {
+    position: relative;
+    padding-left: 22px;
+    margin-bottom: 8px;
+  }
+
+  li::before {
+    content: "";
+    position: absolute;
+    left: 6px;
+    top: 0.72em;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    opacity: 0.85;
+  }
+
+  a {
+    color: var(--accent);
+    font-weight: 500;
+    text-decoration: none;
+    text-underline-offset: 3px;
+  }
+  a:hover { text-decoration: underline; }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+
+  /* 邮箱链接做成胶囊按钮，便于在手机上点按 */
+  a[href^="mailto:"] {
+    display: inline-block;
+    padding: 4px 14px;
+    border-radius: 999px;
+    background: var(--accent-soft);
+    overflow-wrap: anywhere;
+    transition: background-color 0.2s ease;
+  }
+  a[href^="mailto:"]:hover { text-decoration: none; background: rgba(0, 122, 255, 0.18); }
+
+  hr { border: none; border-top: 1px solid var(--line); margin: 32px 0; }
+  .lang hr + h2 { margin-top: 0; }
+
+  .center { text-align: center; }
+  .muted { color: var(--muted); }
+
+  footer {
+    margin: 32px 0 8px;
+    font-size: 13px;
+    letter-spacing: 0.01em;
+    color: var(--muted);
+  }
+
+  @media (max-width: 600px) {
+    .blob { filter: blur(80px); }
+    .blob1 { width: 320px; height: 320px; }
+    .blob2 { width: 260px; height: 260px; right: -40px; }
+    .blob3 { width: 240px; height: 240px; left: 20px; }
+    .lang { border-radius: 20px; }
+    .lang-btn { padding: 7px 14px; font-size: 14.5px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .blob { animation: none; }
+    .lang, .lang-btn { transition: none; }
+    .lang { transform: none; }
+  }
 </style>
 </head>
 <body>
@@ -194,22 +326,22 @@
 </div>
 
 <main>
-  <h1>Privacy • Support • Mentions</h1>
-  <p class="center muted">KuaiJi — Offline personal ledger with private AA split over LAN/Bluetooth.</p>
+  <header class="hero">
+    <h1>Privacy • Support • Mentions</h1>
+    <p class="subtitle">KuaiJi — Offline personal ledger with private AA split over LAN/Bluetooth.</p>
+  </header>
   
-  <div class="center">
-    <div class="lang-switcher">
+  <nav class="switcher-wrap">
+    <div class="lang-switcher" role="group" aria-label="Language">
       <button class="lang-btn active" data-lang="zh-CN">简体中文</button>
       <button class="lang-btn" data-lang="en">English</button>
       <button class="lang-btn" data-lang="fr">Français</button>
     </div>
-  </div>
-  
-  <hr>
+  </nav>
 
   <section class="lang active show" id="zh-CN">
     <h2>隐私政策与技术支持</h2>
-    <p><strong>版本日期：2025年10月</strong></p>
+    <p class="meta">版本日期：2025年10月</p>
     <h3>1) 数据与隐私</h3>
     <ul>
       <li>本应用<strong>不收集</strong>任何个人数据；账本与分账信息仅保存在您的设备本地。</li>
@@ -234,7 +366,7 @@
 
   <section class="lang" id="en">
     <h2>Privacy & Technical Support</h2>
-    <p><strong>Version: October 2025</strong></p>
+    <p class="meta">Version: October 2025</p>
     <h3>1) Data & Privacy</h3>
     <ul>
       <li>This app <strong>does not collect</strong> personal data; all ledger/split data stays on-device.</li>
@@ -259,7 +391,7 @@
 
   <section class="lang" id="fr">
     <h2>Confidentialité & Support technique</h2>
-    <p><strong>Version : Octobre 2025</strong></p>
+    <p class="meta">Version : Octobre 2025</p>
     <h3>1) Données & vie privée</h3>
     <ul>
       <li>L’application <strong>ne collecte aucune</strong> donnée personnelle ; toutes les informations restent sur l’appareil.</li>
@@ -283,47 +415,79 @@
   </section>
 
   <footer class="center">
-    <hr>
     <div class="muted">KuaiJi • © 2025 • Offline-first • No data collection</div>
   </footer>
 </main>
 
 <script>
-document.addEventListener('DOMContentLoaded', () => {
-  const buttons = document.querySelectorAll('.lang-btn');
-  const transitionTime = 300; 
+(() => {
+  const buttons = Array.from(document.querySelectorAll('.lang-btn'));
+  const ids = buttons.map(b => b.dataset.lang);
+  const STORAGE_KEY = 'preferred-lang';
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const FADE_MS = reduceMotion ? 0 : 200;
+  let current = document.querySelector('.lang.active');
+  let timer;
+
+  // 精确匹配优先，其次按主语言匹配（如 fr-CA → fr, zh-Hans → zh-CN）
+  const match = code => {
+    if (!code) return null;
+    const c = code.toLowerCase();
+    return ids.find(id => id.toLowerCase() === c) ||
+           ids.find(id => id.toLowerCase().split('-')[0] === c.split('-')[0]) || null;
+  };
+
+  const initialLang = () => {
+    let saved = null;
+    try { saved = localStorage.getItem(STORAGE_KEY); } catch (e) {}
+    const browser = (navigator.languages || [navigator.language]).map(match).find(Boolean);
+    return match(location.hash.slice(1)) || match(saved) || browser || ids[0];
+  };
+
+  const show = (id, animate) => {
+    const next = document.getElementById(id);
+    if (!next) return;
+
+    buttons.forEach(b => {
+      const on = b.dataset.lang === id;
+      b.classList.toggle('active', on);
+      b.setAttribute('aria-pressed', on);
+    });
+    document.documentElement.lang = id;
+    if (next === current && next.classList.contains('show')) return;
+
+    const prev = current;
+    current = next;
+    clearTimeout(timer);
+
+    const reveal = () => {
+      document.querySelectorAll('.lang').forEach(s => {
+        if (s !== next) s.classList.remove('active', 'show');
+      });
+      next.classList.add('active');
+      if (!animate) { next.classList.add('show'); return; }
+      requestAnimationFrame(() => requestAnimationFrame(() => next.classList.add('show')));
+    };
+
+    if (prev && prev !== next && animate && FADE_MS) {
+      prev.classList.remove('show');
+      timer = setTimeout(reveal, FADE_MS);
+    } else {
+      reveal();
+    }
+  };
 
   buttons.forEach(button => {
     button.addEventListener('click', () => {
-      const targetLang = button.dataset.lang;
-      const newTargetSection = document.getElementById(targetLang);
-      
-      const currentActiveBtn = document.querySelector('.lang-btn.active');
-      const currentActiveSection = document.querySelector('.lang.active');
-      
-      if (currentActiveBtn === button) { return; }
-      
-      if (currentActiveBtn) { currentActiveBtn.classList.remove('active'); }
-      button.classList.add('active');
-      
-      if (currentActiveSection) {
-        currentActiveSection.classList.remove('show'); 
-        setTimeout(() => {
-          currentActiveSection.classList.remove('active'); 
-          newTargetSection.classList.add('active'); 
-          requestAnimationFrame(() => {
-            requestAnimationFrame(() => {
-               newTargetSection.classList.add('show');
-            });
-          });
-        }, transitionTime);
-      } else {
-        newTargetSection.classList.add('active');
-        newTargetSection.classList.add('show');
-      }
+      const id = button.dataset.lang;
+      show(id, true);
+      try { localStorage.setItem(STORAGE_KEY, id); } catch (e) {}
+      try { history.replaceState(null, '', '#' + id); } catch (e) {}
     });
   });
-});
+
+  show(initialLang(), false);
+})();
 </script>
 
 </body>
