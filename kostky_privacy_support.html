@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#120C08">
+<meta name="color-scheme" content="dark">
+<meta name="description" content="Kostky — Privacy Policy & Support">
+
+<title>Kostky | Privacy & Support</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&family=Grenze+Gotisch:wght@500;700&family=Grenze:ital,wght@0,400;0,600;1,400&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --w: 800px;
+    --night: #120C08;
+    --wood: #3B2416;
+    --parchment: #EAD9B0;
+    --parchment-light: #F3E6C4;
+    --parchment-dark: #D6BD88;
+    --vermilion: #8E1B14;
+    --gold: #C9A24A;
+    --ink: #2B1B0F;
+    --ink-2: #4A3322;
+    --ink-muted: #7A5E43;
+    --rule: rgba(59, 36, 22, 0.22);
+    --safe-top: env(safe-area-inset-top, 0px);
+    --font-title: 'UnifrakturMaguntia', 'Grenze Gotisch', serif;
+    --font-head: 'Grenze Gotisch', 'Noto Serif SC', 'Songti SC', serif;
+    --font-body: 'Grenze', 'Noto Serif SC', 'Songti SC', 'STSong', Georgia, serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+
+  html {
+    background-color: var(--night);
+    height: 100%;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100%;
+    position: relative;
+    font-family: var(--font-body);
+    color: var(--parchment);
+    background-color: var(--night);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* --- 烛光与木纹背景 --- */
+  .tavern {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(ellipse 140% 70% at 50% 120%, rgba(59, 36, 22, 0.9), transparent 70%),
+      repeating-linear-gradient(92deg, rgba(0, 0, 0, 0.0) 0 22px, rgba(0, 0, 0, 0.12) 22px 23px, rgba(0, 0, 0, 0.0) 23px 61px),
+      radial-gradient(ellipse 120% 90% at 50% 50%, transparent 40%, rgba(0, 0, 0, 0.65) 100%);
+  }
+
+  .candle {
+    position: fixed;
+    top: -18vh;
+    left: 50%;
+    width: 900px;
+    height: 70vh;
+    transform: translateX(-50%);
+    z-index: 0;
+    pointer-events: none;
+    background: radial-gradient(ellipse at center, rgba(255, 170, 70, 0.30), rgba(201, 120, 40, 0.10) 45%, transparent 70%);
+    animation: flicker 5s infinite ease-in-out;
+  }
+
+  @keyframes flicker {
+    0%, 100% { opacity: 0.85; transform: translateX(-50%) scale(1); }
+    22% { opacity: 1; }
+    40% { opacity: 0.75; transform: translateX(-50%) scale(1.03); }
+    63% { opacity: 0.95; }
+    80% { opacity: 0.8; transform: translateX(-50%) scale(0.98); }
+  }
+
+  /* --- 布局 --- */
+  main {
+    position: relative;
+    z-index: 1;
+    max-width: var(--w);
+    margin: 0 auto;
+    padding:
+      max(var(--safe-top), 44px)
+      max(env(safe-area-inset-right, 0px), 18px)
+      max(env(safe-area-inset-bottom, 0px), 28px)
+      max(env(safe-area-inset-left, 0px), 18px);
+    line-height: 1.7;
+  }
+
+  .hero { text-align: center; margin-bottom: 26px; }
+
+  .dice { width: 132px; height: auto; margin: 0 auto 4px; display: block; filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.55)); }
+
+  h1 {
+    font-family: var(--font-title);
+    font-weight: 400;
+    font-size: clamp(56px, 13vw, 84px);
+    line-height: 1;
+    margin: 0 0 6px;
+    color: var(--gold);
+    text-shadow: 0 0 24px rgba(255, 170, 70, 0.35), 0 2px 0 #5a3a12;
+  }
+
+  .tagline {
+    font-family: var(--font-head);
+    font-weight: 500;
+    font-size: clamp(16px, 3vw, 19px);
+    letter-spacing: 0.04em;
+    color: rgba(234, 217, 176, 0.75);
+    margin: 0 auto;
+    max-width: 30em;
+  }
+
+  .flourish {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    color: var(--gold);
+    margin: 14px auto 0;
+    max-width: 260px;
+    opacity: 0.8;
+  }
+  .flourish::before, .flourish::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold));
+  }
+  .flourish::after { background: linear-gradient(90deg, var(--gold), transparent); }
+
+  /* --- 语言切换 --- */
+  .switcher-wrap {
+    position: sticky;
+    top: max(var(--safe-top), 12px);
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    margin: 0 0 26px;
+  }
+
+  .lang-switcher {
+    display: inline-flex;
+    gap: 2px;
+    padding: 4px;
+    border-radius: 999px;
+    background: rgba(40, 24, 14, 0.82);
+    border: 1px solid rgba(201, 162, 74, 0.45);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
+  }
+
+  .lang-btn {
+    font-family: var(--font-head);
+    font-size: 16px;
+    font-weight: 500;
+    color: rgba(234, 217, 176, 0.7);
+    background: transparent;
+    border: none;
+    padding: 6px 18px;
+    margin: 0;
+    border-radius: 999px;
+    cursor: pointer;
+    white-space: nowrap;
+    -webkit-tap-highlight-color: transparent;
+    transition: color 0.2s ease, background-color 0.25s ease;
+  }
+  .lang-btn:hover { color: var(--parchment); }
+  .lang-btn:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+  .lang-btn.active {
+    color: var(--night);
+    font-weight: 700;
+    background: linear-gradient(180deg, #E0BE68, var(--gold));
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35), 0 2px 6px rgba(0, 0, 0, 0.4);
+  }
+
+  /* --- 羊皮纸卡片 --- */
+  .lang {
+    display: none;
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    position: relative;
+    color: var(--ink-2);
+    background:
+      radial-gradient(ellipse at 20% 10%, rgba(255, 255, 255, 0.35), transparent 50%),
+      radial-gradient(ellipse at 85% 90%, rgba(150, 100, 40, 0.18), transparent 55%),
+      radial-gradient(ellipse at center, var(--parchment-light) 0%, var(--parchment) 55%, var(--parchment-dark) 100%);
+    border-radius: 6px;
+    border: 1px solid #A8854C;
+    outline: 1px solid rgba(201, 162, 74, 0.55);
+    outline-offset: 6px;
+    box-shadow:
+      inset 0 0 70px rgba(120, 80, 30, 0.28),
+      0 24px 60px rgba(0, 0, 0, 0.6);
+    padding: clamp(26px, 6vw, 52px) clamp(22px, 6vw, 56px);
+    margin: 0 6px;
+  }
+  .lang.active { display: block; }
+  .lang.show { opacity: 1; transform: none; }
+  .lang > :first-child { margin-top: 0; }
+  .lang > :last-child { margin-bottom: 0; }
+
+  h2 {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: clamp(26px, 5vw, 32px);
+    line-height: 1.2;
+    color: var(--vermilion);
+    margin: 44px 0 12px;
+    text-align: center;
+  }
+  h2::after {
+    content: "";
+    display: block;
+    width: 120px;
+    height: 8px;
+    margin: 10px auto 0;
+    background:
+      radial-gradient(circle, var(--gold) 3px, transparent 3.5px) center / 8px 8px no-repeat,
+      linear-gradient(90deg, transparent, var(--gold) 30%, var(--gold) 70%, transparent) center / 100% 1px no-repeat;
+  }
+
+  h3 {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 21px;
+    line-height: 1.35;
+    color: var(--wood);
+    margin: 30px 0 8px;
+  }
+
+  p, li { font-size: 17px; }
+  p { margin: 0 0 10px; }
+  strong { color: var(--ink); font-weight: 600; }
+  :lang(zh) p, :lang(zh) li { font-size: 16px; }
+
+  .meta {
+    display: block;
+    width: fit-content;
+    margin: 0 auto 8px;
+    font-family: var(--font-head);
+    font-size: 15px;
+    color: var(--ink-muted);
+    border: 1px solid rgba(142, 27, 20, 0.35);
+    border-radius: 999px;
+    padding: 1px 14px;
+  }
+
+  .lead { font-size: 18px; color: var(--ink); text-align: center; margin: 0 auto 18px; max-width: 32em; }
+  :lang(zh) .lead { font-size: 17px; }
+
+  ul { list-style: none; padding: 0; margin: 6px 0 12px; }
+  li { position: relative; padding-left: 22px; margin-bottom: 7px; }
+  li::before {
+    content: "";
+    position: absolute;
+    left: 4px;
+    top: 0.68em;
+    width: 7px;
+    height: 7px;
+    background: var(--vermilion);
+    transform: rotate(45deg);
+  }
+
+  /* 玩法速览 */
+  .modes {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin: 18px 0 8px;
+  }
+  .mode {
+    border: 1px solid rgba(59, 36, 22, 0.25);
+    border-radius: 6px;
+    padding: 14px 12px;
+    text-align: center;
+    background: rgba(255, 248, 225, 0.35);
+  }
+  .mode b {
+    display: block;
+    font-family: var(--font-head);
+    font-size: 19px;
+    color: var(--vermilion);
+    margin-bottom: 2px;
+  }
+  .mode span { font-size: 15px; line-height: 1.5; display: block; color: var(--ink-2); }
+
+  .scoring {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px 18px;
+    margin: 14px 0 4px;
+    font-family: var(--font-head);
+    font-size: 17px;
+    color: var(--ink);
+  }
+  .scoring span { white-space: nowrap; }
+  .scoring .pip { color: var(--vermilion); font-size: 22px; vertical-align: -2px; margin-right: 4px; }
+
+  .fineprint { font-size: 14.5px; color: var(--ink-muted); }
+  .center { text-align: center; }
+
+  a { color: var(--vermilion); font-weight: 600; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+  a:focus-visible { outline: 2px solid var(--vermilion); outline-offset: 2px; }
+
+  a[href^="mailto:"] {
+    display: inline-block;
+    font-family: var(--font-head);
+    font-weight: 500;
+    font-size: 18px;
+    color: #F6EAC9;
+    text-decoration: none;
+    background: linear-gradient(180deg, #A6241B, var(--vermilion));
+    border: 1px solid #5E100B;
+    border-radius: 999px;
+    padding: 3px 18px 4px;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 2px 6px rgba(80, 20, 10, 0.3);
+    overflow-wrap: anywhere;
+  }
+  a[href^="mailto:"]:hover { filter: brightness(1.08); }
+
+  hr {
+    border: none;
+    height: 18px;
+    margin: 40px 0 0;
+    background:
+      radial-gradient(circle, var(--vermilion) 2.5px, transparent 3px) center / 18px 18px no-repeat,
+      linear-gradient(90deg, transparent, rgba(59, 36, 22, 0.35) 20%, rgba(59, 36, 22, 0.35) 80%, transparent) center / 100% 1px no-repeat;
+  }
+
+  /* 常见问题 */
+  details {
+    border-bottom: 1px solid var(--rule);
+    padding: 10px 0;
+  }
+  details:first-of-type { border-top: 1px solid var(--rule); }
+  summary {
+    cursor: pointer;
+    list-style: none;
+    font-weight: 600;
+    color: var(--ink);
+    position: relative;
+    padding-right: 28px;
+  }
+  summary::-webkit-details-marker { display: none; }
+  summary::after {
+    content: "+";
+    position: absolute;
+    right: 4px;
+    top: -2px;
+    font-family: var(--font-head);
+    font-size: 22px;
+    color: var(--vermilion);
+    transition: transform 0.2s ease;
+  }
+  details[open] summary::after { transform: rotate(45deg); }
+  summary:focus-visible { outline: 2px solid var(--vermilion); outline-offset: 3px; border-radius: 2px; }
+  details p { margin: 6px 0 2px; }
+
+  footer {
+    text-align: center;
+    margin: 36px 0 8px;
+    font-family: var(--font-head);
+    font-size: 15px;
+    letter-spacing: 0.05em;
+    color: rgba(234, 217, 176, 0.5);
+  }
+
+  @media (max-width: 600px) {
+    .modes { grid-template-columns: 1fr; }
+    .mode { text-align: left; display: flex; gap: 12px; align-items: baseline; }
+    .mode b { margin: 0; flex: 0 0 auto; }
+    .lang { margin: 0 4px; outline-offset: 4px; }
+    .lang-btn { padding: 6px 13px; font-size: 15px; }
+    .candle { width: 600px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .candle { animation: none; }
+    .lang, .lang-btn { transition: none; }
+    .lang { transform: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="tavern" aria-hidden="true"></div>
+<div class="candle" aria-hidden="true"></div>
+
+<main>
+  <header class="hero">
+    <svg class="dice" viewBox="0 0 132 80" aria-hidden="true">
+      <g transform="rotate(-13 38 44)">
+        <rect x="12" y="18" width="52" height="52" rx="10" fill="#EAD9B0" stroke="#8C6A32" stroke-width="2"/>
+        <rect x="16" y="22" width="44" height="44" rx="8" fill="none" stroke="rgba(255,255,255,.45)" stroke-width="1.5"/>
+        <circle cx="38" cy="44" r="7" fill="#8E1B14"/>
+      </g>
+      <g transform="rotate(11 94 38)">
+        <rect x="68" y="12" width="52" height="52" rx="10" fill="#F1E3BF" stroke="#8C6A32" stroke-width="2"/>
+        <rect x="72" y="16" width="44" height="44" rx="8" fill="none" stroke="rgba(255,255,255,.45)" stroke-width="1.5"/>
+        <g fill="#2B1B0F">
+          <circle cx="81" cy="25" r="4.5"/><circle cx="107" cy="25" r="4.5"/>
+          <circle cx="94" cy="38" r="4.5"/>
+          <circle cx="81" cy="51" r="4.5"/><circle cx="107" cy="51" r="4.5"/>
+        </g>
+      </g>
+    </svg>
+    <h1>Kostky</h1>
+    <p class="tagline">Privacy · Support · Rules of the Table</p>
+    <div class="flourish" aria-hidden="true">✦</div>
+  </header>
+
+  <nav class="switcher-wrap">
+    <div class="lang-switcher" role="group" aria-label="Language">
+      <button class="lang-btn active" data-lang="zh-CN">简体中文</button>
+      <button class="lang-btn" data-lang="en">English</button>
+      <button class="lang-btn" data-lang="fr">Français</button>
+    </div>
+  </nav>
+
+  <!-- 简体中文 -->
+  <section class="lang active show" id="zh-CN">
+    <h2>关于 Kostky</h2>
+    <p class="lead">Kostky 是一款六骰计分游戏，可挑战电脑、与朋友在同一设备轮流对战，或展开巡回挑战。</p>
+    <div class="modes">
+      <div class="mode"><b>人机对战</b><span>与打法各异的电脑对手过招</span></div>
+      <div class="mode"><b>双人同屏</b><span>与朋友共用一台设备轮流掷骰</span></div>
+      <div class="mode"><b>巡回挑战</b><span>12 场连续对局，护符与特殊骰子</span></div>
+    </div>
+    <p>每回合掷出六颗骰子，留下能计分的骰子，再决定继续掷还是存分。若一次掷出全无计分骰，本回合未存的分数全部失去。默认先到 4000 分者获胜。</p>
+    <div class="scoring">
+      <span><span class="pip">⚀</span>单个 1 = 100</span>
+      <span><span class="pip">⚄</span>单个 5 = 50</span>
+      <span>三同号及以上 · 顺子</span>
+    </div>
+    <p class="fineprint center">完整计分表请见 App 主菜单的「规则」。</p>
+
+    <hr>
+
+    <h2>隐私政策</h2>
+    <p class="meta">生效日期：2026 年 10 月 15 日</p>
+
+    <h3>一、概述</h3>
+    <ul>
+      <li>Kostky <strong>不收集任何个人信息</strong>，也没有注册或登录账号。</li>
+      <li>未集成广告、统计分析、崩溃上报、第三方登录或支付等任何第三方 SDK。</li>
+      <li>游戏本身无需联网即可完整游玩。</li>
+    </ul>
+
+    <h3>二、保存在您设备上的数据</h3>
+    <ul>
+      <li>进行中的对局存档、巡回挑战进度和战绩记录。</li>
+      <li>音量、界面语言、出战骰子与对局设置等偏好。</li>
+      <li>以上数据只保存在您的设备上，不会同步到 iCloud，也不会上传到开发者或任何第三方的服务器。若您开启了设备备份，这些数据可能随系统备份一并保存，该过程由 Apple 管理。</li>
+    </ul>
+
+    <h3>三、网络与外部链接</h3>
+    <ul>
+      <li>游戏不会主动向任何服务器发送数据。</li>
+      <li>仅当您在设置页主动点击「小红书」或「电子邮件」时，才会打开对应的 App、网页或系统邮件编辑器。</li>
+      <li>反馈邮件草稿会预填设备型号、系统版本、App 版本、构建号和界面语言，方便排查问题；是否发送、发送哪些内容完全由您决定。外部服务会按其各自的隐私政策处理信息。</li>
+    </ul>
+
+    <h3>四、设备功能</h3>
+    <ul>
+      <li>可选的「摇一摇掷骰」会使用设备的运动传感器判断摇动动作，数据只在设备上即时处理，不会保存或传输。</li>
+      <li>震动使用系统触感反馈，可在设置中关闭。</li>
+      <li>App 不访问相机、麦克风、照片、定位或通讯录。</li>
+    </ul>
+
+    <h3>五、游戏内货币</h3>
+    <ul>
+      <li>巡回挑战中的「格罗申」只能通过对局赢得，并只能在游戏内商贩处使用。</li>
+      <li>它不能用真钱购买，也不能兑换现金或任何具有现实价值的物品。App 内没有内购或订阅。</li>
+    </ul>
+
+    <h3>六、删除数据</h3>
+    <ul>
+      <li>在「统计」页可以分别清空玩家战绩、历史对局和巡回挑战统计，三者需分别操作。</li>
+      <li>删除 App 会移除它保存在设备上的全部数据。</li>
+    </ul>
+
+    <h3>七、儿童隐私</h3>
+    <p>我们不向任何用户（包括儿童）收集个人信息。</p>
+
+    <h3>八、政策更新</h3>
+    <p>如本政策有变更，我们会更新本页并修改上方的生效日期。</p>
+
+    <hr>
+
+    <h2>技术支持</h2>
+    <p class="center">遇到问题或有建议，欢迎来信：</p>
+    <p class="center"><a href="mailto:rangertars777@gmail.com">rangertars777@gmail.com</a></p>
+    <p class="fineprint center">也可以在 App「设置」页的反馈区通过邮件或小红书联系我们。来信时附上设备型号、系统版本和问题发生的步骤，可以帮助我们更快定位问题。</p>
+
+    <h3>常见问题</h3>
+    <details>
+      <summary>在哪里查看规则？</summary>
+      <p>在主菜单点「规则」；对局中也可以点右上角的问号随时查看。</p>
+    </details>
+    <details>
+      <summary>可以和远方的朋友联机吗？</summary>
+      <p>目前没有联机模式。双人对战需要两人共用一台设备，轮流操作。</p>
+    </details>
+    <details>
+      <summary>怎样清除战绩？</summary>
+      <p>进入「统计」页，选择对应的玩家战绩、历史对局或巡回挑战统计，确认后即可清空。三者需要分别操作。</p>
+    </details>
+    <details>
+      <summary>没有声音怎么办？</summary>
+      <p>先检查设备是否处于静音状态，再到「设置」中检查音乐、音效和酒馆环境声三个音量条是否被调到了零。</p>
+    </details>
+    <details>
+      <summary>格罗申可以用真钱购买吗？</summary>
+      <p>不可以。格罗申只能在巡回挑战中赢得并在游戏内使用，App 没有任何内购。</p>
+    </details>
+  </section>
+
+  <!-- English -->
+  <section class="lang" id="en">
+    <h2>About Kostky</h2>
+    <p class="lead">Kostky is a dice strategy game with computer opponents, local pass-and-play, and a challenge tour.</p>
+    <div class="modes">
+      <div class="mode"><b>vs. Computer</b><span>Face opponents with distinct play styles</span></div>
+      <div class="mode"><b>Pass &amp; Play</b><span>Share one device and take turns with a friend</span></div>
+      <div class="mode"><b>Challenge Tour</b><span>12 matches with charms and special dice</span></div>
+    </div>
+    <p>Each turn you roll six dice, set aside scoring dice, then choose to roll on or bank your points. Roll nothing that scores and you lose everything unbanked that turn. By default, the first to 4,000 points wins.</p>
+    <div class="scoring">
+      <span><span class="pip">⚀</span>Single 1 = 100</span>
+      <span><span class="pip">⚄</span>Single 5 = 50</span>
+      <span>Three of a kind or more · Straights</span>
+    </div>
+    <p class="fineprint center">See “Rules” in the main menu for the full scoring table.</p>
+
+    <hr>
+
+    <h2>Privacy Policy</h2>
+    <p class="meta">Effective date: October 15, 2026</p>
+
+    <h3>1. Overview</h3>
+    <ul>
+      <li>Kostky <strong>does not collect any personal information</strong> and has no sign-up or login.</li>
+      <li>No third-party SDKs are included: no ads, analytics, crash reporting, third-party login or payments.</li>
+      <li>The game is fully playable offline.</li>
+    </ul>
+
+    <h3>2. Data Stored on Your Device</h3>
+    <ul>
+      <li>Saved matches in progress, Challenge Tour progress and match statistics.</li>
+      <li>Preferences such as volume, language, selected dice and match settings.</li>
+      <li>This data stays on your device. It is not synced to iCloud and is never uploaded to the developer’s or any third party’s servers. If device backups are enabled, it may be included in your system backup, which is managed by Apple.</li>
+    </ul>
+
+    <h3>3. Network &amp; External Links</h3>
+    <ul>
+      <li>The game does not send data to any server.</li>
+      <li>The Xiaohongshu app or website, or the system mail composer, opens only when you tap “Xiaohongshu” or “Email” on the Settings screen.</li>
+      <li>Feedback email drafts are pre-filled with your device model, OS version, app version, build number and app language to help with troubleshooting. You decide whether to send it and what it contains. External services handle information under their own privacy policies.</li>
+    </ul>
+
+    <h3>4. Device Features</h3>
+    <ul>
+      <li>The optional “shake to roll” feature uses the motion sensors to detect a shake. Motion data is processed on the device in real time and is never stored or transmitted.</li>
+      <li>Vibration uses system haptics and can be turned off in Settings.</li>
+      <li>The app does not access your camera, microphone, photos, location or contacts.</li>
+    </ul>
+
+    <h3>5. In-Game Currency</h3>
+    <ul>
+      <li>Groschen in the Challenge Tour can only be won in matches and spent with in-game merchants.</li>
+      <li>They cannot be bought with real money or exchanged for cash or anything of real-world value. There are no in-app purchases or subscriptions.</li>
+    </ul>
+
+    <h3>6. Deleting Your Data</h3>
+    <ul>
+      <li>On the Stats screen you can separately clear player statistics, match history and Challenge Tour statistics.</li>
+      <li>Deleting the app removes all of its data from your device.</li>
+    </ul>
+
+    <h3>7. Children’s Privacy</h3>
+    <p>We do not collect personal information from anyone, including children.</p>
+
+    <h3>8. Changes to This Policy</h3>
+    <p>If this policy changes, we will update this page and the effective date above.</p>
+
+    <hr>
+
+    <h2>Support</h2>
+    <p class="center">Questions or suggestions? Write to us:</p>
+    <p class="center"><a href="mailto:rangertars777@gmail.com">rangertars777@gmail.com</a></p>
+    <p class="fineprint center">You can also reach us by email or Xiaohongshu from the feedback section in Settings. Including your device model, OS version and the steps that led to the problem helps us respond faster.</p>
+
+    <h3>FAQ</h3>
+    <details>
+      <summary>Where can I read the rules?</summary>
+      <p>Tap “Rules” in the main menu, or the question mark in the top-right corner during a match.</p>
+    </details>
+    <details>
+      <summary>Can I play online with a friend?</summary>
+      <p>There is no online mode at the moment. Two-player matches are played on one shared device.</p>
+    </details>
+    <details>
+      <summary>How do I clear my statistics?</summary>
+      <p>Open the Stats screen and choose player statistics, match history or Challenge Tour statistics, then confirm. Each must be cleared separately.</p>
+    </details>
+    <details>
+      <summary>There’s no sound. What should I do?</summary>
+      <p>Check that your device is not on silent, then check the Music, Sound Effects and Tavern Ambience volume sliders in Settings.</p>
+    </details>
+    <details>
+      <summary>Can I buy Groschen with real money?</summary>
+      <p>No. Groschen are only earned in the Challenge Tour and used in the game. The app has no in-app purchases.</p>
+    </details>
+  </section>
+
+  <!-- Français -->
+  <section class="lang" id="fr">
+    <h2>À propos de Kostky</h2>
+    <p class="lead">Kostky est un jeu de dés stratégique : affrontez l’ordinateur, jouez à deux sur le même appareil ou lancez-vous dans une tournée de défis.</p>
+    <div class="modes">
+      <div class="mode"><b>Contre l’ordinateur</b><span>Des adversaires aux styles de jeu variés</span></div>
+      <div class="mode"><b>À deux</b><span>Un seul appareil, chacun son tour</span></div>
+      <div class="mode"><b>Tournée de défis</b><span>12 parties, talismans et dés spéciaux</span></div>
+    </div>
+    <p>À chaque tour, lancez six dés, mettez de côté les dés qui marquent, puis relancez ou encaissez vos points. Si un lancer ne marque rien, vous perdez tous les points non encaissés du tour. Par défaut, le premier à 4 000 points l’emporte.</p>
+    <div class="scoring">
+      <span><span class="pip">⚀</span>Un 1 = 100</span>
+      <span><span class="pip">⚄</span>Un 5 = 50</span>
+      <span>Brelan et plus · Suites</span>
+    </div>
+    <p class="fineprint center">Le barème complet se trouve dans « Règles » du menu principal.</p>
+
+    <hr>
+
+    <h2>Politique de confidentialité</h2>
+    <p class="meta">Date d’entrée en vigueur : 15 octobre 2026</p>
+
+    <h3>1. En bref</h3>
+    <ul>
+      <li>Kostky <strong>ne collecte aucune donnée personnelle</strong> et ne nécessite ni inscription ni compte.</li>
+      <li>Aucun SDK tiers : ni publicité, ni analyse, ni rapport de plantage, ni connexion ou paiement tiers.</li>
+      <li>Le jeu est entièrement jouable hors ligne.</li>
+    </ul>
+
+    <h3>2. Données stockées sur votre appareil</h3>
+    <ul>
+      <li>Parties en cours, progression de la tournée de défis et statistiques.</li>
+      <li>Préférences : volume, langue, dés sélectionnés, réglages de partie.</li>
+      <li>Ces données restent sur votre appareil. Elles ne sont pas synchronisées avec iCloud et ne sont jamais envoyées aux serveurs du développeur ni d’un tiers. Si la sauvegarde de l’appareil est activée, elles peuvent être incluses dans la sauvegarde système gérée par Apple.</li>
+    </ul>
+
+    <h3>3. Réseau et liens externes</h3>
+    <ul>
+      <li>Le jeu n’envoie aucune donnée à un serveur.</li>
+      <li>L’app ou le site Xiaohongshu, ou l’éditeur de mail du système, ne s’ouvre que si vous touchez « Xiaohongshu » ou « E-mail » dans les Réglages.</li>
+      <li>Le brouillon d’e-mail est prérempli avec le modèle de l’appareil, la version d’iOS, la version et le numéro de build de l’app et la langue, pour faciliter le diagnostic. Vous décidez de l’envoyer et de son contenu. Les services externes traitent les informations selon leur propre politique de confidentialité.</li>
+    </ul>
+
+    <h3>4. Fonctions de l’appareil</h3>
+    <ul>
+      <li>L’option « secouer pour lancer » utilise les capteurs de mouvement pour détecter une secousse. Ces données sont traitées en temps réel sur l’appareil, sans être enregistrées ni transmises.</li>
+      <li>Les vibrations utilisent le retour haptique du système et peuvent être désactivées dans les Réglages.</li>
+      <li>L’app n’accède ni à l’appareil photo, ni au micro, ni aux photos, ni à la localisation, ni aux contacts.</li>
+    </ul>
+
+    <h3>5. Monnaie du jeu</h3>
+    <ul>
+      <li>Les groschen de la tournée de défis se gagnent uniquement en jouant et se dépensent auprès des marchands du jeu.</li>
+      <li>Ils ne peuvent pas être achetés avec de l’argent réel ni échangés contre de l’argent ou un bien ayant une valeur réelle. Il n’y a ni achat intégré ni abonnement.</li>
+    </ul>
+
+    <h3>6. Suppression des données</h3>
+    <ul>
+      <li>Dans l’écran Statistiques, vous pouvez effacer séparément les statistiques des joueurs, l’historique des parties et les statistiques de la tournée.</li>
+      <li>Supprimer l’app efface toutes ses données de votre appareil.</li>
+    </ul>
+
+    <h3>7. Enfants</h3>
+    <p>Nous ne collectons de données personnelles auprès de personne, enfants compris.</p>
+
+    <h3>8. Modifications</h3>
+    <p>En cas de modification, nous mettrons cette page à jour ainsi que la date ci-dessus.</p>
+
+    <hr>
+
+    <h2>Assistance</h2>
+    <p class="center">Une question ou une suggestion ? Écrivez-nous :</p>
+    <p class="center"><a href="mailto:rangertars777@gmail.com">rangertars777@gmail.com</a></p>
+    <p class="fineprint center">Vous pouvez aussi nous contacter par e-mail ou via Xiaohongshu depuis la section Commentaires des Réglages. Indiquer le modèle de l’appareil, la version d’iOS et les étapes du problème nous aide à répondre plus vite.</p>
+
+    <h3>Questions fréquentes</h3>
+    <details>
+      <summary>Où trouver les règles ?</summary>
+      <p>Touchez « Règles » dans le menu principal, ou le point d’interrogation en haut à droite pendant une partie.</p>
+    </details>
+    <details>
+      <summary>Peut-on jouer en ligne avec un ami ?</summary>
+      <p>Il n’y a pas de mode en ligne pour l’instant. Les parties à deux se jouent sur un seul appareil partagé.</p>
+    </details>
+    <details>
+      <summary>Comment effacer mes statistiques ?</summary>
+      <p>Ouvrez l’écran Statistiques, choisissez les statistiques d’un joueur, l’historique ou les statistiques de la tournée, puis confirmez. Chaque élément s’efface séparément.</p>
+    </details>
+    <details>
+      <summary>Je n’ai pas de son, que faire ?</summary>
+      <p>Vérifiez que l’appareil n’est pas en mode silencieux, puis les curseurs Musique, Effets sonores et Ambiance de taverne dans les Réglages.</p>
+    </details>
+    <details>
+      <summary>Peut-on acheter des groschen avec de l’argent réel ?</summary>
+      <p>Non. Les groschen se gagnent uniquement dans la tournée de défis et s’utilisent dans le jeu. L’app ne propose aucun achat intégré.</p>
+    </details>
+  </section>
+
+  <footer>Kostky · © 2026 · Offline · No accounts · No tracking</footer>
+</main>
+
+<script>
+(() => {
+  const buttons = Array.from(document.querySelectorAll('.lang-btn'));
+  const ids = buttons.map(b => b.dataset.lang);
+  const STORAGE_KEY = 'preferred-lang';
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const FADE_MS = reduceMotion ? 0 : 200;
+  let current = document.querySelector('.lang.active');
+  let timer;
+
+  // 精确匹配优先，其次按主语言匹配（如 fr-CA → fr, zh-Hans → zh-CN）
+  const match = code => {
+    if (!code) return null;
+    const c = code.toLowerCase();
+    return ids.find(id => id.toLowerCase() === c) ||
+           ids.find(id => id.toLowerCase().split('-')[0] === c.split('-')[0]) || null;
+  };
+
+  const initialLang = () => {
+    let saved = null;
+    try { saved = localStorage.getItem(STORAGE_KEY); } catch (e) {}
+    const browser = (navigator.languages || [navigator.language]).map(match).find(Boolean);
+    return match(location.hash.slice(1)) || match(saved) || browser || ids[0];
+  };
+
+  const show = (id, animate) => {
+    const next = document.getElementById(id);
+    if (!next) return;
+
+    buttons.forEach(b => {
+      const on = b.dataset.lang === id;
+      b.classList.toggle('active', on);
+      b.setAttribute('aria-pressed', on);
+    });
+    document.documentElement.lang = id;
+    if (next === current && next.classList.contains('show')) return;
+
+    const prev = current;
+    current = next;
+    clearTimeout(timer);
+
+    const reveal = () => {
+      document.querySelectorAll('.lang').forEach(s => {
+        if (s !== next) s.classList.remove('active', 'show');
+      });
+      next.classList.add('active');
+      if (!animate) { next.classList.add('show'); return; }
+      requestAnimationFrame(() => requestAnimationFrame(() => next.classList.add('show')));
+    };
+
+    if (prev && prev !== next && animate && FADE_MS) {
+      prev.classList.remove('show');
+      timer = setTimeout(reveal, FADE_MS);
+    } else {
+      reveal();
+    }
+  };
+
+  buttons.forEach(button => {
+    button.addEventListener('click', () => {
+      const id = button.dataset.lang;
+      show(id, true);
+      try { localStorage.setItem(STORAGE_KEY, id); } catch (e) {}
+      try { history.replaceState(null, '', '#' + id); } catch (e) {}
+    });
+  });
+
+  show(initialLang(), false);
+})();
+</script>
+
+</body>
+</html>
