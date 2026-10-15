@@ -11,7 +11,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&family=Grenze+Gotisch:wght@500;700&family=Grenze:ital,wght@0,400;0,600;1,400&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&family=Grenze+Gotisch:wght@500;700&family=Grenze:ital,wght@0,400;0,600;1,400&family=Noto+Serif+SC:wght@400;600;700&family=Noto+Serif+TC:wght@400;600;700&family=Noto+Serif+JP:wght@400;600;700&family=Noto+Serif+KR:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
   :root {
@@ -31,6 +31,20 @@
     --font-title: 'UnifrakturMaguntia', 'Grenze Gotisch', serif;
     --font-head: 'Grenze Gotisch', 'Noto Serif SC', 'Songti SC', serif;
     --font-body: 'Grenze', 'Noto Serif SC', 'Songti SC', 'STSong', Georgia, serif;
+  }
+
+  /* 东亚语言各用对应字形的衬线体 */
+  :root:lang(zh-Hant) {
+    --font-head: 'Grenze Gotisch', 'Noto Serif TC', 'Songti TC', 'PMingLiU', serif;
+    --font-body: 'Grenze', 'Noto Serif TC', 'Songti TC', 'PMingLiU', Georgia, serif;
+  }
+  :root:lang(ja) {
+    --font-head: 'Grenze Gotisch', 'Noto Serif JP', 'Hiragino Mincho ProN', 'Yu Mincho', serif;
+    --font-body: 'Grenze', 'Noto Serif JP', 'Hiragino Mincho ProN', 'Yu Mincho', Georgia, serif;
+  }
+  :root:lang(ko) {
+    --font-head: 'Grenze Gotisch', 'Noto Serif KR', 'AppleMyungjo', 'Batang', serif;
+    --font-body: 'Grenze', 'Noto Serif KR', 'AppleMyungjo', 'Batang', Georgia, serif;
   }
 
   *, *::before, *::after { box-sizing: border-box; }
@@ -155,6 +169,11 @@
     display: inline-flex;
     gap: 2px;
     padding: 4px;
+    max-width: 100%;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
     border-radius: 999px;
     background: rgba(40, 24, 14, 0.82);
     border: 1px solid rgba(201, 162, 74, 0.45);
@@ -163,14 +182,17 @@
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
   }
 
+  .lang-switcher::-webkit-scrollbar { display: none; }
+
   .lang-btn {
-    font-family: var(--font-head);
+    flex: 0 0 auto;
+    font-family: 'Grenze Gotisch', 'Noto Serif SC', serif;
     font-size: 16px;
     font-weight: 500;
     color: rgba(234, 217, 176, 0.7);
     background: transparent;
     border: none;
-    padding: 6px 18px;
+    padding: 6px 14px;
     margin: 0;
     border-radius: 999px;
     cursor: pointer;
@@ -178,6 +200,9 @@
     -webkit-tap-highlight-color: transparent;
     transition: color 0.2s ease, background-color 0.25s ease;
   }
+  .lang-btn:lang(zh-Hant) { font-family: 'Grenze Gotisch', 'Noto Serif TC', serif; }
+  .lang-btn:lang(ja) { font-family: 'Grenze Gotisch', 'Noto Serif JP', serif; }
+  .lang-btn:lang(ko) { font-family: 'Grenze Gotisch', 'Noto Serif KR', serif; }
   .lang-btn:hover { color: var(--parchment); }
   .lang-btn:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
   .lang-btn.active {
@@ -246,7 +271,7 @@
   p, li { font-size: 17px; }
   p { margin: 0 0 10px; }
   strong { color: var(--ink); font-weight: 600; }
-  :lang(zh) p, :lang(zh) li { font-size: 16px; }
+  :lang(zh) p, :lang(zh) li, :lang(ja) p, :lang(ja) li, :lang(ko) p, :lang(ko) li { font-size: 16px; }
 
   .meta {
     display: block;
@@ -261,7 +286,8 @@
   }
 
   .lead { font-size: 18px; color: var(--ink); text-align: center; margin: 0 auto 18px; max-width: 32em; }
-  :lang(zh) .lead { font-size: 17px; }
+  :lang(zh) .lead, :lang(ja) .lead, :lang(ko) .lead { font-size: 17px; }
+  :lang(ko) .lang { word-break: keep-all; }
 
   ul { list-style: none; padding: 0; margin: 6px 0 12px; }
   li { position: relative; padding-left: 22px; margin-bottom: 7px; }
@@ -386,7 +412,12 @@
     .mode { text-align: left; display: flex; gap: 12px; align-items: baseline; }
     .mode b { margin: 0; flex: 0 0 auto; }
     .lang { margin: 0 4px; outline-offset: 4px; }
-    .lang-btn { padding: 6px 13px; font-size: 15px; }
+    .lang-btn { padding: 6px 12px; font-size: 15px; }
+    .switcher-wrap { margin-left: -6px; margin-right: -6px; }
+    .lang-switcher {
+      -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 16px, #000 calc(100% - 16px), transparent 100%);
+      mask-image: linear-gradient(90deg, transparent 0, #000 16px, #000 calc(100% - 16px), transparent 100%);
+    }
     .candle { width: 600px; }
   }
 
@@ -427,9 +458,15 @@
 
   <nav class="switcher-wrap">
     <div class="lang-switcher" role="group" aria-label="Language">
-      <button class="lang-btn active" data-lang="zh-CN">简体中文</button>
-      <button class="lang-btn" data-lang="en">English</button>
-      <button class="lang-btn" data-lang="fr">Français</button>
+      <button class="lang-btn active" data-lang="zh-CN" lang="zh-CN">简体中文</button>
+      <button class="lang-btn" data-lang="zh-Hant" lang="zh-Hant">繁體中文</button>
+      <button class="lang-btn" data-lang="en" lang="en">English</button>
+      <button class="lang-btn" data-lang="fr" lang="fr">Français</button>
+      <button class="lang-btn" data-lang="de" lang="de">Deutsch</button>
+      <button class="lang-btn" data-lang="es" lang="es">Español</button>
+      <button class="lang-btn" data-lang="cs" lang="cs">Čeština</button>
+      <button class="lang-btn" data-lang="ja" lang="ja">日本語</button>
+      <button class="lang-btn" data-lang="ko" lang="ko">한국어</button>
     </div>
   </nav>
 
@@ -528,6 +565,104 @@
     <details>
       <summary>格罗申可以用真钱购买吗？</summary>
       <p>不可以。格罗申只能在巡回挑战中赢得并在游戏内使用，App 没有任何内购。</p>
+    </details>
+  </section>
+
+  <!-- 繁體中文 -->
+  <section class="lang" id="zh-Hant">
+    <h2>關於 Kostky</h2>
+    <p class="lead">Kostky 是一款六骰計分遊戲，可以挑戰電腦、與朋友在同一台裝置輪流對戰，或展開巡迴挑戰。</p>
+    <div class="modes">
+      <div class="mode"><b>人機對戰</b><span>與打法各異的電腦對手過招</span></div>
+      <div class="mode"><b>雙人同屏</b><span>與朋友共用一台裝置輪流擲骰</span></div>
+      <div class="mode"><b>巡迴挑戰</b><span>12 場連續對局，護符與特殊骰子</span></div>
+    </div>
+    <p>每回合擲出六顆骰子，留下能計分的骰子，再決定繼續擲還是存分。若一次擲出完全沒有計分骰，本回合未存的分數全部失去。預設先達 4000 分者獲勝。</p>
+    <div class="scoring">
+      <span><span class="pip">⚀</span>單個 1 = 100</span>
+      <span><span class="pip">⚄</span>單個 5 = 50</span>
+      <span>三同號以上 · 順子</span>
+    </div>
+    <p class="fineprint center">完整計分表請見 App 主選單的「規則」。</p>
+
+    <hr>
+
+    <h2>隱私權政策</h2>
+    <p class="meta">生效日期：2026 年 10 月 15 日</p>
+
+    <h3>一、概述</h3>
+    <ul>
+      <li>Kostky <strong>不收集任何個人資料</strong>，也沒有註冊或登入帳號。</li>
+      <li>未整合廣告、統計分析、當機回報、第三方登入或付款等任何第三方 SDK。</li>
+      <li>遊戲本身無需連網即可完整遊玩。</li>
+    </ul>
+
+    <h3>二、儲存在您裝置上的資料</h3>
+    <ul>
+      <li>進行中的對局存檔、巡迴挑戰進度與戰績紀錄。</li>
+      <li>音量、介面語言、出戰骰子與對局設定等偏好。</li>
+      <li>以上資料只儲存在您的裝置上，不會同步到 iCloud，也不會上傳到開發者或任何第三方的伺服器。若您開啟了裝置備份，這些資料可能隨系統備份一併保存，該過程由 Apple 管理。</li>
+    </ul>
+
+    <h3>三、網路與外部連結</h3>
+    <ul>
+      <li>遊戲不會主動向任何伺服器傳送資料。</li>
+      <li>只有在您於設定頁主動點選「小紅書」或「電子郵件」時，才會開啟對應的 App、網頁或系統郵件編輯器。</li>
+      <li>回饋郵件草稿會預先填入裝置型號、系統版本、App 版本、建置編號與介面語言，方便排查問題；是否寄出、寄出哪些內容完全由您決定。外部服務會依其各自的隱私權政策處理資訊。</li>
+    </ul>
+
+    <h3>四、裝置功能</h3>
+    <ul>
+      <li>可選的「搖一搖擲骰」會使用裝置的動作感測器判斷搖動，資料只在裝置上即時處理，不會儲存或傳輸。</li>
+      <li>震動使用系統觸覺回饋，可在設定中關閉。</li>
+      <li>App 不會存取相機、麥克風、照片、定位或聯絡人。</li>
+    </ul>
+
+    <h3>五、遊戲內貨幣</h3>
+    <ul>
+      <li>巡迴挑戰中的「格羅申」只能透過對局贏得，且只能在遊戲內商販處使用。</li>
+      <li>它不能用真錢購買，也不能兌換現金或任何具有現實價值的物品。App 內沒有內購或訂閱。</li>
+    </ul>
+
+    <h3>六、刪除資料</h3>
+    <ul>
+      <li>在「統計」頁可以分別清除玩家戰績、歷史對局與巡迴挑戰統計，三者需分別操作。</li>
+      <li>刪除 App 會移除它儲存在裝置上的全部資料。</li>
+    </ul>
+
+    <h3>七、兒童隱私</h3>
+    <p>我們不向任何使用者（包括兒童）收集個人資料。</p>
+
+    <h3>八、政策更新</h3>
+    <p>如本政策有所變更，我們會更新本頁並修改上方的生效日期。</p>
+
+    <hr>
+
+    <h2>技術支援</h2>
+    <p class="center">遇到問題或有建議，歡迎來信：</p>
+    <p class="center"><a href="mailto:rangertars777@gmail.com">rangertars777@gmail.com</a></p>
+    <p class="fineprint center">也可以在 App「設定」頁的回饋區透過郵件或小紅書聯絡我們。來信時附上裝置型號、系統版本與問題發生的步驟，能幫助我們更快找到問題。</p>
+
+    <h3>常見問題</h3>
+    <details>
+      <summary>在哪裡查看規則？</summary>
+      <p>在主選單點「規則」；對局中也可以點右上角的問號隨時查看。</p>
+    </details>
+    <details>
+      <summary>可以和遠方的朋友連線對戰嗎？</summary>
+      <p>目前沒有連線模式。雙人對戰需要兩人共用一台裝置，輪流操作。</p>
+    </details>
+    <details>
+      <summary>怎麼清除戰績？</summary>
+      <p>進入「統計」頁，選擇對應的玩家戰績、歷史對局或巡迴挑戰統計，確認後即可清除。三者需要分別操作。</p>
+    </details>
+    <details>
+      <summary>沒有聲音怎麼辦？</summary>
+      <p>先檢查裝置是否處於靜音狀態，再到「設定」中檢查音樂、音效與酒館環境音三個音量條是否被調到零。</p>
+    </details>
+    <details>
+      <summary>格羅申可以用真錢購買嗎？</summary>
+      <p>不行。格羅申只能在巡迴挑戰中贏得並在遊戲內使用，App 沒有任何內購。</p>
     </details>
   </section>
 
@@ -727,6 +862,496 @@
     </details>
   </section>
 
+  <!-- Deutsch -->
+  <section class="lang" id="de">
+    <h2>Über Kostky</h2>
+    <p class="lead">Kostky ist ein strategisches Würfelspiel: Tritt gegen den Computer an, spiele abwechselnd mit Freunden auf einem Gerät oder stelle dich der Herausforderungstour.</p>
+    <div class="modes">
+      <div class="mode"><b>Gegen den Computer</b><span>Gegner mit unterschiedlichen Spielstilen</span></div>
+      <div class="mode"><b>Zu zweit</b><span>Ein Gerät, abwechselnd würfeln</span></div>
+      <div class="mode"><b>Herausforderungstour</b><span>12 Partien mit Talismanen und Spezialwürfeln</span></div>
+    </div>
+    <p>In jeder Runde wirfst du sechs Würfel, legst punktende Würfel beiseite und entscheidest dann, ob du weiterwürfelst oder deine Punkte sicherst. Bringt ein Wurf keine Punkte, verlierst du alle ungesicherten Punkte dieser Runde. Standardmäßig gewinnt, wer zuerst 4.000 Punkte erreicht.</p>
+    <div class="scoring">
+      <span><span class="pip">⚀</span>Einzelne 1 = 100</span>
+      <span><span class="pip">⚄</span>Einzelne 5 = 50</span>
+      <span>Drei Gleiche und mehr · Straßen</span>
+    </div>
+    <p class="fineprint center">Die vollständige Punktetabelle findest du unter „Regeln“ im Hauptmenü.</p>
+
+    <hr>
+
+    <h2>Datenschutzerklärung</h2>
+    <p class="meta">Gültig ab: 15. Oktober 2026</p>
+
+    <h3>1. Überblick</h3>
+    <ul>
+      <li>Kostky <strong>erhebt keinerlei personenbezogene Daten</strong> und benötigt weder Registrierung noch Anmeldung.</li>
+      <li>Es sind keine SDKs von Drittanbietern enthalten: keine Werbung, keine Analyse, keine Absturzberichte, keine Drittanbieter-Anmeldung und keine Zahlungsdienste.</li>
+      <li>Das Spiel ist vollständig offline spielbar.</li>
+    </ul>
+
+    <h3>2. Auf deinem Gerät gespeicherte Daten</h3>
+    <ul>
+      <li>Laufende Partien, Fortschritt der Herausforderungstour und Statistiken.</li>
+      <li>Einstellungen wie Lautstärke, Sprache, gewählte Würfel und Partieeinstellungen.</li>
+      <li>Diese Daten bleiben auf deinem Gerät. Sie werden nicht mit iCloud synchronisiert und nie auf Server des Entwicklers oder Dritter hochgeladen. Wenn Gerätebackups aktiviert sind, können sie im von Apple verwalteten Systembackup enthalten sein.</li>
+    </ul>
+
+    <h3>3. Netzwerk und externe Links</h3>
+    <ul>
+      <li>Das Spiel sendet keine Daten an Server.</li>
+      <li>Die Xiaohongshu-App bzw. -Website oder das Mail-Fenster des Systems öffnet sich nur, wenn du in den Einstellungen auf „Xiaohongshu“ oder „E-Mail“ tippst.</li>
+      <li>Der Feedback-Entwurf enthält Gerätemodell, Systemversion, App-Version, Buildnummer und App-Sprache, um die Fehlersuche zu erleichtern. Ob und was du sendest, entscheidest du. Externe Dienste verarbeiten Informationen gemäß ihren eigenen Datenschutzerklärungen.</li>
+    </ul>
+
+    <h3>4. Gerätefunktionen</h3>
+    <ul>
+      <li>Die optionale Funktion „Schütteln zum Würfeln“ nutzt die Bewegungssensoren, um ein Schütteln zu erkennen. Die Bewegungsdaten werden in Echtzeit auf dem Gerät verarbeitet und weder gespeichert noch übertragen.</li>
+      <li>Vibrationen nutzen das haptische Feedback des Systems und lassen sich in den Einstellungen abschalten.</li>
+      <li>Die App greift nicht auf Kamera, Mikrofon, Fotos, Standort oder Kontakte zu.</li>
+    </ul>
+
+    <h3>5. Spielwährung</h3>
+    <ul>
+      <li>Groschen in der Herausforderungstour können nur in Partien gewonnen und bei Händlern im Spiel ausgegeben werden.</li>
+      <li>Sie können nicht mit echtem Geld gekauft oder gegen Geld oder Gegenstände mit realem Wert eingetauscht werden. Es gibt keine In-App-Käufe oder Abos.</li>
+    </ul>
+
+    <h3>6. Daten löschen</h3>
+    <ul>
+      <li>Auf dem Statistik-Bildschirm kannst du Spielerstatistiken, Partieverlauf und Tour-Statistiken getrennt löschen.</li>
+      <li>Wenn du die App löschst, werden alle ihre Daten von deinem Gerät entfernt.</li>
+    </ul>
+
+    <h3>7. Kinder</h3>
+    <p>Wir erheben von niemandem personenbezogene Daten, auch nicht von Kindern.</p>
+
+    <h3>8. Änderungen</h3>
+    <p>Bei Änderungen aktualisieren wir diese Seite und das oben genannte Datum.</p>
+
+    <hr>
+
+    <h2>Support</h2>
+    <p class="center">Fragen oder Vorschläge? Schreib uns:</p>
+    <p class="center"><a href="mailto:rangertars777@gmail.com">rangertars777@gmail.com</a></p>
+    <p class="fineprint center">Du erreichst uns auch per E-Mail oder über Xiaohongshu im Feedback-Bereich der Einstellungen. Gerätemodell, Systemversion und die Schritte bis zum Problem helfen uns, schneller zu antworten.</p>
+
+    <h3>Häufige Fragen</h3>
+    <details>
+      <summary>Wo finde ich die Regeln?</summary>
+      <p>Tippe im Hauptmenü auf „Regeln“ oder während einer Partie auf das Fragezeichen oben rechts.</p>
+    </details>
+    <details>
+      <summary>Kann ich online mit Freunden spielen?</summary>
+      <p>Derzeit gibt es keinen Online-Modus. Partien zu zweit werden auf einem gemeinsamen Gerät gespielt.</p>
+    </details>
+    <details>
+      <summary>Wie lösche ich meine Statistiken?</summary>
+      <p>Öffne den Statistik-Bildschirm, wähle Spielerstatistiken, Partieverlauf oder Tour-Statistiken und bestätige. Jeder Bereich wird einzeln gelöscht.</p>
+    </details>
+    <details>
+      <summary>Kein Ton – was tun?</summary>
+      <p>Prüfe, ob das Gerät stummgeschaltet ist, und dann die Regler für Musik, Soundeffekte und Tavernenatmosphäre in den Einstellungen.</p>
+    </details>
+    <details>
+      <summary>Kann ich Groschen mit echtem Geld kaufen?</summary>
+      <p>Nein. Groschen gibt es nur in der Herausforderungstour und sie werden nur im Spiel verwendet. Die App hat keine In-App-Käufe.</p>
+    </details>
+  </section>
+
+  <!-- Español -->
+  <section class="lang" id="es">
+    <h2>Acerca de Kostky</h2>
+    <p class="lead">Kostky es un juego de dados de estrategia: enfréntate al ordenador, juega por turnos con amigos en el mismo dispositivo o embárcate en una gira de desafíos.</p>
+    <div class="modes">
+      <div class="mode"><b>Contra el ordenador</b><span>Rivales con estilos de juego distintos</span></div>
+      <div class="mode"><b>Dos jugadores</b><span>Un solo dispositivo, por turnos</span></div>
+      <div class="mode"><b>Gira de desafíos</b><span>12 partidas con amuletos y dados especiales</span></div>
+    </div>
+    <p>En cada turno lanzas seis dados, apartas los que puntúan y decides si sigues lanzando o guardas los puntos. Si una tirada no puntúa, pierdes todos los puntos no guardados de ese turno. Por defecto, gana quien llegue primero a 4000 puntos.</p>
+    <div class="scoring">
+      <span><span class="pip">⚀</span>Un 1 = 100</span>
+      <span><span class="pip">⚄</span>Un 5 = 50</span>
+      <span>Trío o más · Escaleras</span>
+    </div>
+    <p class="fineprint center">Consulta la tabla completa de puntuación en «Reglas», en el menú principal.</p>
+
+    <hr>
+
+    <h2>Política de privacidad</h2>
+    <p class="meta">Fecha de entrada en vigor: 15 de octubre de 2026</p>
+
+    <h3>1. Resumen</h3>
+    <ul>
+      <li>Kostky <strong>no recopila ningún dato personal</strong> y no requiere registro ni inicio de sesión.</li>
+      <li>No incluye SDK de terceros: ni publicidad, ni analíticas, ni informes de fallos, ni inicio de sesión o pagos de terceros.</li>
+      <li>El juego se puede jugar por completo sin conexión.</li>
+    </ul>
+
+    <h3>2. Datos guardados en tu dispositivo</h3>
+    <ul>
+      <li>Partidas en curso, progreso de la gira de desafíos y estadísticas.</li>
+      <li>Preferencias como volumen, idioma, dados seleccionados y ajustes de partida.</li>
+      <li>Estos datos permanecen en tu dispositivo. No se sincronizan con iCloud ni se suben nunca a servidores del desarrollador ni de terceros. Si tienes activadas las copias de seguridad del dispositivo, pueden incluirse en la copia del sistema, gestionada por Apple.</li>
+    </ul>
+
+    <h3>3. Red y enlaces externos</h3>
+    <ul>
+      <li>El juego no envía datos a ningún servidor.</li>
+      <li>La app o la web de Xiaohongshu, o el editor de correo del sistema, solo se abre si tocas «Xiaohongshu» o «Correo electrónico» en Ajustes.</li>
+      <li>El borrador de correo incluye el modelo del dispositivo, la versión del sistema, la versión y el número de compilación de la app y el idioma, para facilitar el diagnóstico. Tú decides si lo envías y qué contiene. Los servicios externos tratan la información según sus propias políticas de privacidad.</li>
+    </ul>
+
+    <h3>4. Funciones del dispositivo</h3>
+    <ul>
+      <li>La opción «agitar para lanzar» usa los sensores de movimiento para detectar la sacudida. Esos datos se procesan en tiempo real en el dispositivo y nunca se guardan ni se transmiten.</li>
+      <li>La vibración usa la respuesta háptica del sistema y puede desactivarse en Ajustes.</li>
+      <li>La app no accede a la cámara, el micrófono, las fotos, la ubicación ni los contactos.</li>
+    </ul>
+
+    <h3>5. Moneda del juego</h3>
+    <ul>
+      <li>Los groschen de la gira de desafíos solo se ganan en partidas y se gastan con los mercaderes del juego.</li>
+      <li>No pueden comprarse con dinero real ni canjearse por dinero o por bienes con valor real. No hay compras dentro de la app ni suscripciones.</li>
+    </ul>
+
+    <h3>6. Eliminar tus datos</h3>
+    <ul>
+      <li>En la pantalla Estadísticas puedes borrar por separado las estadísticas de jugadores, el historial de partidas y las estadísticas de la gira.</li>
+      <li>Al eliminar la app se borran todos sus datos del dispositivo.</li>
+    </ul>
+
+    <h3>7. Menores</h3>
+    <p>No recopilamos datos personales de nadie, incluidos los menores.</p>
+
+    <h3>8. Cambios</h3>
+    <p>Si esta política cambia, actualizaremos esta página y la fecha indicada arriba.</p>
+
+    <hr>
+
+    <h2>Soporte</h2>
+    <p class="center">¿Dudas o sugerencias? Escríbenos:</p>
+    <p class="center"><a href="mailto:rangertars777@gmail.com">rangertars777@gmail.com</a></p>
+    <p class="fineprint center">También puedes contactarnos por correo o Xiaohongshu desde la sección de comentarios de Ajustes. Incluir el modelo del dispositivo, la versión del sistema y los pasos que llevaron al problema nos ayuda a responder antes.</p>
+
+    <h3>Preguntas frecuentes</h3>
+    <details>
+      <summary>¿Dónde están las reglas?</summary>
+      <p>Toca «Reglas» en el menú principal o el signo de interrogación arriba a la derecha durante una partida.</p>
+    </details>
+    <details>
+      <summary>¿Puedo jugar en línea con un amigo?</summary>
+      <p>Por ahora no hay modo en línea. Las partidas de dos jugadores se juegan en un mismo dispositivo.</p>
+    </details>
+    <details>
+      <summary>¿Cómo borro mis estadísticas?</summary>
+      <p>Abre Estadísticas, elige las estadísticas de un jugador, el historial de partidas o las estadísticas de la gira y confirma. Cada una se borra por separado.</p>
+    </details>
+    <details>
+      <summary>No hay sonido, ¿qué hago?</summary>
+      <p>Comprueba que el dispositivo no esté en silencio y revisa los controles de Música, Efectos de sonido y Ambiente de taberna en Ajustes.</p>
+    </details>
+    <details>
+      <summary>¿Puedo comprar groschen con dinero real?</summary>
+      <p>No. Los groschen solo se ganan en la gira de desafíos y se usan dentro del juego. La app no tiene compras integradas.</p>
+    </details>
+  </section>
+
+  <!-- Čeština -->
+  <section class="lang" id="cs">
+    <h2>O hře Kostky</h2>
+    <p class="lead">Kostky jsou strategická kostková hra: utkejte se s počítačem, hrajte s přáteli střídavě na jednom zařízení nebo se vydejte na putovní výzvu.</p>
+    <div class="modes">
+      <div class="mode"><b>Proti počítači</b><span>Soupeři s různými herními styly</span></div>
+      <div class="mode"><b>Ve dvou</b><span>Jedno zařízení, střídavé tahy</span></div>
+      <div class="mode"><b>Putovní výzva</b><span>12 zápasů s talismany a speciálními kostkami</span></div>
+    </div>
+    <p>V každém tahu hodíte šesti kostkami, odložíte bodující kostky a rozhodnete se, zda budete házet dál, nebo body uložíte. Pokud hod nepřinese žádné body, přijdete o všechny neuložené body z daného tahu. Ve výchozím nastavení vyhrává ten, kdo první dosáhne 4 000 bodů.</p>
+    <div class="scoring">
+      <span><span class="pip">⚀</span>Jednička = 100</span>
+      <span><span class="pip">⚄</span>Pětka = 50</span>
+      <span>Tři a více stejných · Postupky</span>
+    </div>
+    <p class="fineprint center">Úplnou tabulku bodování najdete v hlavní nabídce v sekci „Pravidla“.</p>
+
+    <hr>
+
+    <h2>Zásady ochrany soukromí</h2>
+    <p class="meta">Platné od: 15. října 2026</p>
+
+    <h3>1. Přehled</h3>
+    <ul>
+      <li>Kostky <strong>neshromažďují žádné osobní údaje</strong> a nevyžadují registraci ani přihlášení.</li>
+      <li>Neobsahují žádné SDK třetích stran: žádné reklamy, analytiku, hlášení pádů, přihlášení ani platby třetích stran.</li>
+      <li>Hru lze plně hrát offline.</li>
+    </ul>
+
+    <h3>2. Data uložená ve vašem zařízení</h3>
+    <ul>
+      <li>Rozehrané zápasy, postup v putovní výzvě a statistiky.</li>
+      <li>Předvolby jako hlasitost, jazyk, zvolené kostky a nastavení zápasu.</li>
+      <li>Tato data zůstávají ve vašem zařízení. Nesynchronizují se s iCloudem a nikdy se nenahrávají na servery vývojáře ani třetích stran. Máte-li zapnuté zálohování zařízení, mohou být součástí systémové zálohy, kterou spravuje Apple.</li>
+    </ul>
+
+    <h3>3. Síť a externí odkazy</h3>
+    <ul>
+      <li>Hra neodesílá data na žádný server.</li>
+      <li>Aplikace či web Xiaohongshu nebo systémový e-mailový editor se otevře, jen když v Nastavení klepnete na „Xiaohongshu“ nebo „E-mail“.</li>
+      <li>Koncept e-mailu obsahuje model zařízení, verzi systému, verzi a číslo sestavení aplikace a jazyk, aby se usnadnilo řešení problémů. Zda a co odešlete, je jen na vás. Externí služby zpracovávají informace podle svých vlastních zásad ochrany soukromí.</li>
+    </ul>
+
+    <h3>4. Funkce zařízení</h3>
+    <ul>
+      <li>Volitelná funkce „hod zatřesením“ využívá pohybové senzory k rozpoznání zatřesení. Data o pohybu se zpracovávají v reálném čase v zařízení a nikdy se neukládají ani nepřenášejí.</li>
+      <li>Vibrace využívají systémovou haptickou odezvu a lze je vypnout v Nastavení.</li>
+      <li>Aplikace nepřistupuje ke kameře, mikrofonu, fotkám, poloze ani kontaktům.</li>
+    </ul>
+
+    <h3>5. Herní měna</h3>
+    <ul>
+      <li>Groše v putovní výzvě lze získat pouze v zápasech a utratit u herních obchodníků.</li>
+      <li>Nelze je koupit za skutečné peníze ani směnit za peníze nebo cokoli se skutečnou hodnotou. Aplikace nemá žádné nákupy v aplikaci ani předplatné.</li>
+    </ul>
+
+    <h3>6. Smazání dat</h3>
+    <ul>
+      <li>Na obrazovce Statistiky můžete samostatně vymazat statistiky hráčů, historii zápasů a statistiky putovní výzvy.</li>
+      <li>Smazáním aplikace odstraníte ze zařízení všechna její data.</li>
+    </ul>
+
+    <h3>7. Děti</h3>
+    <p>Neshromažďujeme osobní údaje od nikoho, ani od dětí.</p>
+
+    <h3>8. Změny</h3>
+    <p>Pokud se tyto zásady změní, aktualizujeme tuto stránku i datum uvedené výše.</p>
+
+    <hr>
+
+    <h2>Podpora</h2>
+    <p class="center">Máte dotaz nebo návrh? Napište nám:</p>
+    <p class="center"><a href="mailto:rangertars777@gmail.com">rangertars777@gmail.com</a></p>
+    <p class="fineprint center">Kontaktovat nás můžete také e-mailem nebo přes Xiaohongshu v sekci zpětné vazby v Nastavení. Uveďte prosím model zařízení, verzi systému a postup, který k problému vedl – pomůže nám to odpovědět rychleji.</p>
+
+    <h3>Časté dotazy</h3>
+    <details>
+      <summary>Kde najdu pravidla?</summary>
+      <p>V hlavní nabídce klepněte na „Pravidla“, během zápasu na otazník vpravo nahoře.</p>
+    </details>
+    <details>
+      <summary>Můžu hrát online s přáteli?</summary>
+      <p>Online režim zatím není. Hra ve dvou probíhá na jednom sdíleném zařízení.</p>
+    </details>
+    <details>
+      <summary>Jak vymažu statistiky?</summary>
+      <p>Otevřete Statistiky, zvolte statistiky hráče, historii zápasů nebo statistiky putovní výzvy a potvrďte. Každou část je třeba vymazat zvlášť.</p>
+    </details>
+    <details>
+      <summary>Nejde zvuk, co dělat?</summary>
+      <p>Zkontrolujte, zda není zařízení ztlumené, a poté v Nastavení posuvníky Hudba, Zvukové efekty a Atmosféra krčmy.</p>
+    </details>
+    <details>
+      <summary>Můžu si groše koupit za skutečné peníze?</summary>
+      <p>Ne. Groše lze získat pouze v putovní výzvě a používají se jen ve hře. Aplikace nemá žádné nákupy v aplikaci.</p>
+    </details>
+  </section>
+
+  <!-- 日本語 -->
+  <section class="lang" id="ja">
+    <h2>Kostky について</h2>
+    <p class="lead">Kostky は 6 個のサイコロで得点を競う戦略ダイスゲームです。コンピューターと対戦したり、1 台の端末で友だちと交代で遊んだり、巡回チャレンジに挑んだりできます。</p>
+    <div class="modes">
+      <div class="mode"><b>コンピューター対戦</b><span>プレイスタイルの異なる相手と勝負</span></div>
+      <div class="mode"><b>2 人で対戦</b><span>1 台の端末で交代にプレイ</span></div>
+      <div class="mode"><b>巡回チャレンジ</b><span>お守りや特殊なサイコロが登場する全 12 戦</span></div>
+    </div>
+    <p>毎ターン 6 個のサイコロを振り、得点になるサイコロを取り分けて、振り続けるか得点を確定するかを選びます。得点になる目が 1 つも出なければ、そのターンの未確定の得点はすべて失われます。初期設定では、先に 4000 点に達したプレイヤーの勝ちです。</p>
+    <div class="scoring">
+      <span><span class="pip">⚀</span>1 の目 1 個 = 100</span>
+      <span><span class="pip">⚄</span>5 の目 1 個 = 50</span>
+      <span>3 個以上のゾロ目 · ストレート</span>
+    </div>
+    <p class="fineprint center">詳しい得点表はメインメニューの「ルール」で確認できます。</p>
+
+    <hr>
+
+    <h2>プライバシーポリシー</h2>
+    <p class="meta">施行日：2026 年 10 月 15 日</p>
+
+    <h3>1. 概要</h3>
+    <ul>
+      <li>Kostky は<strong>個人情報を一切収集しません</strong>。アカウント登録やログインもありません。</li>
+      <li>広告、アクセス解析、クラッシュレポート、サードパーティのログインや決済など、サードパーティ製 SDK は一切組み込んでいません。</li>
+      <li>ゲームはオフラインですべて遊べます。</li>
+    </ul>
+
+    <h3>2. 端末に保存されるデータ</h3>
+    <ul>
+      <li>進行中の対局、巡回チャレンジの進行状況、戦績。</li>
+      <li>音量、言語、使用するサイコロ、対局設定などの環境設定。</li>
+      <li>これらのデータは端末内にのみ保存され、iCloud と同期されることも、開発者や第三者のサーバーにアップロードされることもありません。端末のバックアップを有効にしている場合は、Apple が管理するシステムバックアップに含まれることがあります。</li>
+    </ul>
+
+    <h3>3. ネットワークと外部リンク</h3>
+    <ul>
+      <li>ゲームがサーバーにデータを送信することはありません。</li>
+      <li>設定画面で「小紅書」または「メール」をタップしたときにのみ、該当するアプリ、Web ページ、またはシステムのメール作成画面が開きます。</li>
+      <li>フィードバックメールの下書きには、問題の調査に役立てるため、端末の機種、OS のバージョン、アプリのバージョンとビルド番号、表示言語があらかじめ入力されます。送信するかどうか、何を書くかはご自身で決められます。外部サービスは各社のプライバシーポリシーに従って情報を取り扱います。</li>
+    </ul>
+
+    <h3>4. 端末の機能</h3>
+    <ul>
+      <li>オプションの「振ってサイコロを転がす」機能は、モーションセンサーで端末の揺れを検知します。データは端末上でリアルタイムに処理され、保存や送信はされません。</li>
+      <li>振動にはシステムの触覚フィードバックを使用しており、設定でオフにできます。</li>
+      <li>カメラ、マイク、写真、位置情報、連絡先にはアクセスしません。</li>
+    </ul>
+
+    <h3>5. ゲーム内通貨</h3>
+    <ul>
+      <li>巡回チャレンジの「グロッシェン」は対局で獲得し、ゲーム内の商人のもとでのみ使えます。</li>
+      <li>現実のお金で購入したり、現金や現実の価値を持つものと交換したりすることはできません。App 内課金やサブスクリプションはありません。</li>
+    </ul>
+
+    <h3>6. データの削除</h3>
+    <ul>
+      <li>「統計」画面で、プレイヤーの戦績、対局履歴、巡回チャレンジの統計をそれぞれ個別に消去できます。</li>
+      <li>アプリを削除すると、端末に保存されたすべてのデータが削除されます。</li>
+    </ul>
+
+    <h3>7. お子さまのプライバシー</h3>
+    <p>お子さまを含め、どなたからも個人情報を収集しません。</p>
+
+    <h3>8. ポリシーの変更</h3>
+    <p>本ポリシーを変更する場合は、このページと上記の施行日を更新します。</p>
+
+    <hr>
+
+    <h2>サポート</h2>
+    <p class="center">ご質問やご提案はメールでお寄せください：</p>
+    <p class="center"><a href="mailto:rangertars777@gmail.com">rangertars777@gmail.com</a></p>
+    <p class="fineprint center">アプリの「設定」画面のフィードバック欄から、メールまたは小紅書でもご連絡いただけます。端末の機種、OS のバージョン、問題が起きるまでの手順を添えていただくと、より早く対応できます。</p>
+
+    <h3>よくある質問</h3>
+    <details>
+      <summary>ルールはどこで確認できますか？</summary>
+      <p>メインメニューの「ルール」をタップしてください。対局中は右上の「？」からも確認できます。</p>
+    </details>
+    <details>
+      <summary>離れた友だちとオンライン対戦できますか？</summary>
+      <p>現在オンラインモードはありません。2 人対戦は 1 台の端末を共有して遊びます。</p>
+    </details>
+    <details>
+      <summary>戦績を消去するには？</summary>
+      <p>「統計」画面でプレイヤーの戦績、対局履歴、巡回チャレンジの統計のいずれかを選び、確認すると消去されます。それぞれ個別に操作する必要があります。</p>
+    </details>
+    <details>
+      <summary>音が出ません。</summary>
+      <p>端末が消音モードになっていないか確認し、「設定」で音楽、効果音、酒場の環境音の音量を確認してください。</p>
+    </details>
+    <details>
+      <summary>グロッシェンは現実のお金で買えますか？</summary>
+      <p>いいえ。グロッシェンは巡回チャレンジで獲得し、ゲーム内でのみ使えます。App 内課金はありません。</p>
+    </details>
+  </section>
+
+  <!-- 한국어 -->
+  <section class="lang" id="ko">
+    <h2>Kostky 소개</h2>
+    <p class="lead">Kostky는 주사위 여섯 개로 점수를 겨루는 전략 주사위 게임입니다. 컴퓨터와 대결하거나, 한 기기로 친구와 번갈아 플레이하거나, 순회 도전에 나설 수 있습니다.</p>
+    <div class="modes">
+      <div class="mode"><b>컴퓨터 대전</b><span>플레이 스타일이 다른 상대와 승부</span></div>
+      <div class="mode"><b>2인 대전</b><span>한 기기로 번갈아 플레이</span></div>
+      <div class="mode"><b>순회 도전</b><span>부적과 특수 주사위가 등장하는 12판</span></div>
+    </div>
+    <p>매 턴 주사위 여섯 개를 굴려 점수가 되는 주사위를 남기고, 계속 굴릴지 점수를 확정할지 선택합니다. 점수가 되는 눈이 하나도 나오지 않으면 그 턴에 확정하지 않은 점수를 모두 잃습니다. 기본 설정에서는 먼저 4000점에 도달한 사람이 이깁니다.</p>
+    <div class="scoring">
+      <span><span class="pip">⚀</span>1 한 개 = 100</span>
+      <span><span class="pip">⚄</span>5 한 개 = 50</span>
+      <span>같은 눈 3개 이상 · 스트레이트</span>
+    </div>
+    <p class="fineprint center">전체 점수표는 메인 메뉴의 ‘규칙’에서 확인할 수 있습니다.</p>
+
+    <hr>
+
+    <h2>개인정보 처리방침</h2>
+    <p class="meta">시행일: 2026년 10월 15일</p>
+
+    <h3>1. 개요</h3>
+    <ul>
+      <li>Kostky는 <strong>어떠한 개인정보도 수집하지 않으며</strong>, 회원가입이나 로그인이 없습니다.</li>
+      <li>광고, 분석, 충돌 보고, 타사 로그인, 결제 등 어떠한 타사 SDK도 포함하지 않습니다.</li>
+      <li>게임은 오프라인에서 모든 기능을 이용할 수 있습니다.</li>
+    </ul>
+
+    <h3>2. 기기에 저장되는 데이터</h3>
+    <ul>
+      <li>진행 중인 대국, 순회 도전 진행 상황, 전적.</li>
+      <li>음량, 언어, 사용할 주사위, 대국 설정 등 환경설정.</li>
+      <li>이 데이터는 기기에만 저장되며 iCloud와 동기화되지 않고, 개발자나 제3자의 서버로 업로드되지 않습니다. 기기 백업을 켜 둔 경우 Apple이 관리하는 시스템 백업에 포함될 수 있습니다.</li>
+    </ul>
+
+    <h3>3. 네트워크 및 외부 링크</h3>
+    <ul>
+      <li>게임은 어떤 서버로도 데이터를 보내지 않습니다.</li>
+      <li>설정 화면에서 ‘샤오홍슈’ 또는 ‘이메일’을 직접 탭할 때만 해당 앱, 웹페이지 또는 시스템 메일 작성 화면이 열립니다.</li>
+      <li>피드백 메일 초안에는 문제 확인을 돕기 위해 기기 모델, OS 버전, 앱 버전과 빌드 번호, 표시 언어가 미리 입력됩니다. 보낼지 여부와 내용은 사용자가 결정합니다. 외부 서비스는 각자의 개인정보 처리방침에 따라 정보를 처리합니다.</li>
+    </ul>
+
+    <h3>4. 기기 기능</h3>
+    <ul>
+      <li>선택 기능인 ‘흔들어서 굴리기’는 동작 센서로 흔들림을 감지합니다. 이 데이터는 기기에서 실시간으로만 처리되며 저장되거나 전송되지 않습니다.</li>
+      <li>진동은 시스템 햅틱 피드백을 사용하며 설정에서 끌 수 있습니다.</li>
+      <li>앱은 카메라, 마이크, 사진, 위치, 연락처에 접근하지 않습니다.</li>
+    </ul>
+
+    <h3>5. 게임 내 화폐</h3>
+    <ul>
+      <li>순회 도전의 ‘그로셴’은 대국에서만 얻을 수 있고 게임 속 상인에게서만 사용할 수 있습니다.</li>
+      <li>실제 돈으로 구매할 수 없으며, 현금이나 실제 가치가 있는 물건으로 교환할 수 없습니다. 앱 내 구입이나 구독은 없습니다.</li>
+    </ul>
+
+    <h3>6. 데이터 삭제</h3>
+    <ul>
+      <li>‘통계’ 화면에서 플레이어 전적, 대국 기록, 순회 도전 통계를 각각 따로 지울 수 있습니다.</li>
+      <li>앱을 삭제하면 기기에 저장된 모든 데이터가 삭제됩니다.</li>
+    </ul>
+
+    <h3>7. 아동의 개인정보</h3>
+    <p>아동을 포함한 누구로부터도 개인정보를 수집하지 않습니다.</p>
+
+    <h3>8. 방침 변경</h3>
+    <p>이 방침이 변경되면 이 페이지와 위의 시행일을 업데이트합니다.</p>
+
+    <hr>
+
+    <h2>지원</h2>
+    <p class="center">문의나 제안이 있으시면 메일로 보내 주세요:</p>
+    <p class="center"><a href="mailto:rangertars777@gmail.com">rangertars777@gmail.com</a></p>
+    <p class="fineprint center">앱 ‘설정’ 화면의 피드백 항목에서 이메일이나 샤오홍슈로도 연락하실 수 있습니다. 기기 모델, OS 버전, 문제가 발생하기까지의 과정을 함께 알려 주시면 더 빨리 도와드릴 수 있습니다.</p>
+
+    <h3>자주 묻는 질문</h3>
+    <details>
+      <summary>규칙은 어디에서 보나요?</summary>
+      <p>메인 메뉴에서 ‘규칙’을 탭하세요. 대국 중에는 오른쪽 위의 물음표를 눌러도 됩니다.</p>
+    </details>
+    <details>
+      <summary>멀리 있는 친구와 온라인으로 대전할 수 있나요?</summary>
+      <p>현재는 온라인 모드가 없습니다. 2인 대전은 기기 한 대를 함께 사용합니다.</p>
+    </details>
+    <details>
+      <summary>전적은 어떻게 지우나요?</summary>
+      <p>‘통계’ 화면에서 플레이어 전적, 대국 기록, 순회 도전 통계 중 하나를 선택하고 확인하면 지워집니다. 각각 따로 지워야 합니다.</p>
+    </details>
+    <details>
+      <summary>소리가 나지 않아요.</summary>
+      <p>기기가 무음 모드인지 확인한 뒤, ‘설정’에서 음악, 효과음, 선술집 환경음 음량을 확인하세요.</p>
+    </details>
+    <details>
+      <summary>그로셴을 실제 돈으로 살 수 있나요?</summary>
+      <p>아니요. 그로셴은 순회 도전에서만 얻을 수 있고 게임 안에서만 사용됩니다. 앱 내 구입은 없습니다.</p>
+    </details>
+  </section>
+
   <footer>Kostky · © 2026 · Offline · No accounts · No tracking</footer>
 </main>
 
@@ -740,10 +1365,15 @@
   let current = document.querySelector('.lang.active');
   let timer;
 
-  // 精确匹配优先，其次按主语言匹配（如 fr-CA → fr, zh-Hans → zh-CN）
+  // 精确匹配优先，其次按主语言匹配（如 fr-CA → fr）；中文按地区/书写系统区分简繁
+  const normalize = code => {
+    const c = code.toLowerCase();
+    if (c.split('-')[0] !== 'zh') return c;
+    return /hant|-tw|-hk|-mo/.test(c) ? 'zh-hant' : 'zh-cn';
+  };
   const match = code => {
     if (!code) return null;
-    const c = code.toLowerCase();
+    const c = normalize(code);
     return ids.find(id => id.toLowerCase() === c) ||
            ids.find(id => id.toLowerCase().split('-')[0] === c.split('-')[0]) || null;
   };
@@ -752,7 +1382,7 @@
     let saved = null;
     try { saved = localStorage.getItem(STORAGE_KEY); } catch (e) {}
     const browser = (navigator.languages || [navigator.language]).map(match).find(Boolean);
-    return match(location.hash.slice(1)) || match(saved) || browser || ids[0];
+    return match(location.hash.slice(1)) || match(saved) || browser || match('en') || ids[0];
   };
 
   const show = (id, animate) => {
@@ -765,6 +1395,11 @@
       b.setAttribute('aria-pressed', on);
     });
     document.documentElement.lang = id;
+    const bar = document.querySelector('.lang-switcher');
+    const btn = buttons.find(b => b.dataset.lang === id);
+    if (bar && btn && bar.scrollWidth > bar.clientWidth) {
+      bar.scrollTo({ left: btn.offsetLeft - (bar.clientWidth - btn.offsetWidth) / 2, behavior: animate && !reduceMotion ? 'smooth' : 'auto' });
+    }
     if (next === current && next.classList.contains('show')) return;
 
     const prev = current;
