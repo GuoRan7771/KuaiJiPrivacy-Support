@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#ECE7DF" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1C1917" media="(prefers-color-scheme: dark)">
+<meta name="color-scheme" content="light dark">
+<meta name="description" content="Melospin — Privacy Policy & Support">
+<title>Melospin | Privacy & Support</title>
+
+<style>
+  /* 和 App 同一套配色：象牙白底 + 黑胶 + 樱桃红标签；深色模式是暖调深灰 */
+  :root {
+    --w: 760px;
+    --bg: #ECE7DF;
+    --paper: #F6F2EC;
+    --ink: #1D1A17;
+    --ink-2: #4A443E;
+    --muted: #8A8177;
+    --rule: rgba(29, 26, 23, .1);
+    --accent: #C8323C;
+    --glass: rgba(255, 255, 255, .55);
+    --glass-edge: rgba(255, 255, 255, .8);
+    --shadow: 0 30px 80px rgba(60, 40, 20, .14), 0 8px 24px rgba(60, 40, 20, .08);
+    --font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Hiragino Sans", "Apple SD Gothic Neo", "Helvetica Neue", Arial, sans-serif;
+    --font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "PingFang SC", "Hiragino Sans", "Apple SD Gothic Neo", "Helvetica Neue", Arial, sans-serif;
+  }
+  :root:lang(zh-Hant) { --font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang TC", "Helvetica Neue", sans-serif; --font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "PingFang TC", "Helvetica Neue", sans-serif; }
+  :root:lang(ja) { --font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif; --font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Hiragino Sans", "Yu Gothic", sans-serif; }
+  :root:lang(ko) { --font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif; --font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif; }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1C1917;
+      --paper: #26221F;
+      --ink: #EFE8DE;
+      --ink-2: #CFC6BB;
+      --muted: #978C80;
+      --rule: rgba(239, 232, 222, .1);
+      --accent: #E0626A;
+      --glass: rgba(255, 255, 255, .06);
+      --glass-edge: rgba(255, 255, 255, .12);
+      --shadow: 0 30px 80px rgba(0, 0, 0, .45), 0 8px 24px rgba(0, 0, 0, .3);
+    }
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { background: var(--bg); -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    color: var(--ink);
+    font: 16px/1.7 var(--font);
+    background:
+      radial-gradient(1200px 600px at 50% -10%, rgba(200, 50, 60, .08), transparent 70%),
+      var(--bg);
+    min-height: 100vh;
+    padding: env(safe-area-inset-top) 16px calc(48px + env(safe-area-inset-bottom));
+  }
+  /* 纸张颗粒 */
+  body::before {
+    content: ""; position: fixed; inset: 0; pointer-events: none; opacity: .05; mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  }
+  @media (prefers-color-scheme: dark) { body::before { mix-blend-mode: screen; opacity: .04; } }
+  @media (prefers-color-scheme: dark) { .record { box-shadow: 0 0 0 1px rgba(255, 255, 255, .1), 0 24px 60px rgba(0, 0, 0, .6); } }
+
+  .wrap { max-width: var(--w); margin: 0 auto; }
+
+  /* ---------- 头部：一台小唱机 ---------- */
+  header { text-align: center; padding: 56px 0 28px; }
+  .deck { position: relative; width: 184px; height: 184px; margin: 0 auto 26px; }
+  .record {
+    position: absolute; inset: 0; border-radius: 50%;
+    background:
+      radial-gradient(circle, #111 0 3.5%, transparent 3.6%),
+      radial-gradient(circle, var(--accent) 0 21%, transparent 21.3%),
+      repeating-radial-gradient(circle, #141414 0 1.6px, #1f1f1f 1.6px 3.2px),
+      #151515;
+    box-shadow: 0 24px 50px rgba(0, 0, 0, .35), inset 0 0 0 1px rgba(255, 255, 255, .04);
+    animation: spin 7.2s linear infinite;   /* 8⅓ 转：每圈 7.2 秒，和 App 默认转速一样 */
+  }
+  /* 唱片表面的反光，不跟着转 */
+  .deck::after {
+    content: ""; position: absolute; inset: 0; border-radius: 50%; pointer-events: none;
+    background: conic-gradient(from 20deg, transparent 0 12%, rgba(255, 255, 255, .1) 18%, transparent 26% 62%, rgba(255, 255, 255, .08) 68%, transparent 76%);
+  }
+  .record::after {
+    content: ""; position: absolute; inset: 39%; border-radius: 50%;
+    border: 1.5px solid rgba(246, 236, 220, .75);
+  }
+  .arm { position: absolute; right: -26px; top: -6px; width: 60px; height: 160px; pointer-events: none; }
+  .arm .base { position: absolute; right: 10px; top: 0; width: 34px; height: 30px; border-radius: 8px; background: linear-gradient(#3a3a3d, #0e0e10); box-shadow: 0 6px 14px rgba(0, 0, 0, .3); }
+  .arm .base::after { content: ""; position: absolute; left: 50%; top: 50%; width: 8px; height: 8px; margin: -4px; border-radius: 50%; background: #eee; }
+  .arm .tube { position: absolute; right: 25px; top: 18px; width: 5px; height: 120px; border-radius: 3px; transform-origin: 50% 0; transform: rotate(24deg);
+    background: linear-gradient(90deg, #7e7f82, #f4f4f5 45%, #c4c5c8 70%, #77787b); box-shadow: 0 4px 8px rgba(0, 0, 0, .2); }
+  .arm .head { position: absolute; left: -7px; bottom: -14px; width: 19px; height: 24px; border-radius: 4px; background: #1b1b1d; transform: rotate(-10deg); }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @media (prefers-reduced-motion: reduce) { .record { animation: none; } }
+
+  h1 { margin: 0; font: 700 40px/1.1 var(--font-display); letter-spacing: -.02em; }
+  .subtitle { margin: 8px 0 0; color: var(--muted); font-size: 15px; letter-spacing: .02em; }
+
+  /* ---------- 语言切换：和 App 里的分段控件一样的玻璃胶囊 ---------- */
+  .lang-switcher {
+    display: flex; gap: 4px; width: max-content; max-width: 100%; margin: 26px auto 0; padding: 4px;
+    overflow-x: auto; scrollbar-width: none; border-radius: 999px;
+    background: var(--glass); box-shadow: inset 0 0 0 1px var(--glass-edge), 0 6px 18px rgba(0, 0, 0, .06);
+    -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px);
+  }
+  .lang-switcher::-webkit-scrollbar { display: none; }
+  .lang-btn {
+    flex: none; border: 0; border-radius: 999px; padding: 7px 14px; cursor: pointer;
+    font: 600 13px/1 var(--font); color: var(--ink-2); background: transparent; transition: background .2s, color .2s;
+  }
+  .lang-btn:hover { color: var(--ink); }
+  .lang-btn.active { background: var(--ink); color: var(--bg); }
+
+  /* ---------- 正文卡片 ---------- */
+  main { margin-top: 28px; }
+  .lang { display: none; opacity: 0; transform: translateY(8px); transition: opacity .25s, transform .25s; }
+  .lang.active { display: block; }
+  .lang.show { opacity: 1; transform: none; }
+  .card { background: var(--paper); border-radius: 28px; padding: 36px 40px; box-shadow: var(--shadow); }
+  .card + .card { margin-top: 18px; }
+  @media (max-width: 600px) { .card { padding: 26px 20px; border-radius: 22px; } h1 { font-size: 34px; } }
+
+  h2 { margin: 0 0 6px; font: 700 24px/1.3 var(--font-display); letter-spacing: -.01em; }
+  h3 { margin: 26px 0 6px; font-size: 16px; font-weight: 700; }
+  h3::before { content: ""; display: inline-block; width: 7px; height: 7px; margin: 0 9px 2px 0; border-radius: 50%; background: var(--accent); }
+  p, li { color: var(--ink-2); }
+  p { margin: 8px 0; }
+  ul { margin: 6px 0; padding-left: 1.2em; }
+  li { margin: 4px 0; }
+  li::marker { color: var(--muted); }
+  strong { color: var(--ink); }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .lead { font-size: 17px; color: var(--ink); }
+  .meta { margin: 0 0 4px; color: var(--muted); font-size: 13px; }
+
+  .features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 18px 0 4px; }
+  @media (max-width: 600px) { .features { grid-template-columns: 1fr; } }
+  .feature { padding: 14px 16px; border-radius: 16px; background: var(--bg); }
+  .feature b { display: block; font-size: 15px; color: var(--ink); }
+  .feature span { display: block; font-size: 13px; line-height: 1.5; color: var(--muted); margin-top: 2px; }
+
+  .contact { display: flex; flex-wrap: wrap; gap: 10px; margin: 14px 0 6px; }
+  .contact a {
+    display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; border-radius: 999px;
+    background: var(--bg); color: var(--ink); font-weight: 600; font-size: 14px; text-decoration: none;
+  }
+  .contact a:first-child { background: var(--ink); color: var(--bg); }
+  .contact svg { width: 16px; height: 16px; flex: none; }
+
+  details { border-top: 1px solid var(--rule); padding: 12px 0; }
+  details:last-of-type { border-bottom: 1px solid var(--rule); }
+  summary { cursor: pointer; list-style: none; font-weight: 600; color: var(--ink); display: flex; justify-content: space-between; gap: 16px; }
+  summary::-webkit-details-marker { display: none; }
+  summary::after { content: "+"; color: var(--muted); font-weight: 400; font-size: 20px; line-height: 1.2; transition: transform .2s; }
+  details[open] summary::after { transform: rotate(45deg); }
+  details p { margin: 8px 0 2px; }
+
+  footer { text-align: center; color: var(--muted); font-size: 13px; margin-top: 30px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="deck" aria-hidden="true">
+      <div class="record"></div>
+      <div class="arm"><div class="base"></div><div class="tube"><div class="head"></div></div></div>
+    </div>
+    <h1>Melospin</h1>
+    <p class="subtitle">Privacy Policy · Support</p>
+    <div class="lang-switcher" role="group" aria-label="Language">
+      <button class="lang-btn active" data-lang="zh-CN" lang="zh-CN">简体中文</button>
+      <button class="lang-btn" data-lang="zh-Hant" lang="zh-Hant">繁體中文</button>
+      <button class="lang-btn" data-lang="en" lang="en">English</button>
+      <button class="lang-btn" data-lang="fr" lang="fr">Français</button>
+      <button class="lang-btn" data-lang="es" lang="es">Español</button>
+      <button class="lang-btn" data-lang="ja" lang="ja">日本語</button>
+      <button class="lang-btn" data-lang="ko" lang="ko">한국어</button>
+    </div>
+  </header>
+
+<main>
+  <!-- 简体中文 -->
+  <section class="lang active show" id="zh-CN">
+    <div class="card">
+      <h2>关于 Melospin</h2>
+      <p class="lead">把手机变成一台黑胶唱机：拖动唱臂落针，翻唱片架找专辑，跟着歌词一起唱。</p>
+      <div class="features">
+        <div class="feature"><b>黑胶唱机</b><span>唱片随音乐转动，落针声和底噪</span></div>
+        <div class="feature"><b>唱片架与歌词</b><span>3D 翻找专辑，歌词一句句亮起</span></div>
+        <div class="feature"><b>小组件与待机</b><span>主屏幕小组件，横放变成唱片时钟</span></div>
+      </div>
+      <p>支持 Apple Music、Spotify 和存在设备上的本地音乐。</p>
+    </div>
+
+    <div class="card">
+      <h2>隐私政策</h2>
+      <p class="meta">生效日期：2026 年 10 月 29 日</p>
+
+      <h3>概述</h3>
+      <ul>
+        <li>Melospin <strong>不收集你的个人信息</strong>，没有账号、广告、统计分析或崩溃上报。</li>
+        <li>没有集成任何广告或分析类第三方 SDK，也不会追踪你。</li>
+      </ul>
+
+      <h3>保存在你设备上的内容</h3>
+      <ul>
+        <li>音乐资料库、喜欢的歌、播放记录、歌词缓存、外观和其他设置。</li>
+        <li>这些内容只保存在你的设备上（小组件通过系统的 App 群组在本机读取），不会上传到开发者或任何服务器。</li>
+        <li>专辑和歌单会加入系统的 Spotlight 搜索索引，这个索引同样只在本机。</li>
+      </ul>
+
+      <h3>联网时会发送什么</h3>
+      <ul>
+        <li><strong>查找歌词</strong>：歌名、艺人、专辑和时长会发送给公开歌词库 LRCLIB（lrclib.net）。可以在「设置 › 歌词」里关掉「在线查找歌词」。</li>
+        <li><strong>Apple Music 封面和歌名</strong>：会向 Apple 查询歌曲在 Apple Music 里的编号和原语言歌名，用来显示高清封面和正确的歌名。</li>
+        <li><strong>Spotify</strong>：登录在 Spotify 的页面上完成，登录凭证保存在本机的钥匙串里，只用来读取你的资料库和控制播放。</li>
+        <li>这些服务会按照各自的隐私政策处理请求。</li>
+      </ul>
+
+      <h3>使用的权限</h3>
+      <ul>
+        <li><strong>媒体与 Apple Music</strong>：读取「音乐」App 的资料库并播放。</li>
+        <li><strong>运动传感器</strong>：iPhone 横放充电时判断是否自动进入待机显示，只在本机即时处理，不保存。</li>
+        <li>App 不访问相机、麦克风、照片、定位或通讯录。</li>
+      </ul>
+
+      <h3>你主动发出的内容</h3>
+      <p>通过「联系我」发邮件时，邮件里会预先填好设备型号、系统版本、App 版本和语言，方便排查问题。是否发送、发送什么由你决定。</p>
+
+      <h3>删除数据</h3>
+      <p>删除 App 会移除它保存在设备上的全部数据；「设置」里也可以清理缓存。Spotify 可以随时在设置里退出登录。</p>
+
+      <h3>儿童隐私</h3>
+      <p>我们不向任何用户（包括儿童）收集个人信息。</p>
+
+      <h3>政策更新</h3>
+      <p>如本政策有变更，会更新本页并修改上方的生效日期。</p>
+    </div>
+
+    <div class="card">
+      <h2>技术支持</h2>
+      <p>遇到问题或有建议，欢迎联系我。来信时附上设备型号、系统版本和问题出现的步骤，能更快找到原因。</p>
+      <div class="contact">
+        <a href="mailto:rangertars777@gmail.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>rangertars777@gmail.com</a>
+        <a href="https://www.xiaohongshu.com/user/profile/5b815f2d47bf040001a99d94">小红书</a>
+        <a href="https://x.com/Sonansu_guoran">X @Sonansu_guoran</a>
+      </div>
+
+      <h3>常见问题</h3>
+      <details><summary>怎样连接 Apple Music？</summary>
+        <p>第一次打开时选择 Apple Music 并允许访问；之后也可以在「设置 › 音乐来源」里切换。如果之前拒绝过，请到 iPhone「设置 › Melospin」里打开「媒体与 Apple Music」。</p></details>
+      <details><summary>为什么有的歌没有歌词？</summary>
+        <p>歌词优先来自音乐来源本身，其次来自公开歌词库 LRCLIB，并不是每首歌都有。歌词库繁忙时 App 会自动再查几次，稍等片刻即可。</p></details>
+      <details><summary>怎样使用 Spotify？</summary>
+        <p>在「设置 › 音乐来源」里登录 Spotify。控制播放需要 Spotify Premium，并且设备上要装有 Spotify App。</p></details>
+      <details><summary>怎样导入本地音乐？</summary>
+        <p>把歌曲放进「文件」App › 我的 iPhone › Melospin › 音乐，然后在资料库里点「更新资料库」；也可以在资料库左上角菜单里「从『文件』导入」。</p></details>
+      <details><summary>怎样添加小组件？</summary>
+        <p>长按主屏幕空白处，点左上角「编辑」›「添加小组件」，搜索「Melospin」。锁定屏幕也可以添加。</p></details>
+      <details><summary>待机时钟怎么打开？</summary>
+        <p>App 打开时把 iPhone 横放并充电会自动进入；也可以长按唱机页空白处，在菜单里点「待机」。iPad 上只能手动打开。</p></details>
+      <details><summary>划掉 App 后音乐为什么停了？</summary>
+        <p>Melospin 用自己的播放器播放 Apple Music，划掉 App 时音乐会跟着停止，这是有意的设计。再次打开时唱机会停在上次的歌和进度。</p></details>
+    </div>
+  </section>
+
+  <!-- 繁體中文 -->
+  <section class="lang" id="zh-Hant">
+    <div class="card">
+      <h2>關於 Melospin</h2>
+      <p class="lead">把手機變成一台黑膠唱機：拖動唱臂落針，翻唱片架找專輯，跟著歌詞一起唱。</p>
+      <div class="features">
+        <div class="feature"><b>黑膠唱機</b><span>唱片隨音樂轉動，落針聲與底噪</span></div>
+        <div class="feature"><b>唱片架與歌詞</b><span>3D 翻找專輯，歌詞一句句亮起</span></div>
+        <div class="feature"><b>小工具與待機</b><span>主畫面小工具，橫放變成唱片時鐘</span></div>
+      </div>
+      <p>支援 Apple Music、Spotify 和存在裝置上的本機音樂。</p>
+    </div>
+
+    <div class="card">
+      <h2>隱私權政策</h2>
+      <p class="meta">生效日期：2026 年 10 月 29 日</p>
+
+      <h3>概述</h3>
+      <ul>
+        <li>Melospin <strong>不蒐集你的個人資料</strong>，沒有帳號、廣告、統計分析或當機回報。</li>
+        <li>沒有整合任何廣告或分析類的第三方 SDK，也不會追蹤你。</li>
+      </ul>
+
+      <h3>儲存在你裝置上的內容</h3>
+      <ul>
+        <li>音樂資料庫、喜歡的歌曲、播放紀錄、歌詞快取、外觀和其他設定。</li>
+        <li>這些內容只儲存在你的裝置上（小工具透過系統的 App 群組在本機讀取），不會上傳到開發者或任何伺服器。</li>
+        <li>專輯和播放列表會加入系統的 Spotlight 搜尋索引，這個索引同樣只在本機。</li>
+      </ul>
+
+      <h3>連網時會傳送什麼</h3>
+      <ul>
+        <li><strong>查詢歌詞</strong>：歌名、演出者、專輯和時長會傳送給公開歌詞庫 LRCLIB（lrclib.net）。可以在「設定 › 歌詞」裡關閉「線上搜尋歌詞」。</li>
+        <li><strong>Apple Music 封面和歌名</strong>：會向 Apple 查詢歌曲在 Apple Music 裡的編號和原語言歌名，用來顯示高解析度封面和正確的歌名。</li>
+        <li><strong>Spotify</strong>：登入在 Spotify 的頁面上完成，登入憑證儲存在本機的鑰匙圈裡，只用來讀取你的資料庫和控制播放。</li>
+        <li>這些服務會依照各自的隱私權政策處理請求。</li>
+      </ul>
+
+      <h3>使用的權限</h3>
+      <ul>
+        <li><strong>媒體與 Apple Music</strong>：讀取「音樂」App 的資料庫並播放。</li>
+        <li><strong>動作感測器</strong>：iPhone 橫放充電時判斷是否自動進入待機顯示，只在本機即時處理，不會儲存。</li>
+        <li>App 不會取用相機、麥克風、照片、定位或聯絡人。</li>
+      </ul>
+
+      <h3>你主動送出的內容</h3>
+      <p>透過「聯絡我」寄信時，郵件裡會預先填好裝置型號、系統版本、App 版本和語言，方便排查問題。是否寄出、寄出什麼由你決定。</p>
+
+      <h3>刪除資料</h3>
+      <p>刪除 App 會移除它儲存在裝置上的所有資料；「設定」裡也可以清除快取。Spotify 可以隨時在設定裡登出。</p>
+
+      <h3>兒童隱私</h3>
+      <p>我們不向任何使用者（包括兒童）蒐集個人資料。</p>
+
+      <h3>政策更新</h3>
+      <p>如本政策有變更，會更新本頁並修改上方的生效日期。</p>
+    </div>
+
+    <div class="card">
+      <h2>技術支援</h2>
+      <p>遇到問題或有建議，歡迎聯絡我。來信時附上裝置型號、系統版本和問題發生的步驟，能更快找到原因。</p>
+      <div class="contact">
+        <a href="mailto:rangertars777@gmail.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>rangertars777@gmail.com</a>
+        <a href="https://www.xiaohongshu.com/user/profile/5b815f2d47bf040001a99d94">小紅書</a>
+        <a href="https://x.com/Sonansu_guoran">X @Sonansu_guoran</a>
+      </div>
+
+      <h3>常見問題</h3>
+      <details><summary>怎麼連接 Apple Music？</summary>
+        <p>第一次打開時選擇 Apple Music 並允許取用；之後也可以在「設定 › 音樂來源」裡切換。如果之前拒絕過，請到 iPhone「設定 › Melospin」裡打開「媒體與 Apple Music」。</p></details>
+      <details><summary>為什麼有些歌沒有歌詞？</summary>
+        <p>歌詞優先來自音樂來源本身，其次來自公開歌詞庫 LRCLIB，並不是每首歌都有。歌詞庫忙碌時 App 會自動再查幾次，稍等一下即可。</p></details>
+      <details><summary>怎麼使用 Spotify？</summary>
+        <p>在「設定 › 音樂來源」裡登入 Spotify。控制播放需要 Spotify Premium，而且裝置上要安裝 Spotify App。</p></details>
+      <details><summary>怎麼匯入本機音樂？</summary>
+        <p>把歌曲放進「檔案」App › 我的 iPhone › Melospin › 音樂，然後在資料庫裡點「更新資料庫」；也可以在資料庫左上角選單裡「從『檔案』匯入」。</p></details>
+      <details><summary>怎麼加入小工具？</summary>
+        <p>長按主畫面空白處，點左上角「編輯」›「加入小工具」，搜尋「Melospin」。鎖定畫面也可以加入。</p></details>
+      <details><summary>待機時鐘怎麼打開？</summary>
+        <p>App 開著時把 iPhone 橫放並充電會自動進入；也可以長按唱機頁空白處，在選單裡點「待機」。iPad 上只能手動打開。</p></details>
+      <details><summary>滑掉 App 後音樂為什麼停了？</summary>
+        <p>Melospin 用自己的播放器播放 Apple Music，滑掉 App 時音樂會跟著停止，這是刻意的設計。再次打開時唱機會停在上次的歌曲和進度。</p></details>
+    </div>
+  </section>
+
+  <!-- English -->
+  <section class="lang" id="en">
+    <div class="card">
+      <h2>About Melospin</h2>
+      <p class="lead">Turn your phone into a record player: drop the needle, flip through your albums and sing along with the lyrics.</p>
+      <div class="features">
+        <div class="feature"><b>Turntable</b><span>A spinning record with needle drop and crackle</span></div>
+        <div class="feature"><b>Crate &amp; Lyrics</b><span>Flip through albums in 3D; lyrics light up line by line</span></div>
+        <div class="feature"><b>Widgets &amp; StandBy</b><span>Home Screen widgets and a record clock when charging sideways</span></div>
+      </div>
+      <p>Works with Apple Music, Spotify and music files stored on your device.</p>
+    </div>
+
+    <div class="card">
+      <h2>Privacy Policy</h2>
+      <p class="meta">Effective October 29, 2026</p>
+
+      <h3>Overview</h3>
+      <ul>
+        <li>Melospin <strong>doesn’t collect your personal information</strong>. There are no accounts, ads, analytics or crash reporting.</li>
+        <li>No third-party advertising or analytics SDKs are included, and you aren’t tracked.</li>
+      </ul>
+
+      <h3>What stays on your device</h3>
+      <ul>
+        <li>Your music library, loved songs, listening history, cached lyrics, appearance and other settings.</li>
+        <li>All of this stays on your device (widgets read it locally through the system’s App Group) and is never uploaded to the developer or any server.</li>
+        <li>Albums and playlists are added to the system’s Spotlight index, which also stays on your device.</li>
+      </ul>
+
+      <h3>What’s sent over the internet</h3>
+      <ul>
+        <li><strong>Finding lyrics:</strong> the song’s title, artist, album and length are sent to LRCLIB (lrclib.net), a public lyrics library. You can turn off Find Lyrics Online in Settings › Lyrics.</li>
+        <li><strong>Apple Music artwork and titles:</strong> the app asks Apple for a song’s Apple Music ID and its original-language title, to show sharp artwork and the right name.</li>
+        <li><strong>Spotify:</strong> you sign in on Spotify’s own page. Your sign-in is kept in this device’s Keychain and is only used to read your library and control playback.</li>
+        <li>These services handle requests under their own privacy policies.</li>
+      </ul>
+
+      <h3>Permissions</h3>
+      <ul>
+        <li><strong>Media &amp; Apple Music:</strong> to read and play your Music library.</li>
+        <li><strong>Motion:</strong> to tell when your iPhone is charging sideways so StandBy can start. It’s processed on the spot and never stored.</li>
+        <li>The app doesn’t access your camera, microphone, photos, location or contacts.</li>
+      </ul>
+
+      <h3>What you choose to send</h3>
+      <p>When you write to me from Contact Me, the draft includes your device model, system version, app version and language to help with troubleshooting. Whether to send it, and what to include, is up to you.</p>
+
+      <h3>Deleting your data</h3>
+      <p>Deleting the app removes everything it stored on your device. You can also clear the cache in Settings, and sign out of Spotify at any time.</p>
+
+      <h3>Children’s privacy</h3>
+      <p>We don’t collect personal information from anyone, including children.</p>
+
+      <h3>Changes</h3>
+      <p>If this policy changes, this page and the effective date above will be updated.</p>
+    </div>
+
+    <div class="card">
+      <h2>Support</h2>
+      <p>Questions or ideas? I’d love to hear from you. Including your device model, system version and the steps that led to the problem helps me find the cause faster.</p>
+      <div class="contact">
+        <a href="mailto:rangertars777@gmail.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>rangertars777@gmail.com</a>
+        <a href="https://x.com/Sonansu_guoran">X @Sonansu_guoran</a>
+        <a href="https://www.xiaohongshu.com/user/profile/5b815f2d47bf040001a99d94">RedNote</a>
+      </div>
+
+      <h3>FAQ</h3>
+      <details><summary>How do I connect Apple Music?</summary>
+        <p>Choose Apple Music the first time you open the app and allow access. You can switch later in Settings › Music Source. If you declined before, turn on Media &amp; Apple Music in the iPhone Settings app › Melospin.</p></details>
+      <details><summary>Why don’t some songs have lyrics?</summary>
+        <p>Lyrics come from your music source first, then from LRCLIB, a public lyrics library. Not every song is available. When the library is busy, the app tries again automatically — give it a moment.</p></details>
+      <details><summary>How do I use Spotify?</summary>
+        <p>Sign in to Spotify in Settings › Music Source. Controlling playback requires Spotify Premium and the Spotify app on your device.</p></details>
+      <details><summary>How do I add my own music files?</summary>
+        <p>Put songs in the Files app › On My iPhone › Melospin › Music, then tap Update Library. You can also use Import from Files in the library’s top-left menu.</p></details>
+      <details><summary>How do I add a widget?</summary>
+        <p>Touch and hold an empty area of your Home Screen, tap Edit › Add Widget, then search for Melospin. Lock Screen widgets are available too.</p></details>
+      <details><summary>How do I open the record clock?</summary>
+        <p>With the app open, turn your iPhone sideways while it’s charging and StandBy starts on its own. You can also touch and hold an empty area of the turntable and choose StandBy. On iPad, open it manually.</p></details>
+      <details><summary>Why does the music stop when I swipe the app away?</summary>
+        <p>Melospin plays Apple Music in its own player, so music stops when you close the app — that’s by design. Next time you open it, the turntable is waiting at the same song and position.</p></details>
+    </div>
+  </section>
+
+  <!-- Français -->
+  <section class="lang" id="fr">
+    <div class="card">
+      <h2>À propos de Melospin</h2>
+      <p class="lead">Transformez votre téléphone en platine vinyle&#8239;: posez le diamant, feuilletez vos albums et chantez avec les paroles.</p>
+      <div class="features">
+        <div class="feature"><b>Platine</b><span>Un disque qui tourne, avec le bruit du diamant et les craquements</span></div>
+        <div class="feature"><b>Bac et paroles</b><span>Feuilletez vos albums en 3D, les paroles s’allument ligne par ligne</span></div>
+        <div class="feature"><b>Widgets et En veille</b><span>Des widgets et une horloge vinyle en charge à l’horizontale</span></div>
+      </div>
+      <p>Compatible avec Apple Music, Spotify et les fichiers musicaux de votre appareil.</p>
+    </div>
+
+    <div class="card">
+      <h2>Politique de confidentialité</h2>
+      <p class="meta">En vigueur au 29&nbsp;octobre 2026</p>
+
+      <h3>En bref</h3>
+      <ul>
+        <li>Melospin <strong>ne collecte aucune donnée personnelle</strong>. Pas de compte, pas de publicité, pas de statistiques ni de rapports de plantage.</li>
+        <li>Aucun SDK tiers de publicité ou d’analyse n’est intégré, et vous n’êtes pas suivi.</li>
+      </ul>
+
+      <h3>Ce qui reste sur votre appareil</h3>
+      <ul>
+        <li>Votre bibliothèque, vos coups de cœur, votre historique d’écoute, les paroles en cache, l’apparence et les autres réglages.</li>
+        <li>Tout cela reste sur votre appareil (les widgets le lisent localement via le groupe d’apps du système) et n’est jamais envoyé au développeur ni à un serveur.</li>
+        <li>Les albums et les playlists sont ajoutés à l’index Spotlight du système, qui reste lui aussi sur l’appareil.</li>
+      </ul>
+
+      <h3>Ce qui est envoyé sur Internet</h3>
+      <ul>
+        <li><strong>Recherche des paroles&#8239;:</strong> le titre, l’artiste, l’album et la durée du morceau sont envoyés à LRCLIB (lrclib.net), une bibliothèque de paroles publique. Vous pouvez désactiver «&nbsp;Chercher les paroles en ligne&nbsp;» dans Réglages › Paroles.</li>
+        <li><strong>Pochettes et titres Apple Music&#8239;:</strong> l’app demande à Apple l’identifiant Apple Music du morceau et son titre dans la langue d’origine, pour afficher une pochette nette et le bon nom.</li>
+        <li><strong>Spotify&#8239;:</strong> la connexion se fait sur la page de Spotify. Elle est conservée dans le trousseau de cet appareil et sert uniquement à lire votre bibliothèque et à contrôler la lecture.</li>
+        <li>Ces services traitent les demandes selon leur propre politique de confidentialité.</li>
+      </ul>
+
+      <h3>Autorisations</h3>
+      <ul>
+        <li><strong>Média et Apple Music&#8239;:</strong> pour lire et écouter votre bibliothèque Musique.</li>
+        <li><strong>Mouvements&#8239;:</strong> pour savoir si votre iPhone est en charge à l’horizontale et lancer le mode En veille. Les données sont traitées sur le moment et jamais conservées.</li>
+        <li>L’app n’accède ni à l’appareil photo, ni au micro, ni aux photos, ni à la localisation, ni aux contacts.</li>
+      </ul>
+
+      <h3>Ce que vous choisissez d’envoyer</h3>
+      <p>Quand vous m’écrivez depuis «&nbsp;Me contacter&nbsp;», le brouillon contient le modèle de l’appareil, la version du système, celle de l’app et la langue, pour faciliter le diagnostic. À vous de décider si vous l’envoyez et ce que vous y mettez.</p>
+
+      <h3>Supprimer vos données</h3>
+      <p>Supprimer l’app efface tout ce qu’elle a enregistré sur votre appareil. Vous pouvez aussi vider le cache dans les réglages et vous déconnecter de Spotify à tout moment.</p>
+
+      <h3>Enfants</h3>
+      <p>Nous ne collectons de données personnelles auprès de personne, y compris les enfants.</p>
+
+      <h3>Modifications</h3>
+      <p>Si cette politique change, cette page et la date ci-dessus seront mises à jour.</p>
+    </div>
+
+    <div class="card">
+      <h2>Assistance</h2>
+      <p>Une question, une idée&#8239;? Écrivez-moi. Indiquer le modèle de l’appareil, la version du système et les étapes qui ont mené au problème m’aide à en trouver la cause plus vite.</p>
+      <div class="contact">
+        <a href="mailto:rangertars777@gmail.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>rangertars777@gmail.com</a>
+        <a href="https://x.com/Sonansu_guoran">X @Sonansu_guoran</a>
+      </div>
+
+      <h3>Questions fréquentes</h3>
+      <details><summary>Comment connecter Apple Music&#8239;?</summary>
+        <p>Choisissez Apple Music à la première ouverture et autorisez l’accès. Vous pourrez changer plus tard dans Réglages › Source musicale. Si vous avez refusé, activez «&nbsp;Média et Apple Music&nbsp;» dans Réglages › Melospin sur l’iPhone.</p></details>
+      <details><summary>Pourquoi certains morceaux n’ont-ils pas de paroles&#8239;?</summary>
+        <p>Les paroles viennent d’abord de votre source musicale, puis de LRCLIB, une bibliothèque publique. Tous les morceaux n’y figurent pas. Quand elle est saturée, l’app réessaie automatiquement&#8239;: patientez un instant.</p></details>
+      <details><summary>Comment utiliser Spotify&#8239;?</summary>
+        <p>Connectez-vous à Spotify dans Réglages › Source musicale. Le contrôle de la lecture nécessite Spotify Premium et l’app Spotify sur l’appareil.</p></details>
+      <details><summary>Comment ajouter mes propres fichiers&#8239;?</summary>
+        <p>Placez vos morceaux dans l’app Fichiers › Sur mon iPhone › Melospin › Musique, puis touchez «&nbsp;Mettre à jour la bibliothèque&nbsp;». Vous pouvez aussi utiliser «&nbsp;Importer depuis Fichiers&nbsp;» dans le menu en haut à gauche de la bibliothèque.</p></details>
+      <details><summary>Comment ajouter un widget&#8239;?</summary>
+        <p>Maintenez le doigt sur une zone vide de l’écran d’accueil, touchez Modifier › Ajouter un widget, puis cherchez Melospin. Des widgets pour l’écran verrouillé existent aussi.</p></details>
+      <details><summary>Comment ouvrir l’horloge vinyle&#8239;?</summary>
+        <p>App ouverte, mettez votre iPhone à l’horizontale pendant qu’il charge&#8239;: le mode En veille démarre tout seul. Vous pouvez aussi maintenir le doigt sur une zone vide de la platine et choisir En veille. Sur iPad, ouvrez-le manuellement.</p></details>
+      <details><summary>Pourquoi la musique s’arrête-t-elle quand je ferme l’app&#8239;?</summary>
+        <p>Melospin lit Apple Music dans son propre lecteur&#8239;: la musique s’arrête quand vous fermez l’app, c’est voulu. À la prochaine ouverture, la platine vous attend au même morceau, au même endroit.</p></details>
+    </div>
+  </section>
+
+  <!-- Español -->
+  <section class="lang" id="es">
+    <div class="card">
+      <h2>Acerca de Melospin</h2>
+      <p class="lead">Convierte tu teléfono en un tocadiscos: baja la aguja, busca entre tus discos y canta con la letra.</p>
+      <div class="features">
+        <div class="feature"><b>Tocadiscos</b><span>Un vinilo que gira, con sonido de aguja y crujido</span></div>
+        <div class="feature"><b>Discos y letras</b><span>Busca álbumes en 3D; la letra se ilumina línea por línea</span></div>
+        <div class="feature"><b>Widgets y En reposo</b><span>Widgets y un reloj de vinilo al cargar de lado</span></div>
+      </div>
+      <p>Funciona con Apple Music, Spotify y los archivos de música de tu dispositivo.</p>
+    </div>
+
+    <div class="card">
+      <h2>Política de privacidad</h2>
+      <p class="meta">Vigente desde el 29 de octubre de 2026</p>
+
+      <h3>Resumen</h3>
+      <ul>
+        <li>Melospin <strong>no recopila tus datos personales</strong>. No hay cuentas, anuncios, estadísticas ni informes de fallos.</li>
+        <li>No incluye SDK de terceros de publicidad o análisis, y no se te rastrea.</li>
+      </ul>
+
+      <h3>Lo que se queda en tu dispositivo</h3>
+      <ul>
+        <li>Tu biblioteca, tus canciones favoritas, tu historial, las letras en caché, la apariencia y demás ajustes.</li>
+        <li>Todo se queda en tu dispositivo (los widgets lo leen localmente mediante el grupo de apps del sistema) y nunca se sube al desarrollador ni a ningún servidor.</li>
+        <li>Los álbumes y las playlists se añaden al índice de Spotlight del sistema, que también se queda en el dispositivo.</li>
+      </ul>
+
+      <h3>Lo que se envía por internet</h3>
+      <ul>
+        <li><strong>Buscar letras:</strong> el título, artista, álbum y duración de la canción se envían a LRCLIB (lrclib.net), una biblioteca pública de letras. Puedes desactivar Buscar letras en internet en Ajustes › Letras.</li>
+        <li><strong>Portadas y títulos de Apple Music:</strong> la app le pide a Apple el identificador de la canción en Apple Music y su título en el idioma original, para mostrar una portada nítida y el nombre correcto.</li>
+        <li><strong>Spotify:</strong> inicias sesión en la propia página de Spotify. La sesión se guarda en el llavero de este dispositivo y solo se usa para leer tu biblioteca y controlar la reproducción.</li>
+        <li>Estos servicios tratan las solicitudes según sus propias políticas de privacidad.</li>
+      </ul>
+
+      <h3>Permisos</h3>
+      <ul>
+        <li><strong>Multimedia y Apple Music:</strong> para leer y reproducir tu biblioteca de Música.</li>
+        <li><strong>Movimiento:</strong> para saber si tu iPhone se está cargando de lado y activar En reposo. Se procesa al momento y nunca se guarda.</li>
+        <li>La app no accede a la cámara, el micrófono, las fotos, la ubicación ni los contactos.</li>
+      </ul>
+
+      <h3>Lo que tú decides enviar</h3>
+      <p>Cuando me escribes desde Contacto, el borrador incluye el modelo del dispositivo, la versión del sistema, la de la app y el idioma, para facilitar el diagnóstico. Tú decides si lo envías y qué incluyes.</p>
+
+      <h3>Eliminar tus datos</h3>
+      <p>Al eliminar la app se borra todo lo que guardó en tu dispositivo. También puedes borrar la caché en Ajustes y cerrar sesión en Spotify cuando quieras.</p>
+
+      <h3>Privacidad infantil</h3>
+      <p>No recopilamos datos personales de nadie, incluidos los niños.</p>
+
+      <h3>Cambios</h3>
+      <p>Si esta política cambia, se actualizarán esta página y la fecha indicada arriba.</p>
+    </div>
+
+    <div class="card">
+      <h2>Soporte</h2>
+      <p>¿Tienes una duda o una idea? Escríbeme. Incluir el modelo del dispositivo, la versión del sistema y los pasos que llevaron al problema me ayuda a encontrar la causa más rápido.</p>
+      <div class="contact">
+        <a href="mailto:rangertars777@gmail.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>rangertars777@gmail.com</a>
+        <a href="https://x.com/Sonansu_guoran">X @Sonansu_guoran</a>
+      </div>
+
+      <h3>Preguntas frecuentes</h3>
+      <details><summary>¿Cómo conecto Apple Music?</summary>
+        <p>Elige Apple Music la primera vez que abras la app y permite el acceso. Después puedes cambiarlo en Ajustes › Origen de la música. Si antes lo rechazaste, activa Multimedia y Apple Music en la app Ajustes del iPhone › Melospin.</p></details>
+      <details><summary>¿Por qué algunas canciones no tienen letra?</summary>
+        <p>Las letras vienen primero de tu fuente de música y luego de LRCLIB, una biblioteca pública. No todas las canciones están disponibles. Cuando la biblioteca está saturada, la app lo vuelve a intentar sola; espera un momento.</p></details>
+      <details><summary>¿Cómo uso Spotify?</summary>
+        <p>Inicia sesión en Spotify en Ajustes › Origen de la música. Para controlar la reproducción necesitas Spotify Premium y la app de Spotify en tu dispositivo.</p></details>
+      <details><summary>¿Cómo agrego mis propios archivos?</summary>
+        <p>Pon las canciones en la app Archivos › En mi iPhone › Melospin › Música y toca Actualizar biblioteca. También puedes usar Importar desde Archivos en el menú superior izquierdo de la biblioteca.</p></details>
+      <details><summary>¿Cómo agrego un widget?</summary>
+        <p>Mantén presionada una zona vacía de la pantalla de inicio, toca Editar › Agregar widget y busca Melospin. También hay widgets para la pantalla bloqueada.</p></details>
+      <details><summary>¿Cómo abro el reloj de vinilo?</summary>
+        <p>Con la app abierta, pon tu iPhone de lado mientras se carga y En reposo se activa solo. También puedes mantener presionada una zona vacía del tocadiscos y elegir En reposo. En iPad, ábrelo manualmente.</p></details>
+      <details><summary>¿Por qué se detiene la música al cerrar la app?</summary>
+        <p>Melospin reproduce Apple Music en su propio reproductor, así que la música se detiene al cerrar la app; es intencional. La próxima vez, el tocadiscos te espera en la misma canción y el mismo punto.</p></details>
+    </div>
+  </section>
+
+  <!-- 日本語 -->
+  <section class="lang" id="ja">
+    <div class="card">
+      <h2>Melospinについて</h2>
+      <p class="lead">iPhoneをレコードプレーヤーに。アームを動かして針を落とし、レコードをめくってアルバムを探し、歌詞と一緒に歌えます。</p>
+      <div class="features">
+        <div class="feature"><b>ターンテーブル</b><span>回るレコード、針を落とす音とレコードのノイズ</span></div>
+        <div class="feature"><b>レコード棚と歌詞</b><span>3Dでアルバムをめくり、歌詞が一行ずつ光る</span></div>
+        <div class="feature"><b>ウィジェットとスタンバイ</b><span>ホーム画面のウィジェット、横向きの充電でレコード時計に</span></div>
+      </div>
+      <p>Apple Music、Spotify、デバイス内の音楽ファイルに対応しています。</p>
+    </div>
+
+    <div class="card">
+      <h2>プライバシーポリシー</h2>
+      <p class="meta">施行日：2026年10月29日</p>
+
+      <h3>概要</h3>
+      <ul>
+        <li>Melospinは<strong>個人情報を収集しません</strong>。アカウント、広告、アクセス解析、クラッシュレポートはありません。</li>
+        <li>広告や解析のためのサードパーティSDKは組み込んでおらず、トラッキングも行いません。</li>
+      </ul>
+
+      <h3>デバイスに保存されるもの</h3>
+      <ul>
+        <li>ミュージックライブラリ、お気に入りの曲、再生履歴、歌詞のキャッシュ、外観やその他の設定。</li>
+        <li>これらはデバイス内にのみ保存され（ウィジェットはシステムのAppグループを通じてデバイス内で読み取ります）、開発者やサーバーに送信されることはありません。</li>
+        <li>アルバムとプレイリストはシステムのSpotlight検索に登録されますが、この索引もデバイス内にとどまります。</li>
+      </ul>
+
+      <h3>インターネットに送信されるもの</h3>
+      <ul>
+        <li><strong>歌詞の検索：</strong>曲名、アーティスト名、アルバム名、長さを公開の歌詞データベースLRCLIB（lrclib.net）に送信します。「設定」›「歌詞」で「歌詞をオンラインで探す」をオフにできます。</li>
+        <li><strong>Apple Musicのアートワークと曲名：</strong>高解像度のアートワークと正しい曲名を表示するため、Apple Musicでの曲のIDと原語の曲名をAppleに問い合わせます。</li>
+        <li><strong>Spotify：</strong>サインインはSpotifyのページで行います。サインイン情報はこのデバイスのキーチェーンに保存され、ライブラリの読み込みと再生の操作にのみ使われます。</li>
+        <li>これらのサービスは、それぞれのプライバシーポリシーに従ってリクエストを処理します。</li>
+      </ul>
+
+      <h3>使用する許可</h3>
+      <ul>
+        <li><strong>メディアとApple Music：</strong>「ミュージック」Appのライブラリを読み込んで再生するため。</li>
+        <li><strong>モーション：</strong>iPhoneが横向きで充電されているかを判断し、スタンバイを自動で始めるため。その場で処理し、保存はしません。</li>
+        <li>カメラ、マイク、写真、位置情報、連絡先にはアクセスしません。</li>
+      </ul>
+
+      <h3>ご自身で送信するもの</h3>
+      <p>「お問い合わせ」からメールを書くと、問題の調査に役立つよう、デバイスのモデル、システムとAppのバージョン、言語があらかじめ入力されます。送信するかどうか、何を書くかはご自身で決められます。</p>
+
+      <h3>データの削除</h3>
+      <p>Appを削除すると、デバイスに保存されたデータはすべて消去されます。「設定」からキャッシュを消去したり、いつでもSpotifyからサインアウトしたりできます。</p>
+
+      <h3>子どものプライバシー</h3>
+      <p>子どもを含め、どなたからも個人情報を収集しません。</p>
+
+      <h3>ポリシーの変更</h3>
+      <p>本ポリシーを変更する場合は、このページと上記の施行日を更新します。</p>
+    </div>
+
+    <div class="card">
+      <h2>サポート</h2>
+      <p>ご質問やご要望はお気軽にどうぞ。デバイスのモデル、システムのバージョン、問題が起きたときの操作手順を書いていただくと、原因を早く見つけられます。</p>
+      <div class="contact">
+        <a href="mailto:rangertars777@gmail.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>rangertars777@gmail.com</a>
+        <a href="https://x.com/Sonansu_guoran">X @Sonansu_guoran</a>
+      </div>
+
+      <h3>よくある質問</h3>
+      <details><summary>Apple Musicに接続するには？</summary>
+        <p>初めて開いたときにApple Musicを選んでアクセスを許可してください。あとから「設定」›「音楽のソース」で切り替えることもできます。以前に許可しなかった場合は、iPhoneの「設定」›「Melospin」で「メディアとApple Music」をオンにしてください。</p></details>
+      <details><summary>歌詞が表示されない曲があるのはなぜ？</summary>
+        <p>歌詞はまずミュージックソースから、次に公開の歌詞データベースLRCLIBから取得します。すべての曲があるわけではありません。データベースが混み合っているときはAppが自動で再試行するので、少しお待ちください。</p></details>
+      <details><summary>Spotifyを使うには？</summary>
+        <p>「設定」›「音楽のソース」でSpotifyにサインインしてください。再生の操作にはSpotify Premiumと、デバイスにインストールされたSpotify Appが必要です。</p></details>
+      <details><summary>手持ちの音楽ファイルを追加するには？</summary>
+        <p>「ファイル」App ›「このiPhone内」›「Melospin」›「音楽」に曲を入れて、「ライブラリを更新」をタップします。ライブラリ左上のメニューの「『ファイル』から読み込む」も使えます。</p></details>
+      <details><summary>ウィジェットを追加するには？</summary>
+        <p>ホーム画面の何もないところを長押しし、「編集」›「ウィジェットを追加」で「Melospin」を検索します。ロック画面にも追加できます。</p></details>
+      <details><summary>レコード時計を開くには？</summary>
+        <p>Appを開いたまま、充電中のiPhoneを横向きにすると自動で始まります。ターンテーブルの何もないところを長押しして「スタンバイ」を選ぶこともできます。iPadでは手動で開いてください。</p></details>
+      <details><summary>Appを閉じると音楽が止まるのはなぜ？</summary>
+        <p>MelospinはApple Musicを独自のプレーヤーで再生するため、Appを閉じると音楽も止まります。これは意図した仕様です。次に開くと、前回の曲と再生位置からすぐに再開できます。</p></details>
+    </div>
+  </section>
+
+  <!-- 한국어 -->
+  <section class="lang" id="ko">
+    <div class="card">
+      <h2>Melospin 소개</h2>
+      <p class="lead">휴대폰을 턴테이블로. 톤암을 옮겨 바늘을 내리고, LP를 넘기며 앨범을 고르고, 가사를 따라 불러요.</p>
+      <div class="features">
+        <div class="feature"><b>턴테이블</b><span>돌아가는 LP, 바늘 소리와 LP 잡음</span></div>
+        <div class="feature"><b>LP 진열장과 가사</b><span>3D로 앨범을 넘기고, 가사가 한 줄씩 빛나요</span></div>
+        <div class="feature"><b>위젯과 스탠바이</b><span>홈 화면 위젯, 가로로 충전하면 LP 시계</span></div>
+      </div>
+      <p>Apple Music, Spotify, 기기에 저장된 음악 파일을 지원해요.</p>
+    </div>
+
+    <div class="card">
+      <h2>개인정보 처리방침</h2>
+      <p class="meta">시행일: 2026년 10월 29일</p>
+
+      <h3>개요</h3>
+      <ul>
+        <li>Melospin은 <strong>개인정보를 수집하지 않아요</strong>. 계정, 광고, 분석, 충돌 보고가 없어요.</li>
+        <li>광고나 분석용 제3자 SDK를 넣지 않았고, 사용자를 추적하지 않아요.</li>
+      </ul>
+
+      <h3>기기에 저장되는 내용</h3>
+      <ul>
+        <li>음악 보관함, 좋아하는 노래, 재생 기록, 가사 캐시, 화면 모양과 그 밖의 설정.</li>
+        <li>이 내용은 기기에만 저장되며(위젯은 시스템의 App 그룹을 통해 기기 안에서 읽어요), 개발자나 어떤 서버에도 올라가지 않아요.</li>
+        <li>앨범과 플레이리스트는 시스템의 Spotlight 검색 색인에 추가되며, 이 색인도 기기 안에만 있어요.</li>
+      </ul>
+
+      <h3>인터넷으로 보내는 내용</h3>
+      <ul>
+        <li><strong>가사 찾기:</strong> 노래 제목, 아티스트, 앨범, 길이를 공개 가사 데이터베이스 LRCLIB(lrclib.net)에 보내요. 설정 › 가사에서 ‘온라인에서 가사 찾기’를 끌 수 있어요.</li>
+        <li><strong>Apple Music 커버와 제목:</strong> 선명한 커버와 올바른 제목을 보여 주기 위해 Apple에 노래의 Apple Music ID와 원어 제목을 물어봐요.</li>
+        <li><strong>Spotify:</strong> 로그인은 Spotify 페이지에서 해요. 로그인 정보는 이 기기의 키체인에 저장되며 보관함을 읽고 재생을 제어하는 데만 쓰여요.</li>
+        <li>이 서비스들은 각자의 개인정보 처리방침에 따라 요청을 처리해요.</li>
+      </ul>
+
+      <h3>사용하는 권한</h3>
+      <ul>
+        <li><strong>미디어 및 Apple Music:</strong> 음악 앱의 보관함을 읽고 재생하기 위해 써요.</li>
+        <li><strong>동작:</strong> iPhone을 가로로 두고 충전 중인지 알아내 스탠바이를 자동으로 켜기 위해 써요. 그 자리에서 처리하고 저장하지 않아요.</li>
+        <li>카메라, 마이크, 사진, 위치, 연락처에는 접근하지 않아요.</li>
+      </ul>
+
+      <h3>직접 보내는 내용</h3>
+      <p>‘문의하기’에서 메일을 쓰면 문제 해결에 도움이 되도록 기기 모델, 시스템 버전, 앱 버전, 언어가 미리 채워져요. 보낼지, 무엇을 담을지는 직접 정할 수 있어요.</p>
+
+      <h3>데이터 삭제</h3>
+      <p>앱을 삭제하면 기기에 저장된 모든 데이터가 지워져요. 설정에서 캐시를 지우거나 언제든지 Spotify에서 로그아웃할 수도 있어요.</p>
+
+      <h3>아동 개인정보</h3>
+      <p>아동을 포함해 누구의 개인정보도 수집하지 않아요.</p>
+
+      <h3>방침 변경</h3>
+      <p>이 방침이 바뀌면 이 페이지와 위의 시행일을 업데이트해요.</p>
+    </div>
+
+    <div class="card">
+      <h2>고객 지원</h2>
+      <p>궁금한 점이나 제안이 있으면 편하게 연락해 주세요. 기기 모델, 시스템 버전, 문제가 생긴 과정을 함께 알려 주시면 원인을 더 빨리 찾을 수 있어요.</p>
+      <div class="contact">
+        <a href="mailto:rangertars777@gmail.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>rangertars777@gmail.com</a>
+        <a href="https://x.com/Sonansu_guoran">X @Sonansu_guoran</a>
+      </div>
+
+      <h3>자주 묻는 질문</h3>
+      <details><summary>Apple Music은 어떻게 연결하나요?</summary>
+        <p>처음 열 때 Apple Music을 고르고 접근을 허용해 주세요. 나중에 설정 › 음악 소스에서 바꿀 수도 있어요. 전에 거부했다면 iPhone 설정 › Melospin에서 ‘미디어 및 Apple Music’을 켜 주세요.</p></details>
+      <details><summary>가사가 없는 노래가 있는 이유는요?</summary>
+        <p>가사는 먼저 음악 소스에서, 그다음 공개 가사 데이터베이스 LRCLIB에서 가져와요. 모든 노래가 있는 건 아니에요. 데이터베이스가 붐빌 때는 앱이 알아서 다시 시도하니 잠시 기다려 주세요.</p></details>
+      <details><summary>Spotify는 어떻게 쓰나요?</summary>
+        <p>설정 › 음악 소스에서 Spotify에 로그인하세요. 재생을 제어하려면 Spotify Premium과 기기에 설치된 Spotify 앱이 필요해요.</p></details>
+      <details><summary>내 음악 파일은 어떻게 추가하나요?</summary>
+        <p>파일 앱 › 나의 iPhone › Melospin › 음악에 노래를 넣고 ‘보관함 업데이트’를 누르세요. 보관함 왼쪽 위 메뉴의 ‘파일에서 가져오기’도 쓸 수 있어요.</p></details>
+      <details><summary>위젯은 어떻게 추가하나요?</summary>
+        <p>홈 화면의 빈 곳을 길게 누르고 편집 › 위젯 추가를 누른 다음 ‘Melospin’을 검색하세요. 잠금 화면에도 추가할 수 있어요.</p></details>
+      <details><summary>LP 시계는 어떻게 여나요?</summary>
+        <p>앱을 연 상태에서 충전 중인 iPhone을 가로로 두면 자동으로 시작돼요. 턴테이블의 빈 곳을 길게 눌러 ‘스탠바이’를 골라도 돼요. iPad에서는 직접 열어 주세요.</p></details>
+      <details><summary>앱을 닫으면 음악이 멈추는 이유는요?</summary>
+        <p>Melospin은 Apple Music을 자체 플레이어로 재생해서 앱을 닫으면 음악도 멈춰요. 의도된 동작이에요. 다시 열면 턴테이블이 지난번 노래와 위치에서 기다리고 있어요.</p></details>
+    </div>
+  </section>
+</main>
+
+  <footer>© 2026 Guo · Melospin</footer>
+</div>
+
+<script>
+(() => {
+  const buttons = Array.from(document.querySelectorAll('.lang-btn'));
+  const ids = buttons.map(b => b.dataset.lang);
+  const STORAGE_KEY = 'preferred-lang';
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let current = document.querySelector('.lang.active');
+
+  // 精确匹配优先，其次按主语言匹配（如 fr-CA → fr）；中文按地区 / 书写系统区分简繁
+  const normalize = code => {
+    const c = code.toLowerCase();
+    if (c.split('-')[0] !== 'zh') return c;
+    return /hant|-tw|-hk|-mo/.test(c) ? 'zh-hant' : 'zh-cn';
+  };
+  const match = code => {
+    if (!code) return null;
+    const c = normalize(code);
+    return ids.find(id => id.toLowerCase() === c) ||
+           ids.find(id => id.toLowerCase().split('-')[0] === c.split('-')[0]) || null;
+  };
+  const initialLang = () => {
+    let saved = null;
+    try { saved = localStorage.getItem(STORAGE_KEY); } catch (e) {}
+    const browser = (navigator.languages || [navigator.language]).map(match).find(Boolean);
+    return match(location.hash.slice(1)) || match(saved) || browser || match('en') || ids[0];
+  };
+
+  const show = (id, animate) => {
+    const next = document.getElementById(id);
+    if (!next) return;
+    buttons.forEach(b => {
+      const on = b.dataset.lang === id;
+      b.classList.toggle('active', on);
+      b.setAttribute('aria-pressed', on);
+    });
+    document.documentElement.lang = id;
+    const bar = document.querySelector('.lang-switcher');
+    const btn = buttons.find(b => b.dataset.lang === id);
+    if (bar && btn && bar.scrollWidth > bar.clientWidth) {
+      bar.scrollTo({ left: btn.offsetLeft - (bar.clientWidth - btn.offsetWidth) / 2, behavior: animate && !reduceMotion ? 'smooth' : 'auto' });
+    }
+    if (next === current && next.classList.contains('show')) return;
+    document.querySelectorAll('.lang').forEach(s => { if (s !== next) s.classList.remove('active', 'show'); });
+    current = next;
+    next.classList.add('active');
+    if (!animate || reduceMotion) { next.classList.add('show'); return; }
+    requestAnimationFrame(() => requestAnimationFrame(() => next.classList.add('show')));
+  };
+
+  buttons.forEach(b => b.addEventListener('click', () => {
+    show(b.dataset.lang, true);
+    try { localStorage.setItem(STORAGE_KEY, b.dataset.lang); } catch (e) {}
+    history.replaceState(null, '', '#' + b.dataset.lang);
+  }));
+  window.addEventListener('hashchange', () => { const id = match(location.hash.slice(1)); if (id) show(id, true); });
+  show(initialLang(), false);
+  // 网址里的 #语言 只用来选语言，不要跳到那一节：打开时停在页面顶部
+  if (location.hash) requestAnimationFrame(() => window.scrollTo(0, 0));
+})();
+</script>
+</body>
+</html>
