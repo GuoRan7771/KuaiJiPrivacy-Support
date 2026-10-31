@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#FAF7F0" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#17171A" media="(prefers-color-scheme: dark)">
+<meta name="description" content="Snaptex — Privacy Policy &amp; Support">
+<title>Snaptex | Privacy &amp; Support</title>
+<style>
+  :root {
+    --w: 760px;
+    --paper: #FAF7F0; --sheet: rgba(255,255,255,.6);
+    --ink: #201E1B; --ink-2: rgba(32,30,27,.72); --faint: rgba(32,30,27,.22);
+    --dot: rgba(32,30,27,.09);
+    --marker: #FFD54A; --hl: rgba(255,213,74,.85); --on-marker: #201E1B;
+    --pen: #2F5BD3; --tape: rgba(232,220,192,.9);
+    --hard: rgba(32,30,27,.85); --soft: rgba(32,30,27,.10);
+    --font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Hiragino Sans", "Apple SD Gothic Neo", "Helvetica Neue", Arial, sans-serif;
+  }
+  :root:lang(zh-Hant) { --font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang TC", "Helvetica Neue", sans-serif; }
+  :root:lang(ja) { --font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif; }
+  :root:lang(ko) { --font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif; }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #17171A; --sheet: rgba(255,255,255,.04);
+      --ink: #ECE9E0; --ink-2: rgba(236,233,224,.72); --faint: rgba(236,233,224,.26);
+      --dot: rgba(236,233,224,.10);
+      --marker: #E8BE3A; --hl: rgba(232,190,58,.42);
+      --pen: #86A5F5; --tape: rgba(107,98,79,.92);
+      --hard: rgba(0,0,0,.85); --soft: rgba(0,0,0,.5);
+    }
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html { background: var(--paper); -webkit-text-size-adjust: 100%; color-scheme: light dark; }
+  body {
+    margin: 0; color: var(--ink); font: 16px/1.75 var(--font);
+    background-color: var(--paper);
+    background-image: radial-gradient(circle, var(--dot) 1.1px, transparent 1.5px);
+    background-size: 22px 22px;
+    padding: env(safe-area-inset-top) 16px calc(48px + env(safe-area-inset-bottom));
+    min-height: 100vh;
+  }
+  .wrap { max-width: var(--w); margin: 0 auto; }
+  /* 手绘的框：四个角半径各不相同，看上去像手画的圆角矩形 */
+  .sketch {
+    border: 2px solid var(--ink);
+    border-radius: 255px 18px 225px 18px / 18px 225px 18px 255px;
+  }
+
+  header { text-align: center; padding: 52px 0 24px; }
+  .note {
+    position: relative; width: 150px; height: 144px; margin: 0 auto 30px;
+    background: var(--marker); transform: rotate(-4deg);
+    box-shadow: 7px 9px 0 var(--hard);
+  }
+  .note::before {   /* 胶带 */
+    content: ""; position: absolute; left: 50%; top: -14px; width: 66px; height: 26px; margin-left: -33px;
+    background: var(--tape); transform: rotate(6deg);
+  }
+  .note svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .note path { fill: none; stroke: var(--on-marker); stroke-linecap: round; stroke-linejoin: round; }
+  h1 { margin: 0; font-size: 40px; line-height: 1.15; font-weight: 700; letter-spacing: -.01em; }
+  .hl { background: linear-gradient(transparent 55%, var(--hl) 55%, var(--hl) 92%, transparent 92%); padding: 0 .15em; }
+  .tagline { margin: 10px 0 0; color: var(--ink-2); font-size: 15px; letter-spacing: .04em; }
+
+  nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 18px 0 34px; }
+  .lang-btn {
+    font: 500 14px/1 var(--font); color: var(--ink-2); background: var(--paper);
+    border: 1.6px solid var(--faint); padding: 9px 14px; cursor: pointer;
+    border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
+    transition: transform .15s ease, background .15s ease;
+  }
+  .lang-btn:hover { transform: translateY(-1px); }
+  .lang-btn.active { background: var(--marker); color: var(--on-marker); border-color: var(--ink); font-weight: 700; }
+  .lang-btn:focus-visible { outline: 3px solid var(--pen); outline-offset: 2px; }
+
+  .lang { display: none; background: var(--sheet); padding: 26px 26px 20px; box-shadow: 5px 6px 0 var(--soft); }
+  .lang.active { display: block; animation: fade .25s ease; }
+  @keyframes fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) { .lang.active { animation: none; } .lang-btn { transition: none; } }
+
+  h2 { font-size: 24px; line-height: 1.3; margin: 8px 0 14px; }
+  h3 { font-size: 17px; margin: 26px 0 8px; }
+  p, li { color: var(--ink); }
+  ul { padding-left: 1.3em; margin: 8px 0; }
+  li { margin: 6px 0; }
+  li::marker { color: var(--pen); }
+  strong { font-weight: 700; }
+  a { color: var(--pen); text-decoration-thickness: 1.5px; text-underline-offset: 3px; }
+  .meta { color: var(--ink-2); font-size: 14px; margin-top: -6px; }
+  .fine { color: var(--ink-2); font-size: 14px; }
+  hr { border: none; height: 10px; margin: 30px 0;
+       background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='10'><path d='M2 6 C 40 2, 70 9, 110 5 S 170 3, 198 6' fill='none' stroke='%23888' stroke-opacity='.5' stroke-width='1.6' stroke-linecap='round'/></svg>") center / 100% 10px no-repeat; }
+
+  .features { list-style: none; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 18px 0; }
+  .features li { margin: 0; padding: 14px 16px; border: 1.6px solid var(--faint);
+                 border-radius: 18px 225px 18px 255px / 255px 18px 225px 18px; background: var(--sheet); }
+  .features b { display: block; margin-bottom: 4px; }
+  .features b::before { content: ""; display: inline-block; width: .7em; height: .7em; margin-right: .45em;
+                        background: var(--marker); border-radius: 40% 60% 55% 45%; transform: translateY(.05em); }
+  .features span { color: var(--ink-2); font-size: 14px; line-height: 1.6; display: block; }
+  @media (max-width: 560px) { .features { grid-template-columns: 1fr; } .lang { padding: 20px 18px 16px; } h1 { font-size: 34px; } }
+
+  .contacts { display: grid; gap: 10px; margin: 14px 0; }
+  .contact { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; text-decoration: none;
+             padding: 12px 16px; border: 1.6px solid var(--ink); background: var(--paper);
+             border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px; box-shadow: 3px 4px 0 var(--soft);
+             transition: transform .15s ease; }
+  .contact:hover { transform: translate(-1px, -1px); }
+  .contact span { color: var(--ink); font-weight: 600; }
+  .contact b { color: var(--pen); font-weight: 500; overflow-wrap: anywhere; text-align: right; }
+
+  details { margin: 10px 0; padding: 10px 16px; border: 1.6px solid var(--faint);
+            border-radius: 18px 225px 18px 255px / 255px 18px 225px 18px; }
+  details[open] { border-color: var(--ink); }
+  summary { cursor: pointer; font-weight: 600; list-style: none; position: relative; padding-right: 22px; }
+  summary::-webkit-details-marker { display: none; }
+  summary::after { content: "+"; position: absolute; right: 0; top: 0; color: var(--pen); font-weight: 700; }
+  details[open] summary::after { content: "−"; }
+  details p { margin: 8px 0 4px; color: var(--ink-2); }
+
+  footer { text-align: center; color: var(--ink-2); font-size: 13px; margin-top: 30px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <!-- 一张贴着胶带的便利贴，上面手写一个积分号：和 App 图标一样 -->
+    <div class="note sketch" aria-hidden="true">
+      <svg viewBox="0 0 150 144"><path d="M99.8 37.0 C99.3 35.3 98.4 29.5 96.6 27.0 C94.8 24.5 91.6 22.0 89.0 22.0 C86.5 22.0 83.4 23.7 81.5 27.0 C79.6 30.3 78.7 35.8 77.7 42.0 C76.7 48.2 76.2 57.0 75.5 64.0 C74.9 71.0 74.6 77.0 73.9 84.0 C73.2 91.0 72.6 100.3 71.2 106.0 C69.9 111.7 68.1 115.5 65.8 118.0 C63.6 120.5 60.2 121.8 57.7 121.0 C55.2 120.2 51.9 114.3 50.7 113.0" stroke-width="9"/><path d="M99.8 37.0 C99.3 35.3 98.4 29.5 96.6 27.0 C94.8 24.5 91.6 22.0 89.0 22.0 C86.5 22.0 83.4 23.7 81.5 27.0 C79.6 30.3 78.7 35.8 77.7 42.0 C76.7 48.2 76.2 57.0 75.5 64.0 C74.9 71.0 74.6 77.0 73.9 84.0 C73.2 91.0 72.6 100.3 71.2 106.0 C69.9 111.7 68.1 115.5 65.8 118.0 C63.6 120.5 60.2 121.8 57.7 121.0 C55.2 120.2 51.9 114.3 50.7 113.0" stroke-width="6" transform="translate(1.2 -0.8)"/></svg>
+    </div>
+    <h1><span class="hl">Snaptex</span></h1>
+    <p class="tagline">Privacy Policy · Support · 隐私政策 · 技术支持</p>
+  </header>
+
+  <nav role="group" aria-label="Language">
+    <button class="lang-btn" type="button" data-lang="zh-Hans" aria-pressed="false">简体中文</button>
+    <button class="lang-btn" type="button" data-lang="zh-Hant" aria-pressed="false">繁體中文</button>
+    <button class="lang-btn" type="button" data-lang="en" aria-pressed="false">English</button>
+    <button class="lang-btn" type="button" data-lang="fr" aria-pressed="false">Français</button>
+    <button class="lang-btn" type="button" data-lang="de" aria-pressed="false">Deutsch</button>
+    <button class="lang-btn" type="button" data-lang="ja" aria-pressed="false">日本語</button>
+    <button class="lang-btn" type="button" data-lang="ko" aria-pressed="false">한국어</button>
+    <button class="lang-btn" type="button" data-lang="es" aria-pressed="false">Español</button>
+  </nav>
+
+  <!-- zh-Hans -->
+  <section class="lang" id="lang-zh-Hans" lang="zh-Hans" data-title="Snaptex | 隐私政策 · 技术支持">
+    <h2><span class="hl">关于 Snaptex</span></h2>
+    <p>Snaptex 把从 ChatGPT、Claude 或笔记里复制来的「文字 + LaTeX」混排内容自动整理排版，渲染成一张干净的图片，点一下就能复制到剪贴板。</p>
+    <ul class="features">
+      <li><b>一键粘贴</b><span>点「点击粘贴」读取剪贴板，裸 LaTeX、被拆成几行的式子都能自动认出。</span></li>
+      <li><b>三种版式</b><span>长图、4:3、9:16，分栏后图片比例总是准确。</span></li>
+      <li><b>点一下复制</b><span>图片同时以 JPEG 和 PNG 放进剪贴板，也可以分享或存入相册。</span></li>
+      <li><b>完全离线</b><span>排版引擎内置在 App 里，不需要网络。</span></li>
+    </ul>
+    <p class="fine">支持 iPhone 与 iPad（iOS / iPadOS 15 及以上），并为 iPhone Duo 折叠屏做了专门的排版。界面提供 8 种语言，支持深色模式。</p>
+    <hr>
+    <h2 id="privacy-zh-Hans"><span class="hl">隐私政策</span></h2>
+    <p class="meta">生效日期：2026 年 10 月 31 日</p>
+    <h3>一、概述</h3>
+    <ul>
+      <li>Snaptex <strong>不收集任何个人信息</strong>，没有注册或登录账号。</li>
+      <li>未集成广告、统计分析、崩溃上报、第三方登录或支付等任何第三方 SDK。</li>
+      <li><strong>App 不联网</strong>：你的内容只在本机排版和渲染，不会上传到任何服务器，包括开发者的服务器和任何 AI 服务。</li>
+    </ul>
+    <h3>二、剪贴板</h3>
+    <ul>
+      <li>只有在你点「粘贴」时，App 才会读取剪贴板里的文字；iOS 16 及以上会先询问你是否允许。</li>
+      <li>「复制图片」时，App 把生成的图片（JPEG 与 PNG）写入剪贴板，供你粘贴到别处。</li>
+      <li>拖进来的文字、拖出去的图片同样只在本机处理。</li>
+    </ul>
+    <h3>三、照片</h3>
+    <ul>
+      <li>Snaptex <strong>不会读取</strong>你的照片图库。</li>
+      <li>在分享面板里选「存储图像」时，iOS 会请求「仅添加照片」的权限，App 只能写入你选择保存的那一张图片。</li>
+    </ul>
+    <h3>四、保存在设备上的数据</h3>
+    <ul>
+      <li>设置：字号、行距、边距、版面宽度、清晰度、版式、语言、外观，以及引导页和更新日志是否看过。</li>
+      <li>为了渲染预览和导出图片，当前内容会临时写入 App 自己的缓存目录，下次渲染时覆盖；分享时生成的图片文件放在系统的临时目录。原文本身不会被保存。</li>
+      <li>删除 App 会移除以上全部数据。</li>
+    </ul>
+    <h3>五、反馈邮件</h3>
+    <p>只有在你点「电子邮件」或「给开发者写信」时，才会打开写信界面。草稿会预填设备型号、系统版本、App 版本、构建号和当前语言，是否发送、写什么完全由你决定，App 不会附带你的内容。</p>
+    <h3>六、外部链接</h3>
+    <p>点小红书、X、个人网站或 App Store 评价时，会跳转到对应的 App 或浏览器，此后适用对方的隐私政策。「给个好评」使用的是系统自带的评分弹窗。</p>
+    <h3>七、儿童隐私</h3>
+    <p>我们不向任何用户（包括儿童）收集个人信息。</p>
+    <h3>八、政策更新</h3>
+    <p>如本政策有变更，我们会更新本页并修改上方的生效日期。</p>
+    <hr>
+    <h2 id="support-zh-Hans"><span class="hl">技术支持</span></h2>
+    <p>遇到问题或有建议，欢迎联系：</p>
+    <div class="contacts">
+      <a class="contact" href="mailto:rangertars777@gmail.com"><span>电子邮件</span><b>rangertars777@gmail.com</b></a>
+      <a class="contact" href="https://www.xiaohongshu.com/user/profile/5b815f2d47bf040001a99d94?xsec_token=YBZpK0YrWREW6VWRFKrUhGlh_jMjVWqu6nVjX2p9iNlIo=&amp;xsec_source=app_share"><span>小红书</span><b>开发者主页</b></a>
+      <a class="contact" href="https://x.com/sonansu_guoran"><span>X（Twitter）</span><b>@sonansu_guoran</b></a>
+      <a class="contact" href="https://sonansu.space"><span>个人网站</span><b>sonansu.space</b></a>
+    </div>
+    <p class="fine">也可以在 App 的「设置 → 反馈与支持」里直接写信，草稿会自动附上设备型号和系统版本，方便排查问题。</p>
+    <h3>常见问题</h3>
+    <details><summary>为什么点「粘贴」时会弹出确认？</summary><p>这是 iOS 16 起的隐私保护，App 读取剪贴板前系统都会询问，选「允许粘贴」即可。粘贴过一次之后，可以在「设置 → Snaptex → 从其他 App 粘贴」里改成「允许」，以后就不会再问。</p></details>
+    <details><summary>提示「剪贴板里没有文字」？</summary><p>剪贴板里可能只有图片（比如刚复制出去的公式图），或者是空的。回到原处重新复制一次文字再粘贴。</p></details>
+    <details><summary>有的公式没有排出来，或者显示成红色？</summary><p>红色表示这段 LaTeX 有语法错误。点铅笔打开原文检查一下；也可以给这段公式手动加上 $…$ 或 $$…$$。</p></details>
+    <details><summary>选 4:3 或 9:16 时留白很多？</summary><p>为了让图片比例分毫不差，内容填不满时会在四周留白并居中。内容较短时，用「长图」会更紧凑。</p></details>
+    <details><summary>怎样让图片更清晰？</summary><p>在「设置 → 排版 → 清晰度」里选「超清 3×」。</p></details>
+    <details><summary>怎样保存到相册？</summary><p>点右上角的分享按钮，在分享面板里选「存储图像」。</p></details>
+    <details><summary>在 iPad 或 iPhone Duo 上怎么用？</summary><p>屏幕够宽时左边是原文、右边是预览。iPhone Duo 摊开时两页正好在折痕处分开；半开横放时上半屏看图、下半屏打字。分屏时可以把文字拖进来，也可以按住蓝色的复制按钮，把图片直接拖到另一个 App。</p></details>
+    <details><summary>怎样换语言或深色模式？</summary><p>在「设置 → 通用」里选择「语言」或「外观」。</p></details>
+  </section>
+  <!-- zh-Hant -->
+  <section class="lang" id="lang-zh-Hant" lang="zh-Hant" data-title="Snaptex | 隱私權政策 · 技術支援">
+    <h2><span class="hl">關於 Snaptex</span></h2>
+    <p>Snaptex 把從 ChatGPT、Claude 或筆記裡拷貝來的「文字 + LaTeX」混排內容自動整理排版，轉成一張乾淨的圖片，點一下就能拷貝到剪貼板。</p>
+    <ul class="features">
+      <li><b>一鍵貼上</b><span>點「點一下貼上」讀取剪貼板，裸 LaTeX、被拆成好幾行的式子都能自動認出。</span></li>
+      <li><b>三種版式</b><span>長圖、4:3、9:16，分欄後圖片比例一定準確。</span></li>
+      <li><b>點一下拷貝</b><span>圖片同時以 JPEG 和 PNG 放進剪貼板，也可以分享或存入照片。</span></li>
+      <li><b>完全離線</b><span>排版引擎內建在 App 裡，不需要網路。</span></li>
+    </ul>
+    <p class="fine">支援 iPhone 與 iPad（iOS / iPadOS 15 以上），並為 iPhone Duo 摺疊螢幕做了專門的排版。介面提供 8 種語言，支援深色模式。</p>
+    <hr>
+    <h2 id="privacy-zh-Hant"><span class="hl">隱私權政策</span></h2>
+    <p class="meta">生效日期：2026 年 10 月 31 日</p>
+    <h3>一、概述</h3>
+    <ul>
+      <li>Snaptex <strong>不收集任何個人資訊</strong>，沒有註冊或登入帳號。</li>
+      <li>未整合廣告、統計分析、當機回報、第三方登入或付款等任何第三方 SDK。</li>
+      <li><strong>App 不連網</strong>：你的內容只在本機排版和轉譯，不會上傳到任何伺服器，包括開發者的伺服器和任何 AI 服務。</li>
+    </ul>
+    <h3>二、剪貼板</h3>
+    <ul>
+      <li>只有在你點「貼上」時，App 才會讀取剪貼板裡的文字；iOS 16 以上會先詢問你是否允許。</li>
+      <li>「拷貝圖片」時，App 把產生的圖片（JPEG 與 PNG）寫入剪貼板，供你貼到別處。</li>
+      <li>拖進來的文字、拖出去的圖片同樣只在本機處理。</li>
+    </ul>
+    <h3>三、照片</h3>
+    <ul>
+      <li>Snaptex <strong>不會讀取</strong>你的照片圖庫。</li>
+      <li>在分享面板裡選「儲存影像」時，iOS 會請求「僅加入照片」的權限，App 只能寫入你選擇儲存的那一張圖片。</li>
+    </ul>
+    <h3>四、儲存在裝置上的資料</h3>
+    <ul>
+      <li>設定：字級、行距、邊距、版面寬度、清晰度、版式、語言、外觀，以及引導頁和更新紀錄是否看過。</li>
+      <li>為了轉譯預覽和輸出圖片，目前的內容會暫時寫入 App 自己的快取目錄，下次轉譯時覆蓋；分享時產生的圖片檔放在系統的暫存目錄。原文本身不會被儲存。</li>
+      <li>刪除 App 會移除以上全部資料。</li>
+    </ul>
+    <h3>五、意見回饋郵件</h3>
+    <p>只有在你點「電子郵件」或「寫信給開發者」時，才會打開寫信畫面。草稿會預先填入裝置型號、系統版本、App 版本、建置編號和目前語言，是否寄出、寫什麼完全由你決定，App 不會附帶你的內容。</p>
+    <h3>六、外部連結</h3>
+    <p>點小紅書、X、個人網站或 App Store 評論時，會跳轉到對應的 App 或瀏覽器，之後適用對方的隱私權政策。「給個好評」使用的是系統內建的評分視窗。</p>
+    <h3>七、兒童隱私</h3>
+    <p>我們不向任何使用者（包括兒童）收集個人資訊。</p>
+    <h3>八、政策更新</h3>
+    <p>如本政策有變更，我們會更新本頁並修改上方的生效日期。</p>
+    <hr>
+    <h2 id="support-zh-Hant"><span class="hl">技術支援</span></h2>
+    <p>遇到問題或有建議，歡迎聯絡：</p>
+    <div class="contacts">
+      <a class="contact" href="mailto:rangertars777@gmail.com"><span>電子郵件</span><b>rangertars777@gmail.com</b></a>
+      <a class="contact" href="https://www.xiaohongshu.com/user/profile/5b815f2d47bf040001a99d94?xsec_token=YBZpK0YrWREW6VWRFKrUhGlh_jMjVWqu6nVjX2p9iNlIo=&amp;xsec_source=app_share"><span>小紅書</span><b>開發者主頁</b></a>
+      <a class="contact" href="https://x.com/sonansu_guoran"><span>X（Twitter）</span><b>@sonansu_guoran</b></a>
+      <a class="contact" href="https://sonansu.space"><span>個人網站</span><b>sonansu.space</b></a>
+    </div>
+    <p class="fine">也可以在 App 的「設定 → 意見回饋與支援」裡直接寫信，草稿會自動附上裝置型號和系統版本，方便排查問題。</p>
+    <h3>常見問題</h3>
+    <details><summary>為什麼點「貼上」時會跳出確認？</summary><p>這是 iOS 16 起的隱私保護，App 讀取剪貼板前系統都會詢問，選「允許貼上」即可。貼上過一次之後，可以在「設定 → Snaptex → 從其他 App 貼上」裡改成「允許」，之後就不會再問。</p></details>
+    <details><summary>提示「剪貼板裡沒有文字」？</summary><p>剪貼板裡可能只有圖片（例如剛拷貝出去的公式圖），或是空的。回到原處重新拷貝一次文字再貼上。</p></details>
+    <details><summary>有的公式沒有排出來，或顯示成紅色？</summary><p>紅色表示這段 LaTeX 有語法錯誤。點鉛筆打開原文檢查一下；也可以替這段公式手動加上 $…$ 或 $$…$$。</p></details>
+    <details><summary>選 4:3 或 9:16 時留白很多？</summary><p>為了讓圖片比例分毫不差，內容填不滿時會在四周留白並置中。內容較短時，用「長圖」會更緊湊。</p></details>
+    <details><summary>怎樣讓圖片更清晰？</summary><p>在「設定 → 排版 → 清晰度」裡選「超高畫質 3×」。</p></details>
+    <details><summary>怎樣存到照片？</summary><p>點右上角的分享按鈕，在分享面板裡選「儲存影像」。</p></details>
+    <details><summary>在 iPad 或 iPhone Duo 上怎麼用？</summary><p>螢幕夠寬時左邊是原文、右邊是預覽。iPhone Duo 攤開時兩頁正好在摺痕處分開；半開橫放時上半部看圖、下半部打字。分割畫面時可以把文字拖進來，也可以按住藍色的拷貝按鈕，把圖片直接拖到另一個 App。</p></details>
+    <details><summary>怎樣換語言或深色模式？</summary><p>在「設定 → 一般」裡選擇「語言」或「外觀」。</p></details>
+  </section>
+  <!-- en -->
+  <section class="lang" id="lang-en" lang="en" data-title="Snaptex | Privacy Policy · Support">
+    <h2><span class="hl">About Snaptex</span></h2>
+    <p>Snaptex takes text mixed with LaTeX — copied from ChatGPT, Claude or your notes — tidies up the layout and renders it as a clean image that you can copy with one tap.</p>
+    <ul class="features">
+      <li><b>One-tap paste</b><span>Tap “Tap to Paste” to read the clipboard. Bare LaTeX and formulas split over several lines are recognized automatically.</span></li>
+      <li><b>Three layouts</b><span>Long, 4:3 and 9:16. Column layouts always come out at the exact ratio.</span></li>
+      <li><b>Tap to copy</b><span>The image goes to the clipboard as both JPEG and PNG, or share it and save it to Photos.</span></li>
+      <li><b>Fully offline</b><span>The typesetting engine is built into the app. No network needed.</span></li>
+    </ul>
+    <p class="fine">For iPhone and iPad (iOS / iPadOS 15 or later), with a dedicated layout for the foldable iPhone Duo. Available in 8 languages, with Dark Mode.</p>
+    <hr>
+    <h2 id="privacy-en"><span class="hl">Privacy Policy</span></h2>
+    <p class="meta">Effective date: October 31, 2026</p>
+    <h3>1. Overview</h3>
+    <ul>
+      <li>Snaptex <strong>collects no personal information</strong>. There is no account and no sign-in.</li>
+      <li>No third-party SDKs are included — no ads, analytics, crash reporting, third-party login or payments.</li>
+      <li><strong>The app never goes online.</strong> Your content is typeset and rendered on your device only and is never uploaded to any server, including the developer’s and any AI service.</li>
+    </ul>
+    <h3>2. Clipboard</h3>
+    <ul>
+      <li>The app reads text from the clipboard only when you tap Paste, and on iOS 16 or later the system asks for your permission first.</li>
+      <li>When you tap Copy image, the app puts the generated image (JPEG and PNG) on the clipboard so you can paste it elsewhere.</li>
+      <li>Text you drag in and images you drag out are also handled on your device only.</li>
+    </ul>
+    <h3>3. Photos</h3>
+    <ul>
+      <li>Snaptex <strong>never reads</strong> your photo library.</li>
+      <li>When you choose Save Image in the share sheet, iOS asks for “Add Photos Only” access, which lets the app add only the image you chose to save.</li>
+    </ul>
+    <h3>4. Data Stored on Your Device</h3>
+    <ul>
+      <li>Settings: font size, line spacing, margins, page width, resolution, layout, language, appearance, and whether you have seen the guide and What’s New.</li>
+      <li>To render the preview and export images, the current content is written temporarily to the app’s own cache folder and overwritten on the next render. Image files created for sharing go to the system’s temporary folder. Your source text itself is not saved.</li>
+      <li>Deleting the app removes all of this data.</li>
+    </ul>
+    <h3>5. Feedback Email</h3>
+    <p>The mail composer opens only when you tap Email or Email the developer. The draft is pre-filled with your device model, system version, app version, build number and current language. Whether to send it and what to write is entirely up to you; the app never attaches your content.</p>
+    <h3>6. External Links</h3>
+    <p>Tapping Xiaohongshu, X, the website or the App Store review link opens the corresponding app or browser, whose own privacy policy then applies. “Rate the app” uses the system’s built-in rating prompt.</p>
+    <h3>7. Children’s Privacy</h3>
+    <p>We do not collect personal information from anyone, including children.</p>
+    <h3>8. Changes to This Policy</h3>
+    <p>If this policy changes, we will update this page and the effective date above.</p>
+    <hr>
+    <h2 id="support-en"><span class="hl">Support</span></h2>
+    <p>Questions or suggestions? Get in touch:</p>
+    <div class="contacts">
+      <a class="contact" href="mailto:rangertars777@gmail.com"><span>Email</span><b>rangertars777@gmail.com</b></a>
+      <a class="contact" href="https://www.xiaohongshu.com/user/profile/5b815f2d47bf040001a99d94?xsec_token=YBZpK0YrWREW6VWRFKrUhGlh_jMjVWqu6nVjX2p9iNlIo=&amp;xsec_source=app_share"><span>Xiaohongshu</span><b>Developer page</b></a>
+      <a class="contact" href="https://x.com/sonansu_guoran"><span>X (Twitter)</span><b>@sonansu_guoran</b></a>
+      <a class="contact" href="https://sonansu.space"><span>Website</span><b>sonansu.space</b></a>
+    </div>
+    <p class="fine">You can also write from the app under Settings → Feedback &amp; Support. The draft includes your device model and system version, which helps track down problems.</p>
+    <h3>FAQ</h3>
+    <details><summary>Why does iOS ask for confirmation when I tap Paste?</summary><p>It’s a privacy protection in iOS 16 and later: the system asks every time an app reads the clipboard. Choose “Allow Paste”. After your first paste you can go to Settings → Snaptex → Paste from Other Apps and choose “Allow” so it won’t ask again.</p></details>
+    <details><summary>It says “No text on the clipboard”?</summary><p>The clipboard may only hold an image (such as the formula image you just copied) or be empty. Copy the text again and paste.</p></details>
+    <details><summary>A formula isn’t rendered, or shows up in red?</summary><p>Red means that piece of LaTeX has a syntax error. Tap the pencil to check the source text, or wrap the formula in $…$ or $$…$$ yourself.</p></details>
+    <details><summary>Lots of white space with 4:3 or 9:16?</summary><p>To keep the ratio exact, the content is centered with white space around it when it doesn’t fill the page. For short content, Long is more compact.</p></details>
+    <details><summary>How do I get a sharper image?</summary><p>Go to Settings → Typesetting → Resolution and choose “Ultra HD 3×”.</p></details>
+    <details><summary>How do I save to Photos?</summary><p>Tap the share button in the top-right corner and choose Save Image in the share sheet.</p></details>
+    <details><summary>How does it work on iPad or iPhone Duo?</summary><p>When the screen is wide enough, the source text is on the left and the preview on the right. On iPhone Duo, unfolded, the two pages split exactly at the crease; half-open and lying sideways, the image is on the top half and the keyboard on the bottom. In Split View you can drag text in, or press and hold the blue copy button to drag the image straight into another app.</p></details>
+    <details><summary>How do I change the language or use Dark Mode?</summary><p>Go to Settings → General and choose Language or Appearance.</p></details>
+  </section>
+  <!-- fr -->
+  <section class="lang" id="lang-fr" lang="fr" data-title="Snaptex | Politique de confidentialité · Assistance">
+    <h2><span class="hl">À propos de Snaptex</span></h2>
+    <p>Snaptex reprend un texte mêlé de LaTeX — copié depuis ChatGPT, Claude ou vos notes —, le met en page proprement et en fait une image nette que vous copiez d’un geste.</p>
+    <ul class="features">
+      <li><b>Coller d’un geste</b><span>Touchez « Toucher pour coller » pour lire le presse-papiers. Le LaTeX brut et les formules coupées sur plusieurs lignes sont reconnus automatiquement.</span></li>
+      <li><b>Trois mises en page</b><span>Longue, 4:3 et 9:16. En colonnes, l’image a toujours le ratio exact.</span></li>
+      <li><b>Copier d’un geste</b><span>L’image est placée dans le presse-papiers en JPEG et en PNG ; vous pouvez aussi la partager ou l’enregistrer dans Photos.</span></li>
+      <li><b>Entièrement hors ligne</b><span>Le moteur de mise en page est intégré à l’app. Aucune connexion nécessaire.</span></li>
+    </ul>
+    <p class="fine">Pour iPhone et iPad (iOS / iPadOS 15 ou version ultérieure), avec une mise en page dédiée à l’iPhone Duo pliable. Disponible en 8 langues, avec le mode sombre.</p>
+    <hr>
+    <h2 id="privacy-fr"><span class="hl">Politique de confidentialité</span></h2>
+    <p class="meta">Date d’entrée en vigueur: 31 octobre 2026</p>
+    <h3>1. En bref</h3>
+    <ul>
+      <li>Snaptex <strong>ne collecte aucune donnée personnelle</strong>. Il n’y a ni compte ni connexion.</li>
+      <li>Aucun SDK tiers n’est intégré : ni publicité, ni statistiques, ni rapports de plantage, ni connexion tierce, ni paiement.</li>
+      <li><strong>L’app ne se connecte jamais à Internet.</strong> Votre contenu est mis en page et rendu uniquement sur votre appareil ; il n’est envoyé à aucun serveur, ni celui du développeur ni aucun service d’IA.</li>
+    </ul>
+    <h3>2. Presse-papiers</h3>
+    <ul>
+      <li>L’app lit le texte du presse-papiers uniquement lorsque vous touchez Coller, et, à partir d’iOS 16, le système vous demande d’abord l’autorisation.</li>
+      <li>Lorsque vous touchez Copier l’image, l’app place l’image générée (JPEG et PNG) dans le presse-papiers pour que vous puissiez la coller ailleurs.</li>
+      <li>Le texte que vous glissez dans l’app et les images que vous en faites glisser sont eux aussi traités uniquement sur votre appareil.</li>
+    </ul>
+    <h3>3. Photos</h3>
+    <ul>
+      <li>Snaptex <strong>ne lit jamais</strong> votre photothèque.</li>
+      <li>Si vous choisissez « Enregistrer l’image » dans la feuille de partage, iOS demande l’accès « Ajouter des photos uniquement » : l’app ne peut ajouter que l’image que vous avez choisi d’enregistrer.</li>
+    </ul>
+    <h3>4. Données stockées sur votre appareil</h3>
+    <ul>
+      <li>Réglages : taille du texte, interligne, marges, largeur de page, résolution, mise en page, langue, apparence, et le fait d’avoir vu le guide et les nouveautés.</li>
+      <li>Pour afficher l’aperçu et exporter les images, le contenu en cours est écrit temporairement dans le dossier de cache de l’app, puis remplacé au rendu suivant. Les fichiers image créés pour le partage vont dans le dossier temporaire du système. Votre texte source lui-même n’est pas enregistré.</li>
+      <li>Supprimer l’app efface toutes ces données.</li>
+    </ul>
+    <h3>5. E-mail de commentaires</h3>
+    <p>L’écran de rédaction s’ouvre uniquement lorsque vous touchez E-mail ou Écrire au développeur. Le brouillon est prérempli avec le modèle de l’appareil, la version du système, la version de l’app, le numéro de build et la langue actuelle. L’envoyer ou non, et ce que vous y écrivez, ne dépend que de vous ; l’app n’y joint jamais votre contenu.</p>
+    <h3>6. Liens externes</h3>
+    <p>Toucher Xiaohongshu, X, le site web ou le lien d’avis App Store ouvre l’app ou le navigateur correspondant, dont la politique de confidentialité s’applique alors. « Noter l’app » utilise la fenêtre de notation intégrée au système.</p>
+    <h3>7. Confidentialité des enfants</h3>
+    <p>Nous ne collectons aucune donnée personnelle, y compris auprès des enfants.</p>
+    <h3>8. Modifications</h3>
+    <p>En cas de modification, nous mettrons à jour cette page et la date d’entrée en vigueur ci-dessus.</p>
+    <hr>
+    <h2 id="support-fr"><span class="hl">Assistance</span></h2>
+    <p>Une question ou une suggestion ? Écrivez-moi :</p>
+    <div class="contacts">
+      <a class="contact" href="mailto:rangertars777@gmail.com"><span>E-mail</span><b>rangertars777@gmail.com</b></a>
+      <a class="contact" href="https://www.xiaohongshu.com/user/profile/5b815f2d47bf040001a99d94?xsec_token=YBZpK0YrWREW6VWRFKrUhGlh_jMjVWqu6nVjX2p9iNlIo=&amp;xsec_source=app_share"><span>Xiaohongshu</span><b>Page du développeur</b></a>
+      <a class="contact" href="https://x.com/sonansu_guoran"><span>X (Twitter)</span><b>@sonansu_guoran</b></a>
+      <a class="contact" href="https://sonansu.space"><span>Site web</span><b>sonansu.space</b></a>
+    </div>
+    <p class="fine">Vous pouvez aussi écrire depuis l’app, dans Réglages → Commentaires et assistance. Le brouillon indique le modèle de l’appareil et la version du système, ce qui aide à résoudre les problèmes.</p>
+    <h3>Questions fréquentes</h3>
+    <details><summary>Pourquoi iOS demande-t-il une confirmation quand je touche Coller ?</summary><p>C’est une protection de la vie privée d’iOS 16 et versions ultérieures : le système demande à chaque fois qu’une app lit le presse-papiers. Choisissez « Autoriser le collage ». Après un premier collage, allez dans Réglages → Snaptex → Coller depuis d’autres apps et choisissez « Autoriser » pour ne plus être sollicité.</p></details>
+    <details><summary>Le message « Aucun texte dans le presse-papiers » s’affiche ?</summary><p>Le presse-papiers ne contient peut-être qu’une image (comme l’image de formule que vous venez de copier), ou il est vide. Recopiez le texte puis collez-le.</p></details>
+    <details><summary>Une formule ne s’affiche pas, ou apparaît en rouge ?</summary><p>Le rouge signale une erreur de syntaxe LaTeX. Touchez le crayon pour vérifier le texte source, ou entourez vous-même la formule de $…$ ou $$…$$.</p></details>
+    <details><summary>Beaucoup de blanc en 4:3 ou 9:16 ?</summary><p>Pour garder un ratio exact, le contenu est centré avec des marges blanches quand il ne remplit pas la page. Pour un contenu court, la mise en page Longue est plus compacte.</p></details>
+    <details><summary>Comment obtenir une image plus nette ?</summary><p>Dans Réglages → Mise en page → Résolution, choisissez « Ultra HD 3× ».</p></details>
+    <details><summary>Comment enregistrer dans Photos ?</summary><p>Touchez le bouton de partage en haut à droite, puis « Enregistrer l’image » dans la feuille de partage.</p></details>
+    <details><summary>Comment l’utiliser sur iPad ou iPhone Duo ?</summary><p>Quand l’écran est assez large, le texte source est à gauche et l’aperçu à droite. Sur l’iPhone Duo déplié, les deux pages se séparent exactement au pli ; à moitié ouvert et posé de côté, l’image est en haut et le clavier en bas. En Split View, vous pouvez y glisser du texte, ou maintenir le bouton bleu de copie pour faire glisser l’image directement dans une autre app.</p></details>
+    <details><summary>Comment changer de langue ou passer en mode sombre ?</summary><p>Dans Réglages → Général, choisissez Langue ou Apparence.</p></details>
+  </section>
+  <!-- de -->
+  <section class="lang" id="lang-de" lang="de" data-title="Snaptex | Datenschutzerklärung · Support">
+    <h2><span class="hl">Über Snaptex</span></h2>
+    <p>Snaptex nimmt Text mit LaTeX – kopiert aus ChatGPT, Claude oder deinen Notizen –, setzt ihn sauber und macht daraus ein klares Bild, das du mit einem Tipp kopierst.</p>
+    <ul class="features">
+      <li><b>Einsetzen mit einem Tipp</b><span>Tippe auf „Tippen zum Einsetzen“, um die Zwischenablage zu lesen. Nacktes LaTeX und auf mehrere Zeilen verteilte Formeln werden automatisch erkannt.</span></li>
+      <li><b>Drei Layouts</b><span>Lang, 4:3 und 9:16. Spaltenlayouts haben immer das exakte Seitenverhältnis.</span></li>
+      <li><b>Kopieren mit einem Tipp</b><span>Das Bild landet als JPEG und PNG in der Zwischenablage – oder du teilst es und sicherst es in Fotos.</span></li>
+      <li><b>Komplett offline</b><span>Die Satz-Engine ist in die App eingebaut. Kein Internet nötig.</span></li>
+    </ul>
+    <p class="fine">Für iPhone und iPad (iOS / iPadOS 15 oder neuer), mit einem eigenen Layout für das faltbare iPhone Duo. In 8 Sprachen, mit Dunkelmodus.</p>
+    <hr>
+    <h2 id="privacy-de"><span class="hl">Datenschutzerklärung</span></h2>
+    <p class="meta">Gültig ab: 31. Oktober 2026</p>
+    <h3>1. Überblick</h3>
+    <ul>
+      <li>Snaptex <strong>erhebt keine personenbezogenen Daten</strong>. Es gibt kein Konto und keine Anmeldung.</li>
+      <li>Es sind keine Drittanbieter-SDKs enthalten – keine Werbung, keine Analyse, keine Absturzberichte, keine Drittanbieter-Anmeldung und keine Zahlungen.</li>
+      <li><strong>Die App geht nie online.</strong> Deine Inhalte werden nur auf deinem Gerät gesetzt und gerendert und an keinen Server übertragen – weder an den des Entwicklers noch an einen KI-Dienst.</li>
+    </ul>
+    <h3>2. Zwischenablage</h3>
+    <ul>
+      <li>Die App liest Text aus der Zwischenablage nur, wenn du auf Einsetzen tippst – ab iOS 16 fragt dich das System vorher um Erlaubnis.</li>
+      <li>Wenn du auf Bild kopieren tippst, legt die App das erzeugte Bild (JPEG und PNG) in die Zwischenablage, damit du es woanders einsetzen kannst.</li>
+      <li>Hineingezogener Text und herausgezogene Bilder werden ebenfalls nur auf deinem Gerät verarbeitet.</li>
+    </ul>
+    <h3>3. Fotos</h3>
+    <ul>
+      <li>Snaptex <strong>liest deine Fotomediathek nie</strong>.</li>
+      <li>Wenn du im Teilen-Menü „Bild sichern“ wählst, fragt iOS nach dem Zugriff „Nur Fotos hinzufügen“. Die App kann dann nur das Bild hinzufügen, das du sichern möchtest.</li>
+    </ul>
+    <h3>4. Auf deinem Gerät gespeicherte Daten</h3>
+    <ul>
+      <li>Einstellungen: Schriftgröße, Zeilenabstand, Ränder, Seitenbreite, Auflösung, Layout, Sprache, Erscheinungsbild sowie ob du die Anleitung und die Neuigkeiten schon gesehen hast.</li>
+      <li>Zum Rendern der Vorschau und zum Exportieren wird der aktuelle Inhalt vorübergehend in den eigenen Cache-Ordner der App geschrieben und beim nächsten Rendern überschrieben. Bilddateien zum Teilen landen im temporären Ordner des Systems. Dein Quelltext selbst wird nicht gespeichert.</li>
+      <li>Wenn du die App löschst, werden alle diese Daten entfernt.</li>
+    </ul>
+    <h3>5. Feedback per E-Mail</h3>
+    <p>Das E-Mail-Fenster öffnet sich nur, wenn du auf E-Mail oder Dem Entwickler schreiben tippst. Der Entwurf enthält Gerätemodell, Systemversion, App-Version, Build-Nummer und aktuelle Sprache. Ob du ihn sendest und was du schreibst, entscheidest allein du; die App hängt nie deine Inhalte an.</p>
+    <h3>6. Externe Links</h3>
+    <p>Ein Tipp auf Xiaohongshu, X, die Website oder den App-Store-Bewertungslink öffnet die jeweilige App oder den Browser; dann gilt deren Datenschutzerklärung. „App bewerten“ nutzt das systemeigene Bewertungsfenster.</p>
+    <h3>7. Datenschutz für Kinder</h3>
+    <p>Wir erheben von niemandem personenbezogene Daten – auch nicht von Kindern.</p>
+    <h3>8. Änderungen</h3>
+    <p>Ändert sich diese Erklärung, aktualisieren wir diese Seite und das Datum oben.</p>
+    <hr>
+    <h2 id="support-de"><span class="hl">Support</span></h2>
+    <p>Fragen oder Vorschläge? Schreib mir:</p>
+    <div class="contacts">
+      <a class="contact" href="mailto:rangertars777@gmail.com"><span>E-Mail</span><b>rangertars777@gmail.com</b></a>
+      <a class="contact" href="https://www.xiaohongshu.com/user/profile/5b815f2d47bf040001a99d94?xsec_token=YBZpK0YrWREW6VWRFKrUhGlh_jMjVWqu6nVjX2p9iNlIo=&amp;xsec_source=app_share"><span>Xiaohongshu</span><b>Entwicklerseite</b></a>
+      <a class="contact" href="https://x.com/sonansu_guoran"><span>X (Twitter)</span><b>@sonansu_guoran</b></a>
+      <a class="contact" href="https://sonansu.space"><span>Website</span><b>sonansu.space</b></a>
+    </div>
+    <p class="fine">Du kannst auch direkt aus der App schreiben: Einstellungen → Feedback &amp; Support. Der Entwurf enthält Gerätemodell und Systemversion – das hilft bei der Fehlersuche.</p>
+    <h3>Häufige Fragen</h3>
+    <details><summary>Warum fragt iOS nach, wenn ich auf Einsetzen tippe?</summary><p>Das ist eine Datenschutzfunktion ab iOS 16: Das System fragt jedes Mal, wenn eine App die Zwischenablage liest. Wähle „Einsetzen erlauben“. Nach dem ersten Einsetzen kannst du unter Einstellungen → Snaptex → Aus anderen Apps einsetzen „Erlauben“ wählen, dann fragt iOS nicht mehr.</p></details>
+    <details><summary>Es erscheint „Kein Text in der Zwischenablage“?</summary><p>In der Zwischenablage liegt vielleicht nur ein Bild (etwa das Formelbild, das du gerade kopiert hast), oder sie ist leer. Kopiere den Text noch einmal und setze ihn ein.</p></details>
+    <details><summary>Eine Formel wird nicht gesetzt oder erscheint rot?</summary><p>Rot bedeutet einen Syntaxfehler im LaTeX. Tippe auf den Stift, um den Quelltext zu prüfen, oder setze die Formel selbst in $…$ oder $$…$$.</p></details>
+    <details><summary>Viel Weißraum bei 4:3 oder 9:16?</summary><p>Damit das Seitenverhältnis exakt stimmt, wird der Inhalt mit Weißraum zentriert, wenn er die Seite nicht füllt. Für kurze Inhalte ist Lang kompakter.</p></details>
+    <details><summary>Wie bekomme ich ein schärferes Bild?</summary><p>Wähle unter Einstellungen → Satz → Auflösung „Ultra-HD 3×“.</p></details>
+    <details><summary>Wie sichere ich das Bild in Fotos?</summary><p>Tippe oben rechts auf Teilen und wähle im Teilen-Menü „Bild sichern“.</p></details>
+    <details><summary>Wie nutze ich die App auf dem iPad oder iPhone Duo?</summary><p>Ist der Bildschirm breit genug, steht links der Quelltext und rechts die Vorschau. Auf dem aufgeklappten iPhone Duo teilen sich die beiden Seiten genau am Falz; halb geöffnet und quer hingestellt ist oben das Bild und unten die Tastatur. In Split View kannst du Text hineinziehen oder die blaue Kopieren-Taste gedrückt halten und das Bild direkt in eine andere App ziehen.</p></details>
+    <details><summary>Wie ändere ich die Sprache oder nutze den Dunkelmodus?</summary><p>Unter Einstellungen → Allgemein bei Sprache oder Erscheinungsbild.</p></details>
+  </section>
+  <!-- ja -->
+  <section class="lang" id="lang-ja" lang="ja" data-title="Snaptex | プライバシーポリシー · サポート">
+    <h2><span class="hl">Snaptex について</span></h2>
+    <p>Snaptex は、ChatGPT や Claude、メモからコピーした LaTeX まじりのテキストをきれいに組版し、すっきりした画像にします。タップひとつでクリップボードにコピーできます。</p>
+    <ul class="features">
+      <li><b>ワンタップでペースト</b><span>「タップしてペースト」でクリップボードを読み込み。そのままの LaTeX や、何行にも分かれた数式も自動で認識します。</span></li>
+      <li><b>3 つのレイアウト</b><span>ロング・4:3・9:16。段組みしても画像の比率は常に正確です。</span></li>
+      <li><b>タップでコピー</b><span>画像は JPEG と PNG の両方でクリップボードへ。共有して写真に保存することもできます。</span></li>
+      <li><b>完全オフライン</b><span>組版エンジンを App に内蔵。ネットワークは不要です。</span></li>
+    </ul>
+    <p class="fine">iPhone・iPad（iOS / iPadOS 15 以降）に対応し、折りたたみの iPhone Duo には専用のレイアウトを用意しています。8 言語に対応し、ダークモードも使えます。</p>
+    <hr>
+    <h2 id="privacy-ja"><span class="hl">プライバシーポリシー</span></h2>
+    <p class="meta">施行日：2026年10月31日</p>
+    <h3>1. 概要</h3>
+    <ul>
+      <li>Snaptex は<strong>個人情報を一切収集しません</strong>。アカウント登録やログインはありません。</li>
+      <li>広告、分析、クラッシュレポート、他社ログイン、決済などのサードパーティ SDK は組み込んでいません。</li>
+      <li><strong>App はネットワークに接続しません。</strong>内容の組版と描画はすべて端末内で行い、開発者のサーバーや AI サービスを含め、どこにも送信しません。</li>
+    </ul>
+    <h3>2. クリップボード</h3>
+    <ul>
+      <li>クリップボードのテキストを読むのは「ペースト」をタップしたときだけで、iOS 16 以降はその前にシステムが許可を確認します。</li>
+      <li>「画像をコピー」をタップすると、作成した画像（JPEG と PNG）をクリップボードに書き込み、ほかの場所にペーストできるようにします。</li>
+      <li>ドラッグで取り込んだテキストやドラッグで持ち出した画像も、端末内だけで扱います。</li>
+    </ul>
+    <h3>3. 写真</h3>
+    <ul>
+      <li>Snaptex は写真ライブラリを<strong>読み取りません</strong>。</li>
+      <li>共有シートで「画像を保存」を選ぶと、iOS が「写真の追加のみ」のアクセスを求めます。App が追加できるのは、保存を選んだその画像だけです。</li>
+    </ul>
+    <h3>4. 端末に保存されるデータ</h3>
+    <ul>
+      <li>設定：文字サイズ、行間、余白、版面の幅、解像度、レイアウト、言語、外観、ガイドとアップデート履歴を見たかどうか。</li>
+      <li>プレビューの描画と画像の書き出しのため、現在の内容を App 自身のキャッシュフォルダに一時的に書き込み、次の描画で上書きします。共有用の画像ファイルはシステムの一時フォルダに置かれます。元のテキストそのものは保存しません。</li>
+      <li>App を削除すると、これらのデータはすべて消去されます。</li>
+    </ul>
+    <h3>5. フィードバックメール</h3>
+    <p>メール作成画面が開くのは「メール」または「開発者にメール」をタップしたときだけです。下書きにはデバイスの機種、システムのバージョン、App のバージョン、ビルド番号、現在の言語が入ります。送るかどうか、何を書くかはすべてあなた次第で、App があなたの内容を添付することはありません。</p>
+    <h3>6. 外部リンク</h3>
+    <p>小紅書、X、ウェブサイト、App Store のレビューをタップすると、それぞれの App やブラウザが開き、以降は各サービスのプライバシーポリシーが適用されます。「評価する」はシステム標準の評価画面を使います。</p>
+    <h3>7. 子どものプライバシー</h3>
+    <p>子どもを含め、どなたからも個人情報を収集しません。</p>
+    <h3>8. ポリシーの変更</h3>
+    <p>本ポリシーを変更する場合は、このページと上記の施行日を更新します。</p>
+    <hr>
+    <h2 id="support-ja"><span class="hl">サポート</span></h2>
+    <p>ご質問やご意見はこちらへ：</p>
+    <div class="contacts">
+      <a class="contact" href="mailto:rangertars777@gmail.com"><span>メール</span><b>rangertars777@gmail.com</b></a>
+      <a class="contact" href="https://www.xiaohongshu.com/user/profile/5b815f2d47bf040001a99d94?xsec_token=YBZpK0YrWREW6VWRFKrUhGlh_jMjVWqu6nVjX2p9iNlIo=&amp;xsec_source=app_share"><span>小紅書</span><b>開発者ページ</b></a>
+      <a class="contact" href="https://x.com/sonansu_guoran"><span>X（Twitter）</span><b>@sonansu_guoran</b></a>
+      <a class="contact" href="https://sonansu.space"><span>ウェブサイト</span><b>sonansu.space</b></a>
+    </div>
+    <p class="fine">App の「設定」→「フィードバックとサポート」から直接メールを送ることもできます。下書きにはデバイスの機種とシステムのバージョンが入るので、問題の調査に役立ちます。</p>
+    <h3>よくある質問</h3>
+    <details><summary>「ペースト」をタップすると確認が出るのはなぜ？</summary><p>iOS 16 以降のプライバシー保護で、App がクリップボードを読むたびにシステムが確認します。「ペーストを許可」を選んでください。一度ペーストしたあと「設定」→「Snaptex」→「ほかのAppからペースト」で「許可」にすると、次からは確認されません。</p></details>
+    <details><summary>「クリップボードにテキストがありません」と表示される？</summary><p>クリップボードに画像だけ（たとえばコピーしたばかりの数式画像）が入っているか、空になっています。元の場所でもう一度テキストをコピーしてからペーストしてください。</p></details>
+    <details><summary>数式が表示されない、または赤くなる？</summary><p>赤色は LaTeX の構文エラーです。鉛筆をタップして元のテキストを確認するか、数式を $…$ や $$…$$ で囲んでください。</p></details>
+    <details><summary>4:3 や 9:16 で余白が多い？</summary><p>比率を正確に保つため、内容がページを埋めきれないときは余白をとって中央に配置します。短い内容なら「ロング」のほうがコンパクトです。</p></details>
+    <details><summary>画像をもっと鮮明にするには？</summary><p>「設定」→「組版」→「解像度」で「超高画質 3×」を選んでください。</p></details>
+    <details><summary>写真に保存するには？</summary><p>右上の共有ボタンをタップし、共有シートで「画像を保存」を選んでください。</p></details>
+    <details><summary>iPad や iPhone Duo ではどう使う？</summary><p>画面が十分に広いときは、左に元のテキスト、右にプレビューが並びます。iPhone Duo を開くと 2 ページがちょうど折り目で分かれ、半開きで横に置くと上半分に画像、下半分にキーボードが来ます。Split View ではテキストをドラッグで取り込めるほか、青いコピーボタンを長押しして画像をそのままほかの App へドラッグできます。</p></details>
+    <details><summary>言語やダークモードを変えるには？</summary><p>「設定」→「一般」で「言語」または「外観」を選んでください。</p></details>
+  </section>
+  <!-- ko -->
+  <section class="lang" id="lang-ko" lang="ko" data-title="Snaptex | 개인정보 처리방침 · 지원">
+    <h2><span class="hl">Snaptex 소개</span></h2>
+    <p>Snaptex은 ChatGPT, Claude, 메모에서 복사한 LaTeX가 섞인 텍스트를 깔끔하게 정리해 한 장의 이미지로 만들어 줘요. 한 번 탭하면 클립보드에 복사돼요.</p>
+    <ul class="features">
+      <li><b>한 번에 붙여넣기</b><span>&#x27;탭하여 붙여넣기&#x27;로 클립보드를 가져와요. 그냥 붙여넣은 LaTeX나 여러 줄로 나뉜 수식도 자동으로 알아봐요.</span></li>
+      <li><b>세 가지 레이아웃</b><span>긴 이미지, 4:3, 9:16. 단을 나눠도 이미지 비율은 항상 정확해요.</span></li>
+      <li><b>탭하면 복사</b><span>이미지가 JPEG와 PNG로 함께 클립보드에 들어가요. 공유하거나 사진에 저장할 수도 있어요.</span></li>
+      <li><b>완전 오프라인</b><span>조판 엔진이 앱에 들어 있어 인터넷이 필요 없어요.</span></li>
+    </ul>
+    <p class="fine">iPhone과 iPad(iOS / iPadOS 15 이상)를 지원하며, 접이식 iPhone Duo를 위한 전용 레이아웃이 있어요. 8개 언어와 다크 모드를 지원해요.</p>
+    <hr>
+    <h2 id="privacy-ko"><span class="hl">개인정보 처리방침</span></h2>
+    <p class="meta">시행일: 2026년 10월 31일</p>
+    <h3>1. 개요</h3>
+    <ul>
+      <li>Snaptex은 <strong>어떤 개인정보도 수집하지 않아요</strong>. 회원가입이나 로그인이 없어요.</li>
+      <li>광고, 분석, 충돌 보고, 타사 로그인, 결제 등 어떤 타사 SDK도 넣지 않았어요.</li>
+      <li><strong>앱은 인터넷에 연결하지 않아요.</strong> 내용은 기기 안에서만 정리하고 렌더링하며, 개발자 서버나 AI 서비스를 포함해 어디에도 보내지 않아요.</li>
+    </ul>
+    <h3>2. 클립보드</h3>
+    <ul>
+      <li>앱은 '붙여넣기'를 탭할 때만 클립보드의 텍스트를 읽고, iOS 16 이상에서는 그 전에 시스템이 허용 여부를 물어봐요.</li>
+      <li>'이미지 복사'를 탭하면 만든 이미지(JPEG와 PNG)를 클립보드에 넣어 다른 곳에 붙여넣을 수 있게 해요.</li>
+      <li>드래그해서 가져온 텍스트와 드래그해서 내보낸 이미지도 기기 안에서만 처리해요.</li>
+    </ul>
+    <h3>3. 사진</h3>
+    <ul>
+      <li>Snaptex은 사진 보관함을 <strong>읽지 않아요</strong>.</li>
+      <li>공유 시트에서 '이미지 저장'을 고르면 iOS가 '사진 추가만' 권한을 요청해요. 앱은 저장하기로 고른 그 이미지만 추가할 수 있어요.</li>
+    </ul>
+    <h3>4. 기기에 저장되는 데이터</h3>
+    <ul>
+      <li>설정: 글자 크기, 줄 간격, 여백, 페이지 너비, 해상도, 레이아웃, 언어, 화면 모드, 가이드와 업데이트 내역을 봤는지 여부.</li>
+      <li>미리보기와 이미지 내보내기를 위해 현재 내용을 앱 자체의 캐시 폴더에 잠시 기록하고, 다음 렌더링 때 덮어써요. 공유용 이미지 파일은 시스템 임시 폴더에 생겨요. 원문 자체는 저장하지 않아요.</li>
+      <li>앱을 삭제하면 이 데이터가 모두 지워져요.</li>
+    </ul>
+    <h3>5. 피드백 메일</h3>
+    <p>메일 작성 화면은 '이메일'이나 '개발자에게 메일'을 탭할 때만 열려요. 초안에는 기기 모델, 시스템 버전, 앱 버전, 빌드 번호, 현재 언어가 미리 들어가요. 보낼지, 무엇을 쓸지는 전적으로 사용자가 정하고, 앱은 사용자의 내용을 첨부하지 않아요.</p>
+    <h3>6. 외부 링크</h3>
+    <p>샤오홍슈, X, 웹사이트, App Store 리뷰를 탭하면 해당 앱이나 브라우저로 이동하며, 이후에는 그쪽 개인정보 처리방침이 적용돼요. '별점 주기'는 시스템 기본 평가 창을 사용해요.</p>
+    <h3>7. 아동 개인정보</h3>
+    <p>아동을 포함해 누구에게서도 개인정보를 수집하지 않아요.</p>
+    <h3>8. 방침 변경</h3>
+    <p>이 방침이 바뀌면 이 페이지와 위의 시행일을 업데이트할게요.</p>
+    <hr>
+    <h2 id="support-ko"><span class="hl">지원</span></h2>
+    <p>문의나 제안은 언제든 연락 주세요:</p>
+    <div class="contacts">
+      <a class="contact" href="mailto:rangertars777@gmail.com"><span>이메일</span><b>rangertars777@gmail.com</b></a>
+      <a class="contact" href="https://www.xiaohongshu.com/user/profile/5b815f2d47bf040001a99d94?xsec_token=YBZpK0YrWREW6VWRFKrUhGlh_jMjVWqu6nVjX2p9iNlIo=&amp;xsec_source=app_share"><span>샤오홍슈</span><b>개발자 페이지</b></a>
+      <a class="contact" href="https://x.com/sonansu_guoran"><span>X(트위터)</span><b>@sonansu_guoran</b></a>
+      <a class="contact" href="https://sonansu.space"><span>웹사이트</span><b>sonansu.space</b></a>
+    </div>
+    <p class="fine">앱의 설정 → 피드백 및 지원에서 바로 메일을 보낼 수도 있어요. 초안에 기기 모델과 시스템 버전이 들어가 문제를 찾는 데 도움이 돼요.</p>
+    <h3>자주 묻는 질문</h3>
+    <details><summary>&#x27;붙여넣기&#x27;를 탭하면 왜 확인 창이 떠요?</summary><p>iOS 16부터 있는 개인정보 보호 기능으로, 앱이 클립보드를 읽을 때마다 시스템이 물어봐요. &#x27;붙여넣기 허용&#x27;을 고르면 돼요. 한 번 붙여넣은 뒤 설정 → Snaptex → 다른 앱에서 붙여넣기에서 &#x27;허용&#x27;으로 바꾸면 더 이상 묻지 않아요.</p></details>
+    <details><summary>&#x27;클립보드에 텍스트가 없어요&#x27;라고 나와요?</summary><p>클립보드에 이미지만 있거나(방금 복사한 수식 이미지 등) 비어 있는 경우예요. 원래 있던 곳에서 텍스트를 다시 복사한 뒤 붙여넣어 주세요.</p></details>
+    <details><summary>수식이 안 나오거나 빨갛게 표시돼요?</summary><p>빨간색은 LaTeX 문법 오류라는 뜻이에요. 연필을 탭해 원문을 확인하거나, 수식을 직접 $…$ 또는 $$…$$로 감싸 주세요.</p></details>
+    <details><summary>4:3이나 9:16에서 여백이 많아요?</summary><p>비율을 정확히 맞추기 위해 내용이 페이지를 다 채우지 못하면 여백을 두고 가운데에 배치해요. 내용이 짧다면 &#x27;긴 이미지&#x27;가 더 알차요.</p></details>
+    <details><summary>이미지를 더 선명하게 하려면?</summary><p>설정 → 서식 → 해상도에서 &#x27;초고화질 3×&#x27;를 고르세요.</p></details>
+    <details><summary>사진에 저장하려면?</summary><p>오른쪽 위 공유 버튼을 탭하고 공유 시트에서 &#x27;이미지 저장&#x27;을 고르세요.</p></details>
+    <details><summary>iPad나 iPhone Duo에서는 어떻게 써요?</summary><p>화면이 충분히 넓으면 왼쪽에 원문, 오른쪽에 미리보기가 나와요. iPhone Duo를 펼치면 두 페이지가 정확히 접히는 선에서 나뉘고, 반쯤 열어 가로로 세우면 위쪽에 이미지, 아래쪽에 키보드가 와요. Split View에서는 텍스트를 끌어다 넣거나, 파란 복사 버튼을 길게 눌러 이미지를 다른 앱으로 바로 끌어다 놓을 수 있어요.</p></details>
+    <details><summary>언어나 다크 모드는 어떻게 바꿔요?</summary><p>설정 → 일반에서 &#x27;언어&#x27; 또는 &#x27;화면 모드&#x27;를 고르세요.</p></details>
+  </section>
+  <!-- es -->
+  <section class="lang" id="lang-es" lang="es" data-title="Snaptex | Política de privacidad · Soporte">
+    <h2><span class="hl">Acerca de Snaptex</span></h2>
+    <p>Snaptex toma texto mezclado con LaTeX —copiado de ChatGPT, Claude o tus notas—, lo compone con orden y lo convierte en una imagen limpia que copias con un toque.</p>
+    <ul class="features">
+      <li><b>Pegar con un toque</b><span>Toca «Toca para pegar» para leer el portapapeles. El LaTeX suelto y las fórmulas partidas en varias líneas se reconocen solos.</span></li>
+      <li><b>Tres diseños</b><span>Larga, 4:3 y 9:16. En columnas, la imagen siempre sale con la proporción exacta.</span></li>
+      <li><b>Copiar con un toque</b><span>La imagen va al portapapeles en JPEG y PNG; también puedes compartirla y guardarla en Fotos.</span></li>
+      <li><b>Totalmente sin conexión</b><span>El motor de composición viene dentro de la app. No hace falta internet.</span></li>
+    </ul>
+    <p class="fine">Para iPhone y iPad (iOS / iPadOS 15 o posterior), con un diseño propio para el iPhone Duo plegable. Disponible en 8 idiomas y con modo oscuro.</p>
+    <hr>
+    <h2 id="privacy-es"><span class="hl">Política de privacidad</span></h2>
+    <p class="meta">Fecha de entrada en vigor: 31 de octubre de 2026</p>
+    <h3>1. Resumen</h3>
+    <ul>
+      <li>Snaptex <strong>no recopila ningún dato personal</strong>. No hay cuenta ni inicio de sesión.</li>
+      <li>No incluye ningún SDK de terceros: ni publicidad, ni analítica, ni informes de fallos, ni inicio de sesión de terceros, ni pagos.</li>
+      <li><strong>La app nunca se conecta a internet.</strong> Tu contenido se compone y se renderiza solo en tu dispositivo y no se envía a ningún servidor, ni al del desarrollador ni a ningún servicio de IA.</li>
+    </ul>
+    <h3>2. Portapapeles</h3>
+    <ul>
+      <li>La app lee el texto del portapapeles solo cuando tocas Pegar, y, desde iOS 16, el sistema te pide permiso antes.</li>
+      <li>Cuando tocas Copiar imagen, la app pone la imagen generada (JPEG y PNG) en el portapapeles para que la pegues en otro sitio.</li>
+      <li>El texto que arrastras hacia la app y las imágenes que arrastras fuera de ella también se procesan solo en tu dispositivo.</li>
+    </ul>
+    <h3>3. Fotos</h3>
+    <ul>
+      <li>Snaptex <strong>nunca lee</strong> tu fototeca.</li>
+      <li>Si eliges «Guardar imagen» en la hoja de compartir, iOS pide el acceso «Solo añadir fotos»: la app solo puede añadir la imagen que elegiste guardar.</li>
+    </ul>
+    <h3>4. Datos guardados en tu dispositivo</h3>
+    <ul>
+      <li>Ajustes: tamaño de letra, interlineado, márgenes, ancho de página, resolución, diseño, idioma, apariencia y si ya viste la guía y las novedades.</li>
+      <li>Para mostrar la vista previa y exportar imágenes, el contenido actual se escribe temporalmente en la carpeta de caché de la propia app y se sobrescribe en el siguiente renderizado. Los archivos de imagen para compartir van a la carpeta temporal del sistema. Tu texto original en sí no se guarda.</li>
+      <li>Al eliminar la app se borran todos estos datos.</li>
+    </ul>
+    <h3>5. Correo de comentarios</h3>
+    <p>La pantalla de redacción solo se abre cuando tocas Correo o Escribir al desarrollador. El borrador incluye el modelo del dispositivo, la versión del sistema, la versión de la app, el número de compilación y el idioma actual. Enviarlo o no, y lo que escribas, depende solo de ti; la app nunca adjunta tu contenido.</p>
+    <h3>6. Enlaces externos</h3>
+    <p>Al tocar Xiaohongshu, X, el sitio web o el enlace de reseñas del App Store se abre la app o el navegador correspondiente, y a partir de ahí se aplica su política de privacidad. «Valorar la app» usa la ventana de valoración del propio sistema.</p>
+    <h3>7. Privacidad de los menores</h3>
+    <p>No recopilamos datos personales de nadie, incluidos los menores.</p>
+    <h3>8. Cambios en esta política</h3>
+    <p>Si esta política cambia, actualizaremos esta página y la fecha de arriba.</p>
+    <hr>
+    <h2 id="support-es"><span class="hl">Soporte</span></h2>
+    <p>¿Preguntas o sugerencias? Escríbeme:</p>
+    <div class="contacts">
+      <a class="contact" href="mailto:rangertars777@gmail.com"><span>Correo</span><b>rangertars777@gmail.com</b></a>
+      <a class="contact" href="https://www.xiaohongshu.com/user/profile/5b815f2d47bf040001a99d94?xsec_token=YBZpK0YrWREW6VWRFKrUhGlh_jMjVWqu6nVjX2p9iNlIo=&amp;xsec_source=app_share"><span>Xiaohongshu</span><b>Página del desarrollador</b></a>
+      <a class="contact" href="https://x.com/sonansu_guoran"><span>X (Twitter)</span><b>@sonansu_guoran</b></a>
+      <a class="contact" href="https://sonansu.space"><span>Sitio web</span><b>sonansu.space</b></a>
+    </div>
+    <p class="fine">También puedes escribir desde la app, en Ajustes → Comentarios y soporte. El borrador incluye el modelo del dispositivo y la versión del sistema, lo que ayuda a encontrar el problema.</p>
+    <h3>Preguntas frecuentes</h3>
+    <details><summary>¿Por qué iOS pide confirmación al tocar Pegar?</summary><p>Es una protección de privacidad de iOS 16 y posteriores: el sistema pregunta cada vez que una app lee el portapapeles. Elige «Permitir pegar». Tras el primer pegado, ve a Ajustes → Snaptex → Pegar desde otras apps y elige «Permitir» para que no vuelva a preguntar.</p></details>
+    <details><summary>¿Aparece «No hay texto en el portapapeles»?</summary><p>Puede que el portapapeles solo tenga una imagen (como la imagen de fórmula que acabas de copiar) o esté vacío. Vuelve a copiar el texto y pégalo.</p></details>
+    <details><summary>¿Una fórmula no se muestra o sale en rojo?</summary><p>El rojo indica un error de sintaxis en el LaTeX. Toca el lápiz para revisar el texto original, o encierra tú mismo la fórmula entre $…$ o $$…$$.</p></details>
+    <details><summary>¿Mucho espacio en blanco con 4:3 o 9:16?</summary><p>Para mantener la proporción exacta, el contenido se centra con márgenes en blanco cuando no llena la página. Para contenido corto, Larga es más compacta.</p></details>
+    <details><summary>¿Cómo consigo una imagen más nítida?</summary><p>En Ajustes → Formato → Resolución, elige «Ultra HD 3×».</p></details>
+    <details><summary>¿Cómo la guardo en Fotos?</summary><p>Toca el botón de compartir arriba a la derecha y elige «Guardar imagen» en la hoja de compartir.</p></details>
+    <details><summary>¿Cómo se usa en iPad o iPhone Duo?</summary><p>Cuando la pantalla es lo bastante ancha, el texto original queda a la izquierda y la vista previa a la derecha. En el iPhone Duo desplegado, las dos páginas se separan justo en el pliegue; entreabierto y apoyado de lado, la imagen queda arriba y el teclado abajo. En Split View puedes arrastrar texto hacia la app, o mantener pulsado el botón azul de copiar para arrastrar la imagen directamente a otra app.</p></details>
+    <details><summary>¿Cómo cambio el idioma o uso el modo oscuro?</summary><p>En Ajustes → General, elige Idioma o Apariencia.</p></details>
+  </section>
+
+  <footer>© 2026 Guo · Snaptex</footer>
+</div>
+<script>
+(() => {
+  const buttons = Array.from(document.querySelectorAll('.lang-btn'));
+  const ids = buttons.map(b => b.dataset.lang);
+  const STORAGE_KEY = 'snaptex-lang';
+
+  // 中文先分简繁：zh-TW / zh-HK / zh-MO / zh-Hant 走繁体，其余中文走简体；别的语言按主语言匹配
+  const match = code => {
+    if (!code) return null;
+    const c = code.toLowerCase();
+    if (c.startsWith('zh')) return /hant|tw|hk|mo/.test(c) ? 'zh-Hant' : 'zh-Hans';
+    return ids.find(id => id.toLowerCase() === c) ||
+           ids.find(id => id.toLowerCase().split('-')[0] === c.split('-')[0]) || null;
+  };
+
+  const initial = () => {
+    let saved = null;
+    try { saved = localStorage.getItem(STORAGE_KEY); } catch (e) {}
+    const browser = (navigator.languages || [navigator.language]).map(match).find(Boolean);
+    return match(location.hash.slice(1)) || match(saved) || browser || 'en';
+  };
+
+  const show = id => {
+    document.querySelectorAll('.lang').forEach(s => s.classList.toggle('active', s.id === 'lang-' + id));
+    buttons.forEach(b => {
+      const on = b.dataset.lang === id;
+      b.classList.toggle('active', on);
+      b.setAttribute('aria-pressed', on);
+    });
+    document.documentElement.lang = id;
+    const section = document.getElementById('lang-' + id);
+    const title = section && section.dataset.title;
+    if (title) document.title = title;
+  };
+
+  buttons.forEach(button => button.addEventListener('click', () => {
+    const id = button.dataset.lang;
+    show(id);
+    try { localStorage.setItem(STORAGE_KEY, id); } catch (e) {}
+    try { history.replaceState(null, '', '#' + id); } catch (e) {}
+  }));
+
+  // 只改了地址里的 #语言 时页面不会重新载入，自己跟上
+  window.addEventListener('hashchange', () => {
+    const id = match(location.hash.slice(1));
+    if (id) show(id);
+  });
+
+  show(initial());
+})();
+</script>
+</body>
+</html>
